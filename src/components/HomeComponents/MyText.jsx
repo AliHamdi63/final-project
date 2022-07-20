@@ -3,7 +3,7 @@ import { Typography, Button, Box, Container } from "@mui/material";
 
 function MyText() {
   return (
-    <Box sx={{ pt: 5 }}>
+    <Box sx={{}}>
       <Container>
         <Container
           sx={{ display: "flex", justifyContent: "center", gap: 2, pt: 8 }}
