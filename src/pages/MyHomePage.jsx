@@ -1,6 +1,8 @@
 import React from "react";
 import MyBrief from "../components/HomeComponents/MyBrief";
 import MyImageSlider from "../components/HomeComponents/MyImageSlider";
+import HomeFeatureSection from '../components/HomeComponents/HomeFeatureSection';
+import HomeChooseFrom from '../components/HomeComponents/HomeChooseFrom';
 
 function MyHomePage() {
   return (
@@ -8,6 +10,8 @@ function MyHomePage() {
       <MyImageSlider></MyImageSlider>
       {/* <MyText></MyText> */}
       <MyBrief></MyBrief>
+      <HomeFeatureSection></HomeFeatureSection>
+      <HomeChooseFrom></HomeChooseFrom>
     </div>
   );
 }
