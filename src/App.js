@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import MyAppBar from "./components/MyAppBar";
+import MyAppBar from "./components/layout/MyAppBar";
 
-// Import MUI stuff
+// Import MUI colors
 import { deepOrange, teal } from "@mui/material/colors";
 
 import { CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import BackToTop from "./components/MyBackToTheTop";
+import BackToTop from "./components/layout/MyBackToTheTop";
 import MyHomePage from "./pages/MyHomePage";
 
 // Define theme settings
