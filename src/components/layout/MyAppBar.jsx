@@ -19,6 +19,8 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import MyInfoBar from "./MyInfoBar";
+import { Link } from "react-router-dom";
+
 const drawerWidth = 240;
 const navItems = ["Home", "Menu", "About", "Contact", "Market"];
 
@@ -49,7 +51,11 @@ function MyAppBar(props) {
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
+            <ListItemButton
+              sx={{ textAlign: "center" }}
+              component={Link}
+              to={`/${item}`}
+            >
               <ListItemText primary={item} />
             </ListItemButton>
           </ListItem>
@@ -57,6 +63,7 @@ function MyAppBar(props) {
       </List>
     </Box>
   );
+  // <Tab key={item} label={item} component={Link} to={`/${item}`} />
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -108,7 +115,7 @@ function MyAppBar(props) {
               // <Button key={item} sx={{ color: "inherit  " }} variant="text">
               //   {item}
               // </Button>
-              <Tab key={item} label={item}></Tab>
+              <Tab key={item} label={item} component={Link} to={`/${item}`} />
             ))}
           </Tabs>
           {/* Icons */}

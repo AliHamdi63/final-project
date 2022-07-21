@@ -3,12 +3,17 @@ import MyAppBar from "./components/layout/MyAppBar";
 
 // Import MUI colors
 import { deepOrange, teal } from "@mui/material/colors";
+import { Routes, Route } from "react-router-dom";
 
 import { CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import BackToTop from "./components/layout/MyBackToTheTop";
 import MyHomePage from "./pages/MyHomePage";
 import Footer from "./components/layout/Footer";
+import MyAboutPage from "./pages/MyAboutPage";
+import MyContactPage from "./pages/MyContactPage";
+import MyMenuPage from "./pages/MyMenuPage";
+import MyMarketPage from "./pages/MyMarketPage";
 
 // Define theme settings
 
@@ -58,7 +63,14 @@ const App = () => {
           isDarkTheme={isDarkTheme}
         ></MyAppBar>
         {/* here is our pages */}
-        <MyHomePage></MyHomePage>
+        <Routes>
+          <Route index element={<MyHomePage />}></Route>
+          <Route path="Home" element={<MyHomePage />} />
+          <Route path="About" element={<MyAboutPage />} />
+          <Route path="Contact" element={<MyContactPage />} />
+          <Route path="Menu" element={<MyMenuPage />} />
+          <Route path="Market" element={<MyMarketPage />} />
+        </Routes>
         <Footer></Footer>
       </div>
     </ThemeProvider>
