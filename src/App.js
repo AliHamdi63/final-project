@@ -8,6 +8,7 @@ import { CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import BackToTop from "./components/layout/MyBackToTheTop";
 import MyHomePage from "./pages/MyHomePage";
+import Footer from "./components/layout/Footer";
 
 // Define theme settings
 
@@ -58,6 +59,7 @@ const App = () => {
         ></MyAppBar>
         {/* here is our pages */}
         <MyHomePage></MyHomePage>
+        <Footer></Footer>
       </div>
     </ThemeProvider>
   );

@@ -1,13 +1,47 @@
 import React from "react";
-import { Container, Paper, Grid, Typography, Button } from "@mui/material";
+import {
+  Container,
+  Paper,
+  Grid,
+  Typography,
+  Button,
+  Divider,
+  Box,
+} from "@mui/material";
 import sideImage from "../../assets/images/brief.jpg";
 
 export default function MyBrief() {
   return (
-    <Container sx={{ display: "block", pt: 5, pb: 5 }}>
-      <Typography variant="h2" textAlign={"center"} pb={3}>
-        A brief
-      </Typography>
+    <Container
+      sx={{
+        pt: 5,
+        pb: 5,
+      }}
+    >
+      {/* sx={{ my: "50px", py: "50px" }} */}
+      <Container maxWidth="md">
+        <Box sx={{ display: "flex", flexDirection: "column", my: "50px" }}>
+          <Typography
+            variant="h2"
+            textAlign="center"
+            fontFamily={"serif"}
+            fontWeight={"bold"}
+            fontStyle={"italic"}
+          >
+            {" "}
+            A Brief
+          </Typography>
+
+          <Typography variant="h6" textAlign="center" alignSelf={"center"}>
+            Our ,Slogoan is Cook It By YourSelf !!
+          </Typography>
+          <Divider
+            color={"primary"}
+            variant="middle"
+            sx={{ height: 3 }}
+          ></Divider>
+        </Box>
+      </Container>
       <Paper
         sx={{
           display: "flex",
@@ -16,10 +50,10 @@ export default function MyBrief() {
         }}
       >
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} md={6}>
             <img src={sideImage} alt="" width={"100%"} height={"100%"} />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} md={6}>
             <Typography
               variant="h4"
               p={2}
@@ -46,14 +80,26 @@ export default function MyBrief() {
               local food producers, and eat the kind of food they can feel good
               about.
             </Typography>
-            <Grid container align="center">
+            <Grid
+              container
+              p={2}
+              direction="row"
+              alignItems="center"
+              justifyContent="center"
+            >
               <Grid item xs={12} sm={6}>
-                <Typography variant="h4" textAlign={"start"}>
-                  sdhaksd
+                <Typography
+                  variant="h3"
+                  textAlign={"start"}
+                  fontFamily="Brush Script MT"
+                >
+                  Foody
                 </Typography>
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <Button variant="contained">hhsa</Button>
+              <Grid item xs={12} sm={6} justify="center" align="center">
+                <Button variant="contained" color="primary">
+                  show more
+                </Button>
               </Grid>
             </Grid>
           </Grid>
