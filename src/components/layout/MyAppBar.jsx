@@ -25,7 +25,7 @@ const drawerWidth = 240;
 const navItems = ["Home", "Menu", "About", "Contact", "Market"];
 
 function MyAppBar(props) {
-  const [value, setValue] = React.useState(-1);
+  const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
