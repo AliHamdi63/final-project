@@ -90,7 +90,7 @@ function MyContactCard() {
               </Typography>
               <Typography variant="h6">foody_delicous@kit.com </Typography>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} justify="center">
               <img src={sideImage} alt="" width={"100%"} height={"100%"} />
             </Grid>
             <Grid item xs={12} md={6}>
