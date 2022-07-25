@@ -19,15 +19,27 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import MyInfoBar from "./MyInfoBar";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const drawerWidth = 240;
-const navItems = ["Home", "Menu", "About", "Contact", "Market"];
 
+const navItems = ["Home", "Menu", "About", "Contact", "Market"];
 function MyAppBar(props) {
-  const [value, setValue] = React.useState(0);
+  const location = useLocation();
+  function RemoveNavIndecator() {
+    if (location.pathname === "/Register") {
+      value = -1;
+    } else {
+      return value;
+    }
+  }
+
+  let [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
+    // change valueif not in dedtecated location
+
     setValue(newValue);
+    console.log(newValue);
   };
   const changeTheme = () => {
     props.setIsDarkTheme(!props.isDarkTheme);
@@ -107,7 +119,7 @@ function MyAppBar(props) {
 
           <Tabs
             sx={{ display: { xs: "none", sm: "block" } }}
-            value={value}
+            value={RemoveNavIndecator()}
             onChange={handleChange}
             aria-label="nav tabs example"
           >

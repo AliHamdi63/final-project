@@ -14,6 +14,7 @@ import MyAboutPage from "./pages/MyAboutPage";
 import MyContactPage from "./pages/MyContactPage";
 import MyMenuPage from "./pages/MyMenuPage";
 import MyMarketPage from "./pages/MyMarketPage";
+import MyRegisterPage from "./pages/MyRegisterPage";
 
 // Define theme settings
 
@@ -70,6 +71,7 @@ const App = () => {
           <Route path="Contact" element={<MyContactPage />} />
           <Route path="Menu" element={<MyMenuPage />} />
           <Route path="Market" element={<MyMarketPage />} />
+          <Route path="Register" element={<MyRegisterPage />} />
         </Routes>
         <Footer></Footer>
       </div>
