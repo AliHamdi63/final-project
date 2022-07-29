@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import {
   Container,
   Grid,
@@ -17,7 +17,21 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import MapLocation from "../shared/MapLocation";
-function Footer() {
+function Footer(props) {
+  const position = [30.550964701276385, 31.009036511610887];
+  console.log(props.isDarkTheme);
+  let isDarkMode = props.isDarkTheme;
+  const [isDark, setIsDark] = useState(props.isDarkTheme);
+  // setIsDark((prevState) => !prevState);
+  useEffect(() => {
+    if (isDarkMode === true) {
+      setIsDark(true);
+    }
+    if (isDarkMode === false) {
+      setIsDark(false);
+    }
+  });
+
   return (
     <Box
       sx={{
@@ -178,7 +192,11 @@ function Footer() {
             </Typography>{" "}
             <Typography variant="caption">Main Branch</Typography>{" "}
             <Box my={2} display={"flex"} flexDirection={"column"} gap={2}>
-              <MapLocation></MapLocation>
+              {/* <button onClick={() => setIsDark((prevState) => !prevState)}>
+                Change basemap
+              </button> */}
+
+              <MapLocation center={position} zoom={12} darkMode={isDark} />
             </Box>
           </Grid>
         </Grid>

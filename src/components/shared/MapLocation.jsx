@@ -1,25 +1,53 @@
-// import { Box } from "@mui/material";
-import { Box, Typography } from "@mui/material";
-import React from "react";
-import markerIconPng from "leaflet/dist/images/marker-icon.png";
+import { React, useState, useEffect, useCallback } from "react";
+
+import { MapContainer, useMap, Popup, Marker } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
 import { Icon } from "leaflet";
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { Box, Typography } from "@mui/material";
+
+import markerIconPng from "leaflet/dist/images/marker-icon.png";
+
 import "leaflet/dist/leaflet.css";
 
-function MapLocation() {
+function ChangeView({ center, zoom }) {
+  const map = useMap();
+  map.setView(center, zoom);
+  return null;
+}
+
+function TileLayer({ darkMode }) {
+  const map = useMap();
+  var dark = L.tileLayer(
+    "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+  );
+  const normal = L.tileLayer(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+  );
+  map.addLayer(darkMode ? dark : normal);
+
+  return null;
+}
+
+export default function TrackerMap({
+  darkMode,
+  countries,
+  casesType,
+  center,
+  zoom,
+}) {
+  // const currentTheme = useContext(ThemeContext);
+
   return (
     <Box sx={{ height: "250px", width: "100%" }}>
       <MapContainer
-        center={[30.550964701276385, 31.009036511610887]}
-        zoom={13}
-        scrollWheelZoom={false}
-        style={{ height: "100%", width: "100%" }}
+        center={center}
+        zoom={zoom}
+        style={{ width: "100%", height: "100%" }}
       >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+        <ChangeView center={center} zoom={zoom} />
+        <TileLayer darkMode={darkMode}></TileLayer>
         <Marker
           position={[30.550964701276385, 31.009036511610887]}
           icon={
@@ -41,5 +69,3 @@ function MapLocation() {
     </Box>
   );
 }
-
-export default MapLocation;

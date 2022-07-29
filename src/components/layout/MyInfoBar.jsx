@@ -44,7 +44,9 @@ export default function HideAppBar(props) {
                 alignContent: "center",
               }}
             >
-              <Typography variant="h6">Hi ,Abderlrahman</Typography>
+              <Typography variant="body1" textAlign={"center"}>
+                Welcome, Abderlrahman
+              </Typography>
 
               <Box>
                 <MyAccount></MyAccount>

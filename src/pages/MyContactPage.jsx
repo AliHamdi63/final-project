@@ -1,9 +1,21 @@
 import { Box, Container, Typography, Divider } from "@mui/material";
-import React from "react";
+import { React, useEffect, useState } from "react";
 import MyContactCard from "../components/ContactComponents/MyContactCard";
 import MapLocation from "../components/shared/MapLocation";
 
-function MyContactPage() {
+function MyContactPage(props) {
+  const position = [30.550964701276385, 31.009036511610887];
+  console.log(props.isDarkTheme);
+  let isDarkMode = props.isDarkTheme;
+  const [isDark, setIsDark] = useState(props.isDarkTheme);
+  useEffect(() => {
+    if (isDarkMode === true) {
+      setIsDark(true);
+    }
+    if (isDarkMode === false) {
+      setIsDark(false);
+    }
+  });
   return (
     <Box sx={{ minHeight: "100vh" }}>
       <MyContactCard></MyContactCard>
@@ -20,7 +32,12 @@ function MyContactPage() {
             Our Location{" "}
           </Typography>
 
-          <Typography variant="h6" textAlign="center" alignSelf={"center"}>
+          <Typography
+            variant="h6"
+            textAlign="center"
+            alignSelf={"center"}
+            className={"reda"}
+          >
             The Main Branch
           </Typography>
           <Divider
@@ -30,7 +47,7 @@ function MyContactPage() {
           ></Divider>
         </Box>
       </Container>
-      <MapLocation></MapLocation>
+      <MapLocation center={position} zoom={12} darkMode={isDark} />
     </Box>
   );
 }

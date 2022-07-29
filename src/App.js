@@ -68,12 +68,23 @@ const App = () => {
           <Route index element={<MyHomePage />}></Route>
           <Route path="Home" element={<MyHomePage />} />
           <Route path="About" element={<MyAboutPage />} />
-          <Route path="Contact" element={<MyContactPage />} />
+          <Route
+            path="Contact"
+            element={
+              <MyContactPage
+                setIsDarkTheme={setIsDarkTheme}
+                isDarkTheme={isDarkTheme}
+              />
+            }
+          />
           <Route path="Menu" element={<MyMenuPage />} />
           <Route path="Market" element={<MyMarketPage />} />
           <Route path="Register" element={<MyRegisterPage />} />
         </Routes>
-        <Footer></Footer>
+        <Footer
+          setIsDarkTheme={setIsDarkTheme}
+          isDarkTheme={isDarkTheme}
+        ></Footer>
       </div>
     </ThemeProvider>
   );
