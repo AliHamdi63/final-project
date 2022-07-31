@@ -42,7 +42,6 @@ function Footer(props) {
         backgroundPosition: "center",
         backgroundSize: 350,
         backgroundColor: "primary",
-        position: "sticky",
         top: "100%",
         bottom: "0",
       }}

@@ -138,28 +138,6 @@ function MyContactCard() {
                   </Button>
                 </FormControl>
               </Container>
-              {/* <Grid
-                container
-                p={2}
-                direction="row"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Grid item xs={12} sm={6}>
-                  <Typography
-                    variant="h3"
-                    textAlign={"start"}
-                    fontFamily="Brush Script MT"
-                  >
-                    Foody
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={6} justify="center" align="center">
-                  <Button variant="contained" color="primary">
-                    show more
-                  </Button>
-                </Grid>
-              </Grid> */}
             </Grid>
           </Grid>
         </Paper>

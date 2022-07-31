@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useCallback } from "react";
+import { React } from "react";
 
 import { MapContainer, useMap, Popup, Marker } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -37,8 +37,6 @@ export default function TrackerMap({
   center,
   zoom,
 }) {
-  // const currentTheme = useContext(ThemeContext);
-
   return (
     <Box sx={{ height: "250px", width: "100%" }}>
       <MapContainer

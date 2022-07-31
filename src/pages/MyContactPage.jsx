@@ -15,7 +15,7 @@ function MyContactPage(props) {
     if (isDarkMode === false) {
       setIsDark(false);
     }
-  });
+  }, [isDarkMode]);
   return (
     <Box sx={{ minHeight: "100vh" }}>
       <MyContactCard></MyContactCard>

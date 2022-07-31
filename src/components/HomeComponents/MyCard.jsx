@@ -17,10 +17,11 @@ import VeganFoodIcon from "@mui/icons-material/Spa";
 import KitchenIcon from "@mui/icons-material/Countertops";
 import AddToCart from "@mui/icons-material/AddShoppingCart";
 import TimerIcon from "@mui/icons-material/Timer";
+import { Link } from "react-router-dom";
 export default function MyCard() {
   return (
     <Card sx={{ maxWidth: 450 }}>
-      <CardActionArea>
+      <CardActionArea component={Link} to={`/${"Meal"}`}>
         <CardMedia
           component="img"
           height="400"
