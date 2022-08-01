@@ -19,6 +19,7 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import MyInfoBar from "./MyInfoBar";
+import Badge from "@mui/material/Badge";
 import { Link, useLocation } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -140,8 +141,10 @@ function MyAppBar(props) {
                 <Brightness4Icon />
               )}
             </IconButton>
-            <IconButton color="inherit">
-              <ShoppingCartIcon></ShoppingCartIcon>
+            <IconButton color="inherit" component={Link} to={`/Cart`}>
+              <Badge badgeContent={4} color="secondary">
+                <ShoppingCartIcon color="inherit" />
+              </Badge>{" "}
             </IconButton>
           </Box>
           {/* Icons */}

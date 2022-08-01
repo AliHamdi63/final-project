@@ -17,6 +17,7 @@ import MyMarketPage from "./pages/MyMarketPage";
 import MyLogInPage from "./pages/MyLogInPage";
 import MyRegisterPage from "./pages/MyRegisterPage";
 import MealPurchasePage from "./pages/MealPurchasePage";
+import ShoppingCartPage from "./pages/ShoppingCartPage";
 
 // Define theme settings
 
@@ -84,6 +85,7 @@ const App = () => {
           <Route path="LogIn" element={<MyLogInPage />} />
           <Route path="Register" element={<MyRegisterPage />} />
           <Route path="Meal" element={<MealPurchasePage />} />
+          <Route path="Cart" element={<ShoppingCartPage />} />
         </Routes>
         <Footer
           setIsDarkTheme={setIsDarkTheme}
