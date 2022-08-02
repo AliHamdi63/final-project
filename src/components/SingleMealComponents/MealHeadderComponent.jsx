@@ -15,7 +15,21 @@ import BusinessIcon from "@mui/icons-material/Business";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import AvTimerIcon from "@mui/icons-material/AvTimer";
+
+
+import { useSelector, useDispatch } from "react-redux";
+import { added, removed } from "../../features/cart/cartSlice";
+
+
+
 function MealHeadderComponent() {
+
+  const numOfItems = useSelector((state) => state.cart.numOfItems)
+  const dispatch = useDispatch();
+  console.log(numOfItems);
+
+
+
   return (
     <div>
       {" "}
@@ -115,8 +129,13 @@ function MealHeadderComponent() {
                     </Typography>
                   </Box>
                   <Box>
-                    <Button variant="contained" size="large">
+                    <Button variant="contained" size="large" onClick={() => dispatch(added("Initial Value"))}>
                       Add to cooking Cart
+                    </Button>
+                    <br />
+                    <br />
+                    <Button variant="contained" sx={{ backgroundColor: 'red' }} size="large" onClick={() => dispatch(removed("Initial Value"))}>
+                      Remove from cooking Cart
                     </Button>
                   </Box>
                   <Container

@@ -18,7 +18,22 @@ import KitchenIcon from "@mui/icons-material/Countertops";
 import AddToCart from "@mui/icons-material/AddShoppingCart";
 import TimerIcon from "@mui/icons-material/Timer";
 import { Link } from "react-router-dom";
+
+import { useSelector, useDispatch } from "react-redux";
+import { added, removed } from "../../features/cart/cartSlice";
+
+
+
+
+
 export default function MyCard() {
+
+  const numOfItems = useSelector((state) => state.cart.numOfItems)
+  // console.log(numOfItems.length);
+
+  const dispatch = useDispatch();
+
+
   return (
     <Card sx={{ maxWidth: 450 }}>
       <CardActionArea component={Link} to={`/${"Meal"}`}>
@@ -78,7 +93,7 @@ export default function MyCard() {
       </CardActionArea>
       <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h5">300 EGP</Typography>
-        <IconButton aria-label="delete" size="large">
+        <IconButton aria-label="delete" size="large" onClick={() => dispatch(added("Initial Value"))}>
           <AddToCart fontSize="inherit" />
         </IconButton>
       </CardActions>
