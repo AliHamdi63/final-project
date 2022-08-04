@@ -5,10 +5,12 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
-
+import { Link } from "react-router-dom";
 import Slide from "@mui/material/Slide";
 import { Box, Container } from "@mui/system";
 import MyAccount from "./MyAccount";
+import { Button } from "@mui/material";
+import LoginIcon from "@mui/icons-material/Login";
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -50,6 +52,17 @@ export default function HideAppBar(props) {
 
               <Box>
                 <MyAccount></MyAccount>
+                {/* <Button
+                  color="inherit"
+                  size="small"
+                  component={Link}
+                  to={`/Login`}
+                >
+                  <Typography variant="body2" textTransform={"capitalize"}>
+                    Sign In
+                  </Typography>
+                  <LoginIcon fontSize="small"></LoginIcon>
+                </Button> */}
               </Box>
             </Container>
           </Toolbar>

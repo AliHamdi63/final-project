@@ -25,13 +25,27 @@ function InstructionsComponent() {
             <Grid display={{ xs: "none", md: "block" }}>
               <Divider></Divider>
             </Grid>
-
-            <Typography variant="h6" fontFamily={"serif"}>
-              step-by-step
-            </Typography>
-            <Typography variant="h4" fontWeight={"bold"} color={"primary.dark"}>
-              INSTRUCTIONS
-            </Typography>
+            <Grid
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              <Box>
+                <Typography variant="h6" fontFamily={"serif"}>
+                  step-by-step
+                </Typography>
+                <Typography
+                  variant="h4"
+                  fontWeight={"bold"}
+                  color={"primary.dark"}
+                >
+                  INSTRUCTIONS
+                </Typography>
+              </Box>
+            </Grid>
           </Box>
         </Container>
         <Container
