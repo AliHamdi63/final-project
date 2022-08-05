@@ -21,7 +21,6 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
-import { display } from "@mui/system";
 
 function RegisterCard() {
   const [values, setValues] = useState({ showPassword: false });
