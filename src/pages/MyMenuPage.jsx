@@ -15,6 +15,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import Pagination from "@mui/material/Pagination";
 
 function MyMenuPage() {
   return (
@@ -150,6 +151,7 @@ function MyMenuPage() {
               <Grid item lg={4}>
                 <MyCard></MyCard>
               </Grid>{" "}
+              <Pagination count={10} color="primary" sx={{ mt: 4 }} />
             </Grid>
           </Container>
         </Grid>
