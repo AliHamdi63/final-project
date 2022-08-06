@@ -12,43 +12,19 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Fab from "@mui/material/Fab";
 import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
 
-function createData(photo, name, price, kits, total) {
-  return { photo, name, price, kits, total };
-}
+import { useSelector, useDispatch } from "react-redux";
+import { added, removed } from "../../features/cart/cartSlice";
 
-const rows = [
-  createData(
-    "https://media.blueapron.com/recipes/33247/square_newsletter_images/1656967470-29906-0059-0226/0222_2P12_Strip-Steak-Rosemary-Sauce_218_sq_Web.jpg?quality=80&width=850",
-    "Steelhead Trout Fillets & Creamy Pesto",
-    "$" + 21.99,
-    2,
-    "$" + 21.99
-  ),
-  createData(
-    "https://media.blueapron.com/recipes/33247/square_newsletter_images/1656967470-29906-0059-0226/0222_2P12_Strip-Steak-Rosemary-Sauce_218_sq_Web.jpg?quality=80&width=850",
-    "Steelhead Trout Fillets & Creamy Pesto",
-    "$" + 21.99,
-    2,
-    "$" + 21.99
-  ),
-  createData(
-    "https://media.blueapron.com/recipes/33247/square_newsletter_images/1656967470-29906-0059-0226/0222_2P12_Strip-Steak-Rosemary-Sauce_218_sq_Web.jpg?quality=80&width=850",
-    "Steelhead Trout Fillets & Creamy Pesto",
-    "$" + 21.99,
-    2,
-    "$" + 21.99
-  ),
-  createData(
-    "https://media.blueapron.com/recipes/33247/square_newsletter_images/1656967470-29906-0059-0226/0222_2P12_Strip-Steak-Rosemary-Sauce_218_sq_Web.jpg?quality=80&width=850",
-    "Steelhead Trout Fillets & Creamy Pesto",
-    "$" + 21.99,
-    2,
-    "$" + 21.99
-  ),
-];
+
 
 function MyCartItems() {
+
+  const numOfItems = useSelector((state) => state.cart.numOfItems);
+  const dispatch = useDispatch();
+  // console.log(numOfItems);
+
   return (
     <Container sx={{ minHeight: "100vh", mb: 8 }}>
       <Container maxWidth="md" sx={{ mb: 4 }}>
@@ -86,49 +62,66 @@ function MyCartItems() {
               <TableCell>
                 <Typography variant="h6">Meal photo</Typography>
               </TableCell>
-              <TableCell align="right">
+              <TableCell align="left">
                 <Typography variant="h6">Name</Typography>
               </TableCell>
-              <TableCell align="right">
+              <TableCell align="left">
                 <Typography variant="h6">price/Serving</Typography>
               </TableCell>
-              <TableCell align="right">
+              <TableCell align="left">
                 <Typography variant="h6">Kits No.</Typography>
               </TableCell>
-              <TableCell align="right">
-                <Typography variant="h6">Total.</Typography>
+              <TableCell align="left">
+                <Typography variant="h6">Total</Typography>
               </TableCell>
-              <TableCell align="right">
+              <TableCell align="left">
                 {" "}
-                <Typography variant="h6">Clear.</Typography>
+                <Typography variant="h6">+ / -</Typography>
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row.photo}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  <img src={row.photo} alt="" width={"150px"} />
-                </TableCell>
-                <TableCell align="right">
-                  <Typography variant="h6">{row.name}</Typography>
-                </TableCell>
-                <TableCell align="right">
-                  <Typography variant="h6">{row.kits}</Typography>
-                </TableCell>
-                <TableCell align="right">{row.carbs}</TableCell>
-                <TableCell align="right">{row.total}</TableCell>
-                <TableCell align="right">
-                  {" "}
-                  <Fab color="secondary" aria-label="add" size="small">
-                    <RemoveIcon></RemoveIcon>
-                  </Fab>
-                </TableCell>
-              </TableRow>
-            ))}
+            {numOfItems && numOfItems.map((row, index) => {
+              function add() {
+                dispatch(added(row.meal));
+                // console.log("object");
+              }
+              function remove() {
+                dispatch(removed(row.meal._id));
+                // console.log("object22");
+              }
+              return (
+                <TableRow
+                  key={index}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <img src={row.meal.image} alt="" width={"150px"} />
+                  </TableCell>
+                  <TableCell align="left">
+                    <Typography variant="h6">{row.meal.name}</Typography>
+                  </TableCell>
+                  <TableCell align="left">
+                    <Typography variant="h6">{row.meal.price} / {row.meal.servings}</Typography>
+                  </TableCell>
+                  <TableCell sx={{ fontSize: 18 }} align="left">{row.count}</TableCell>
+                  <TableCell sx={{ fontSize: 18 }} align="left">{row.meal.price * row.count}</TableCell>
+                  <TableCell sx={{ fontSize: 18 }} align="left">
+                    {" "}
+                    <Fab color="success" aria-label="add" sx={{ mr: 2 }} size="small" onClick={add}>
+                      <AddIcon></AddIcon>
+                    </Fab>
+                    <Fab color="secondary" aria-label="add" size="small" onClick={remove}>
+                      <RemoveIcon></RemoveIcon>
+                    </Fab>
+                    {/* <br /> */}
+                    {/* <br /> */}
+                  </TableCell>
+                </TableRow>
+
+              )
+            }
+            )}
           </TableBody>
         </Table>
       </TableContainer>

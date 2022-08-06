@@ -29,7 +29,7 @@ export default function MyCard({ meal }) {
   const handleOneMealView = (id) => {
     dispatch(getOneMeal(id));
   };
-
+  // console.log(meal);
   return (
     <Card sx={{ maxWidth: 450 }}>
       <CardActionArea
@@ -98,7 +98,7 @@ export default function MyCard({ meal }) {
         <IconButton
           aria-label="delete"
           size="large"
-          onClick={() => dispatch(added("Initial Value"))}
+          onClick={() => dispatch(added(meal))}
         >
           <AddToCart fontSize="inherit" />
         </IconButton>

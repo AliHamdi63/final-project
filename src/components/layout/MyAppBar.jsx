@@ -40,7 +40,7 @@ function MyAppBar(props) {
       location.pathname === "/Cart"
     ) {
       value = -1;
-      console.log(value);
+      // console.log(value);
     } else {
       return value;
     }
@@ -51,7 +51,7 @@ function MyAppBar(props) {
     // change valueif not in dedtecated location
 
     setValue(newValue);
-    console.log(newValue);
+    // console.log(newValue);
   };
   const changeTheme = () => {
     props.setIsDarkTheme(!props.isDarkTheme);
