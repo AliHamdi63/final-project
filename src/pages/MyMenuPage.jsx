@@ -2,7 +2,7 @@ import { Box, Container, Paper, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@mui/material";
 import MyCard from "../components/HomeComponents/MyCard";
 import { Grid } from "@mui/material";
@@ -16,8 +16,21 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Pagination from "@mui/material/Pagination";
+import { useDispatch, useSelector } from "react-redux";
+import { getMeals } from "../features/meal/mealSlice";
 
 function MyMenuPage() {
+  const {
+    meals: { meals },
+    mealsIsLoading,
+    getMealsError,
+  } = useSelector((state) => state.meal);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getMeals());
+  }, [dispatch]);
+
   return (
     <Box sx={{ minHeight: "100vh" }}>
       <Paper variant={"outlined"} square>
@@ -126,33 +139,32 @@ function MyMenuPage() {
         </Grid>
         <Grid item>
           <Container>
-            <Grid
-              container
-              spacing={2}
-              justifyContent="center"
-              sx={{ flexGrow: 1, mt: "40px" }}
-              my={8}
-            >
-              <Grid item lg={4}>
-                <MyCard></MyCard>
-              </Grid>
-              <Grid item lg={4}>
-                <MyCard></MyCard>
-              </Grid>{" "}
-              <Grid item lg={4}>
-                <MyCard></MyCard>
-              </Grid>{" "}
-              <Grid item lg={4}>
-                <MyCard></MyCard>
-              </Grid>{" "}
-              <Grid item lg={4}>
-                <MyCard></MyCard>
-              </Grid>{" "}
-              <Grid item lg={4}>
-                <MyCard></MyCard>
-              </Grid>{" "}
-              <Pagination count={10} color="primary" sx={{ mt: 4 }} />
-            </Grid>
+          {mealsIsLoading ? (
+          "Loading ..."
+        ) : (
+          <Grid
+            container
+            spacing={2}
+            justifyContent="center"
+            sx={{ flexGrow: 1, mt: "40px" }}
+          >
+            {getMealsError ? (
+              "can't catch data"
+            ) : (
+              <>
+                {meals &&
+                  meals.map((item, index) => {
+                      return (
+                        <Grid key={item._id} item lg={4}>
+                          <MyCard meal={item}></MyCard>
+                        </Grid>
+                      );
+                  })}
+              </>
+            )}
+          </Grid>
+        )}
+            <Pagination count={10} color="primary" sx={{ mt: 4, mb: 8 }} />
           </Container>
         </Grid>
       </Grid>
