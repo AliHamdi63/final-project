@@ -139,32 +139,42 @@ function MyMenuPage() {
         </Grid>
         <Grid item>
           <Container>
-          {mealsIsLoading ? (
-          "Loading ..."
-        ) : (
-          <Grid
-            container
-            spacing={2}
-            justifyContent="center"
-            sx={{ flexGrow: 1, mt: "40px" }}
-          >
-            {getMealsError ? (
-              "can't catch data"
+            {mealsIsLoading ? (
+              "Loading ..."
             ) : (
-              <>
-                {meals &&
-                  meals.map((item, index) => {
-                      return (
-                        <Grid key={item._id} item lg={4}>
-                          <MyCard meal={item}></MyCard>
-                        </Grid>
-                      );
-                  })}
-              </>
+              <Grid
+                container
+                spacing={2}
+                justifyContent="center"
+                sx={{ flexGrow: 1, mt: "40px" }}
+              >
+                {getMealsError ? (
+                  "can't catch data"
+                ) : (
+                  <>
+                    {meals &&
+                      meals.map((item, index) => {
+                        return (
+                          <Grid key={item._id} item lg={4}>
+                            <MyCard meal={item}></MyCard>
+                          </Grid>
+                        );
+                      })}
+                  </>
+                )}
+              </Grid>
             )}
-          </Grid>
-        )}
-            <Pagination count={10} color="primary" sx={{ mt: 4, mb: 8 }} />
+            <Grid
+              container
+              spacing={0}
+              direction="column"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Grid item xs={3}>
+                <Pagination count={10} color="primary" sx={{ mt: 4, mb: 8 }} />
+              </Grid>
+            </Grid>
           </Container>
         </Grid>
       </Grid>
