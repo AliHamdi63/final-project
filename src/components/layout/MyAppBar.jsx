@@ -24,21 +24,23 @@ import { Link, useLocation } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 
-
-
 const drawerWidth = 240;
 
 const navItems = ["Home", "Menu", "About", "Contact", "Market"];
 function MyAppBar(props) {
-
-
-  let numOfItems = useSelector((state) => state.cart.numOfItems)
+  let numOfItems = useSelector((state) => state.cart.numOfItems);
   // console.log(numOfItems.length);
 
   const location = useLocation();
   function RemoveNavIndecator() {
-    if (location.pathname === "/Register") {
+    if (
+      location.pathname === "/Register" ||
+      location.pathname === "/LogIn" ||
+      location.pathname === "/Profile" ||
+      location.pathname === "/Cart"
+    ) {
       value = -1;
+      console.log(value);
     } else {
       return value;
     }

@@ -1,7 +1,12 @@
 import React from "react";
+import RegisterCard from "../components/Regesteration Components/RegisterCard";
 
 function MyRegisterPage() {
-  return <div>MyRegisterPage</div>;
+  return (
+    <div>
+      <RegisterCard></RegisterCard>
+    </div>
+  );
 }
 
 export default MyRegisterPage;

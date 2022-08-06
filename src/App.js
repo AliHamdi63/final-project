@@ -18,6 +18,12 @@ import MyLogInPage from "./pages/MyLogInPage";
 import MyRegisterPage from "./pages/MyRegisterPage";
 import MealPurchasePage from "./pages/MealPurchasePage";
 import ShoppingCartPage from "./pages/ShoppingCartPage";
+import MyProfile from "./pages/MyProfile";
+import ProfileAddresses from "./components/ProfileComponents/ProfileAddresses";
+import ProfileDashboard from "./components/ProfileComponents/ProfileDashboard";
+import ProfileDetails from "./components/ProfileComponents/ProfileDetails";
+import ProfileOrders from "./components/ProfileComponents/ProfileOrders";
+import ProfilePssword from "./components/ProfileComponents/ProfilePssword";
 
 // Define theme settings
 
@@ -84,8 +90,15 @@ const App = () => {
           <Route path="Market" element={<MyMarketPage />} />
           <Route path="LogIn" element={<MyLogInPage />} />
           <Route path="Register" element={<MyRegisterPage />} />
-          <Route path="Meal" element={<MealPurchasePage />} />
+          <Route path="Meal/:id" element={<MealPurchasePage />} />
           <Route path="Cart" element={<ShoppingCartPage />} />
+          <Route path="Profile" element={<MyProfile />}>
+            <Route path="Dashboard" element={<ProfileDashboard />} />
+            <Route path="Address" element={<ProfileAddresses />} />
+            <Route path="ProfileDetails" element={<ProfileDetails />} />
+            <Route path="ProfileOrders" element={<ProfileOrders />} />
+            <Route path="ProfilePassword" element={<ProfilePssword />} />
+          </Route>
         </Routes>
         <Footer
           setIsDarkTheme={setIsDarkTheme}

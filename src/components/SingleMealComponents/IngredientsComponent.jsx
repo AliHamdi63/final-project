@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Grid, Typography, Box } from "@mui/material";
 
-function IngredientsComponent() {
+function IngredientsComponent({meal}) {
   return (
     <Container maxWidth={"xl"}>
       {" "}
@@ -9,7 +9,7 @@ function IngredientsComponent() {
         <Grid item xs={12} md={6}>
           <img
             src={
-              "https://media.blueapron.com/recipes/33134/ingredient_images/1656601743-50-0003-0301/0801_2PRE12_large_feature.png"
+              meal && meal.image
             }
             alt=""
             width={"100%"}
@@ -25,71 +25,18 @@ function IngredientsComponent() {
                 gap: 2,
               }}
             >
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                fontSize={"large"}
-              >
-                10 oz Chopped Chicken Breast{" "}
-              </Typography>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                fontSize={"large"}
-              >
-                1 15.5-Ounce Can Black Beans
-              </Typography>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                fontSize={"large"}
-              >
-                2 cloves Garlic
-              </Typography>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                fontSize={"large"}
-              >
-                1 15-Ounce Can Crushed Tomatoes
-              </Typography>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                fontSize={"large"}
-              >
-                2 Scallions
-              </Typography>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                fontSize={"large"}
-              >
-                6 oz Carrots
-              </Typography>
-
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                fontSize={"large"}
-              >
-                2 tsps Chipotle Chile Paste
-              </Typography>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                fontSize={"large"}
-              >
-                2 Tbsps Grated Cotija Cheese
-              </Typography>
-
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                fontSize={"large"}
-              >
-                ½ cup Plain Nonfat Greek Yogurt{" "}
-              </Typography>
+              {meal && meal._ingredients.map((item, index) => {
+                return(
+                  <Typography
+                  key={index}
+                  variant="body2"
+                  color="text.secondary"
+                  fontSize={"large"}
+                >
+                  {item.quantity} {item.name}{" "}
+                </Typography>
+                )
+              })}
             </Box>
           </Container>
         </Grid>
