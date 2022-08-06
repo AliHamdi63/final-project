@@ -90,7 +90,7 @@ const App = () => {
           <Route path="Market" element={<MyMarketPage />} />
           <Route path="LogIn" element={<MyLogInPage />} />
           <Route path="Register" element={<MyRegisterPage />} />
-          <Route path="Meal" element={<MealPurchasePage />} />
+          <Route path="Meal/:id" element={<MealPurchasePage />} />
           <Route path="Cart" element={<ShoppingCartPage />} />
           <Route path="Profile" element={<MyProfile />}>
             <Route path="Dashboard" element={<ProfileDashboard />} />

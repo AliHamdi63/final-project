@@ -5,14 +5,11 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import {
   Box,
-  Button,
   CardActionArea,
   CardActions,
   Chip,
-  Icon,
   IconButton,
 } from "@mui/material";
-import SeaFodIcon from "@mui/icons-material/SetMeal";
 import VeganFoodIcon from "@mui/icons-material/Spa";
 import KitchenIcon from "@mui/icons-material/Countertops";
 import AddToCart from "@mui/icons-material/AddShoppingCart";
@@ -20,27 +17,32 @@ import TimerIcon from "@mui/icons-material/Timer";
 import { Link } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
-import { added, removed } from "../../features/cart/cartSlice";
+import { added } from "../../features/cart/cartSlice";
+import { getOneMeal } from "../../features/meal/mealSlice";
 
-
-
-
-
-export default function MyCard() {
-
-  const numOfItems = useSelector((state) => state.cart.numOfItems)
-  // console.log(numOfItems.length);
+export default function MyCard({ meal }) {
+  const { _id, addons, name, cuisine, category, cookingDuration, image, price } =
+    meal;
+  const numOfItems = useSelector((state) => state.cart.numOfItems);
 
   const dispatch = useDispatch();
-
+  const handleOneMealView = (id) => {
+    dispatch(getOneMeal(id));
+  };
 
   return (
     <Card sx={{ maxWidth: 450 }}>
-      <CardActionArea component={Link} to={`/${"Meal"}`}>
+      <CardActionArea
+        component={Link}
+        to={`/${"Meal"}/${_id}`}
+        onClick={() => {
+          handleOneMealView(_id);
+        }}
+      >
         <CardMedia
           component="img"
           height="400"
-          image="https://media.blueapron.com/recipes/33099/square_newsletter_images/1656624414-43-0005-9008/1004_2P21-Sweet-Chili-Glazed-Pork_173_SQ_Web.jpg?quality=80&width=850"
+          image={image}
           alt="green iguana"
         />
         <CardContent>
@@ -51,10 +53,10 @@ export default function MyCard() {
             color={"primary"}
             fontFamily="serif"
           >
-            Miso-Sesame Chicken
+            {name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            with Brown Rice & Vegetables
+            {addons}
           </Typography>
           <Box
             sx={{
@@ -67,13 +69,13 @@ export default function MyCard() {
               <Chip
                 color="primary"
                 size="small"
-                label="vegan-food"
+                label={category}
                 icon={<VeganFoodIcon />}
               />
               <Chip
                 color="secondary"
                 size="small"
-                label="american"
+                label={cuisine}
                 icon={<KitchenIcon />}
               />
             </Box>
@@ -85,15 +87,19 @@ export default function MyCard() {
               <TimerIcon></TimerIcon>
               <Typography varient="caption" textAlign={"center"}>
                 {" "}
-                90 min
+                {cookingDuration} min
               </Typography>
             </Typography>
           </Box>
         </CardContent>
       </CardActionArea>
       <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Typography variant="h5">300 EGP</Typography>
-        <IconButton aria-label="delete" size="large" onClick={() => dispatch(added("Initial Value"))}>
+        <Typography variant="h5">{price} EGP</Typography>
+        <IconButton
+          aria-label="delete"
+          size="large"
+          onClick={() => dispatch(added("Initial Value"))}
+        >
           <AddToCart fontSize="inherit" />
         </IconButton>
       </CardActions>

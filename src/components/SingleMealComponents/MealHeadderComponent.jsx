@@ -22,11 +22,12 @@ import { added, removed } from "../../features/cart/cartSlice";
 
 
 
-function MealHeadderComponent() {
+function MealHeadderComponent({meal}) {
+  // console.log(meal)
 
   const numOfItems = useSelector((state) => state.cart.numOfItems)
   const dispatch = useDispatch();
-  console.log(numOfItems);
+  // console.log(numOfItems);
 
 
 
@@ -50,7 +51,7 @@ function MealHeadderComponent() {
             <Grid item xs={12} md={6} justify="center">
               <img
                 src={
-                  "https://media.blueapron.com/recipes/33134/square_newsletter_images/1656431490-48-0013-4661/0801_2P12_Steelhead-Trout-Creamy-Pesto_336_SQ_Web.jpg?quality=80&width=850"
+                  meal.image
                 }
                 alt=""
                 width={"100%"}
@@ -70,14 +71,15 @@ function MealHeadderComponent() {
                     color="primary.dark"
                   >
                     {" "}
-                    Steelhead Trout Fillets & Creamy Pesto{" "}
+                    {meal.name}
+                    {" "}
                   </Typography>
                   <Typography
                     variant="body2"
                     color="text.secondary"
                     fontSize={"large"}
                   >
-                    with Arugula & Corn Panzanella Salad
+                    {meal.addons}
                   </Typography>
                   <Typography
                     variant="h5"
@@ -87,7 +89,7 @@ function MealHeadderComponent() {
                     <AvTimerIcon></AvTimerIcon>
                     <Typography varient="caption" textAlign={"center"}>
                       {" "}
-                      90 min
+                      {meal.cookingDuration} min
                     </Typography>
                   </Typography>
                   <Box sx={{ display: "flex", gap: 2 }}>
@@ -102,16 +104,16 @@ function MealHeadderComponent() {
                         alignItems: "center",
                       }}
                     >
-                      $21.99/serving
+                      ${meal.price}/serving
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      2 Servings
+                      {meal.servings} Servings
                     </Typography>
                   </Box>
                 </Box>
                 <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
                   <Typography variant="h5" fontWeight={"bold"}>
-                    From American Kitchen
+                    From {meal.cuisine} Kitchen
                   </Typography>
                   <Box>
                     <Typography
@@ -119,13 +121,10 @@ function MealHeadderComponent() {
                       fontWeight={"bold"}
                       color="text.secondary"
                     >
-                      ORIGIN{" "}
+                      {meal.category}{" "}
                     </Typography>
                     <Typography variant="body2" color={"text.secondary"}>
-                      Panzanella (or Italian bread salad) originated in Tuscany,
-                      where people made use of stale bread by soaking it in
-                      olive oil, then tossing it with fresh tomatoes and more
-                      for a vibrant, delicious salad.
+                      {meal.description}
                     </Typography>
                   </Box>
                   <Box>
@@ -178,7 +177,7 @@ function MealHeadderComponent() {
                         Calories
                       </Typography>
 
-                      <Typography variant="body1">1170 Cals</Typography>
+                      <Typography variant="body1">{meal.calories} Cals</Typography>
                     </Box>
                     <Divider></Divider>
                   </Container>
