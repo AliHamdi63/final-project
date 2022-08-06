@@ -8,7 +8,6 @@ function MyHomePage() {
   return (
     <div>
       <MyImageSlider></MyImageSlider>
-      {/* <MyText></MyText> */}
       <MyBrief></MyBrief>
       <HomeFeatureSection></HomeFeatureSection>
       <HomeChooseFrom></HomeChooseFrom>
@@ -16,4 +15,4 @@ function MyHomePage() {
   );
 }
 
-export default MyHomePage;
+export default MyHomePage

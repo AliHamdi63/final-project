@@ -10,5 +10,4 @@ function ShoppingCartPage() {
     </div>
   );
 }
-
 export default ShoppingCartPage;
