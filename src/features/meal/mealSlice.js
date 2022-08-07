@@ -2,10 +2,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initState = {meals : [], mealsIsLoading: false, getMealsError: false, oneMeal: {}, oneMealLoading: false, getOneMealError: false};
 
-export const getMeals = createAsyncThunk('meal/getMeals', async (_, {rejectWithValue}) => {
+export const getMeals = createAsyncThunk('meal/getMeals', async (query, {rejectWithValue}) => {
     try{
-        const res = await fetch(`https://foody--api.herokuapp.com/meals`);
-        const data = res.json();
+        const res = await fetch(`https://foody--api.herokuapp.com/meals?${query.data}`);
+        const data = await res.json();
         return data;
     }catch(error){
         return rejectWithValue(error.message);
@@ -14,7 +14,6 @@ export const getMeals = createAsyncThunk('meal/getMeals', async (_, {rejectWithV
 
 export const getOneMeal = createAsyncThunk('meal/getOneMeal', async (id, {rejectWithValue}) => {
     try{
-        // console.log(id)
         const res = await fetch(`https://foody--api.herokuapp.com/meals/${id}`);
         const data = res.json();
         return data;

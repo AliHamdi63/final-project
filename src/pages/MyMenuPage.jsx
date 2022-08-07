@@ -2,7 +2,7 @@ import { Box, Container, Paper, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import MyCard from "../components/HomeComponents/MyCard";
 import { Grid } from "@mui/material";
@@ -18,17 +18,28 @@ import FormLabel from "@mui/material/FormLabel";
 import Pagination from "@mui/material/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { getMeals } from "../features/meal/mealSlice";
+import { click } from "@testing-library/user-event/dist/click";
 
 function MyMenuPage() {
-  const {
-    meals: { meals },
+  
+  let {
+    meals,
     mealsIsLoading,
     getMealsError,
   } = useSelector((state) => state.meal);
+  const mealsList = meals.meals;
+  const {pages} = meals;
+
+
+  const PageHandle = async (event, value)=>{
+
+    dispatch(getMeals({data: `page=${value}`}));
+
+  };
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getMeals());
+    dispatch(getMeals({data:"page=1"}));
   }, [dispatch]);
 
   return (
@@ -71,7 +82,7 @@ function MyMenuPage() {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                <Typography fontWeight={"bold"}>Categories</Typography>
+                <Typography fontWeight={"bold"}>Cuisine</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <FormControl>
@@ -87,14 +98,34 @@ function MyMenuPage() {
                       label="All"
                     />
                     <FormControlLabel
-                      value="lamb"
+                      value="african"
                       control={<Radio />}
-                      label="Lamb"
+                      label="African"
                     />
                     <FormControlLabel
-                      value="fish"
+                      value="moroccan"
                       control={<Radio />}
-                      label="Fish"
+                      label="Moroccan"
+                    />
+                    <FormControlLabel
+                      value="japanese"
+                      control={<Radio />}
+                      label="Japanese"
+                    />
+                    <FormControlLabel
+                      value="asian"
+                      control={<Radio />}
+                      label="Asian"
+                    />
+                    <FormControlLabel
+                      value="italian"
+                      control={<Radio />}
+                      label="Italian"
+                    />
+                    <FormControlLabel
+                      value="american"
+                      control={<Radio />}
+                      label="American"
                     />
                   </RadioGroup>
                 </FormControl>
@@ -131,6 +162,21 @@ function MyMenuPage() {
                       control={<Radio />}
                       label="Fish"
                     />
+                    <FormControlLabel
+                      value="poultry"
+                      control={<Radio />}
+                      label="Poultry"
+                    />
+                    <FormControlLabel
+                      value="beef"
+                      control={<Radio />}
+                      label="Beef"
+                    />
+                    <FormControlLabel
+                      value="vegetarian"
+                      control={<Radio />}
+                      label="Vegetarian"
+                    />
                   </RadioGroup>
                 </FormControl>
               </AccordionDetails>
@@ -142,6 +188,22 @@ function MyMenuPage() {
             {mealsIsLoading ? (
               "Loading ..."
             ) : (
+// <<<<<<< HEAD
+//               <>
+//                 {mealsList &&
+//                   mealsList.map((item, index) => {
+//                       return (
+//                         <Grid key={item._id} item lg={4}>
+//                           <MyCard meal={item}></MyCard>
+//                         </Grid>
+//                       );
+//                   })}
+//               </>
+//             )}
+//           </Grid>
+//         )}
+            
+// =======
               <Grid
                 container
                 spacing={2}
@@ -152,8 +214,8 @@ function MyMenuPage() {
                   "can't catch data"
                 ) : (
                   <>
-                    {meals &&
-                      meals.map((item, index) => {
+                    {mealsList &&
+                      mealsList.map((item, index) => {
                         return (
                           <Grid key={item._id} item lg={4}>
                             <MyCard meal={item}></MyCard>
@@ -172,9 +234,10 @@ function MyMenuPage() {
               justifyContent="center"
             >
               <Grid item xs={3}>
-                <Pagination count={10} color="primary" sx={{ mt: 4, mb: 8 }} />
+              <Pagination count={pages} color="primary" sx={{ mt: 4, mb: 8 }} onChange={PageHandle} />
               </Grid>
             </Grid>
+{/* >>>>>>> main */}
           </Container>
         </Grid>
       </Grid>
