@@ -26,7 +26,7 @@ import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
-const navItems = ["Home", "Menu", "About", "Contact", "Market"];
+const navItems = ["Home", "Menu", "About", "Contact"];
 function MyAppBar(props) {
   let numOfItems = useSelector((state) => state.cart.numOfItems);
   // console.log(numOfItems.length);
@@ -40,7 +40,7 @@ function MyAppBar(props) {
       location.pathname === "/Cart"
     ) {
       value = -1;
-      console.log(value);
+      // console.log(value);
     } else {
       return value;
     }
@@ -51,7 +51,7 @@ function MyAppBar(props) {
     // change valueif not in dedtecated location
 
     setValue(newValue);
-    console.log(newValue);
+    // console.log(newValue);
   };
   const changeTheme = () => {
     props.setIsDarkTheme(!props.isDarkTheme);

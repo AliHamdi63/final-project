@@ -21,17 +21,25 @@ import { added } from "../../features/cart/cartSlice";
 import { getOneMeal } from "../../features/meal/mealSlice";
 
 export default function MyCard({ meal }) {
-  const { _id, addons, name, cuisine, category, cookingDuration, image, price } =
-    meal;
+  const {
+    _id,
+    addons,
+    name,
+    cuisine,
+    category,
+    cookingDuration,
+    image,
+    price,
+  } = meal;
   const numOfItems = useSelector((state) => state.cart.numOfItems);
 
   const dispatch = useDispatch();
   const handleOneMealView = (id) => {
     dispatch(getOneMeal(id));
   };
-
+  // console.log(meal);
   return (
-    <Card sx={{ maxWidth: 450 }}>
+    <Card sx={{ maxWidth: 400, height: 700 }}>
       <CardActionArea
         component={Link}
         to={`/${"Meal"}/${_id}`}
@@ -98,7 +106,7 @@ export default function MyCard({ meal }) {
         <IconButton
           aria-label="delete"
           size="large"
-          onClick={() => dispatch(added("Initial Value"))}
+          onClick={() => dispatch(added(meal))}
         >
           <AddToCart fontSize="inherit" />
         </IconButton>

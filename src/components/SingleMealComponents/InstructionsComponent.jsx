@@ -12,7 +12,7 @@ import {
   OutlinedInput,
 } from "@mui/material";
 
-function InstructionsComponent({meal}) {
+function InstructionsComponent({ meal }) {
   return (
     <div>
       {" "}
@@ -58,26 +58,50 @@ function InstructionsComponent({meal}) {
           }}
         >
           <Grid container spacing={2} mb={5}>
-            {meal && meal.map((item, index) => {
-              return(
-                <Grid key={index} item xs={12} md={6} justify="center" mb={15}>
-              <img
-                src={
-                  item.image
-                }
-                alt=""
-                width={"100%"}
-              />
-              <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-                <Typography>{item.title}:</Typography>
-                <Divider></Divider>
-                <Typography>
-                  {item.description}
-                </Typography>
-              </Box>
-            </Grid>
-              )
-            })}
+            {meal &&
+              meal.map((item, index) => {
+                return (
+                  <Grid
+                    key={index}
+                    item
+                    xs={12}
+                    md={6}
+                    justify="center"
+                    mb={15}
+                  >
+                    <img src={item.image} alt="" width={"100%"} />
+                    <Box
+                      sx={{ display: "flex", flexDirection: "column", gap: 1 }}
+                    >
+                      <Typography>
+                        <Box
+                          component={"span"}
+                          sx={{
+                            backgroundColor: "primary.main",
+                            color: "white",
+                            borderRadius: "50%",
+                            px: 1,
+                            py: 0.5,
+                          }}
+                        >
+                          {index + 1}
+                        </Box>{" "}
+                        <Box
+                          component={"span"}
+                          sx={{ fontSize: 18, fontWeight: "bold" }}
+                        >
+                          {item.title}:
+                        </Box>{" "}
+                      </Typography>
+                      <Divider></Divider>
+                      {/* <Typography>{item.description}</Typography> */}
+                      <p
+                        dangerouslySetInnerHTML={{ __html: item.description }}
+                      ></p>
+                    </Box>
+                  </Grid>
+                );
+              })}
           </Grid>
         </Container>
       </Grid>

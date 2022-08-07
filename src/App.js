@@ -3,7 +3,7 @@ import MyAppBar from "./components/layout/MyAppBar";
 
 // Import MUI colors
 import { deepOrange, teal } from "@mui/material/colors";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -24,6 +24,7 @@ import ProfileDashboard from "./components/ProfileComponents/ProfileDashboard";
 import ProfileDetails from "./components/ProfileComponents/ProfileDetails";
 import ProfileOrders from "./components/ProfileComponents/ProfileOrders";
 import ProfilePssword from "./components/ProfileComponents/ProfilePssword";
+import ScrollToTop from "./components/Utilities/ScrollToTop";
 
 // Define theme settings
 
@@ -73,7 +74,9 @@ const App = () => {
           isDarkTheme={isDarkTheme}
         ></MyAppBar>
         {/* here is our pages */}
+
         <Routes>
+          {/* <ScrollToTop></ScrollToTop> */}
           <Route index element={<MyHomePage />}></Route>
           <Route path="Home" element={<MyHomePage />} />
           <Route path="About" element={<MyAboutPage />} />

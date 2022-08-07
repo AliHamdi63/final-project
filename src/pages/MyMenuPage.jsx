@@ -185,32 +185,59 @@ function MyMenuPage() {
         </Grid>
         <Grid item>
           <Container>
-          {mealsIsLoading ? (
-          "Loading ..."
-        ) : (
-          <Grid
-            container
-            spacing={2}
-            justifyContent="center"
-            sx={{ flexGrow: 1, mt: "40px" }}
-          >
-            {getMealsError ? (
-              "can't catch data"
+            {mealsIsLoading ? (
+              "Loading ..."
             ) : (
-              <>
-                {mealsList &&
-                  mealsList.map((item, index) => {
-                      return (
-                        <Grid key={item._id} item lg={4}>
-                          <MyCard meal={item}></MyCard>
-                        </Grid>
-                      );
-                  })}
-              </>
+// <<<<<<< HEAD
+//               <>
+//                 {mealsList &&
+//                   mealsList.map((item, index) => {
+//                       return (
+//                         <Grid key={item._id} item lg={4}>
+//                           <MyCard meal={item}></MyCard>
+//                         </Grid>
+//                       );
+//                   })}
+//               </>
+//             )}
+//           </Grid>
+//         )}
+            
+// =======
+              <Grid
+                container
+                spacing={2}
+                justifyContent="center"
+                sx={{ flexGrow: 1, mt: "40px" }}
+              >
+                {getMealsError ? (
+                  "can't catch data"
+                ) : (
+                  <>
+                    {mealsList &&
+                      mealsList.map((item, index) => {
+                        return (
+                          <Grid key={item._id} item lg={4}>
+                            <MyCard meal={item}></MyCard>
+                          </Grid>
+                        );
+                      })}
+                  </>
+                )}
+              </Grid>
             )}
-          </Grid>
-        )}
-            <Pagination count={pages} color="primary" sx={{ mt: 4, mb: 8 }} onChange={PageHandle} />
+            <Grid
+              container
+              spacing={0}
+              direction="column"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Grid item xs={3}>
+              <Pagination count={pages} color="primary" sx={{ mt: 4, mb: 8 }} onChange={PageHandle} />
+              </Grid>
+            </Grid>
+{/* >>>>>>> main */}
           </Container>
         </Grid>
       </Grid>
