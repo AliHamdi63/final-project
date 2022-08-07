@@ -2,7 +2,7 @@ import { Box, Container, Paper, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import MyCard from "../components/HomeComponents/MyCard";
 import { Grid } from "@mui/material";
@@ -18,17 +18,28 @@ import FormLabel from "@mui/material/FormLabel";
 import Pagination from "@mui/material/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { getMeals } from "../features/meal/mealSlice";
+import { click } from "@testing-library/user-event/dist/click";
 
 function MyMenuPage() {
-  const {
-    meals: { meals },
+  
+  let {
+    meals,
     mealsIsLoading,
     getMealsError,
   } = useSelector((state) => state.meal);
+  const mealsList = meals.meals;
+  const {pages} = meals;
+
+
+  const PageHandle = async (event, value)=>{
+
+    dispatch(getMeals({data: `page=${value}`}));
+
+  };
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getMeals());
+    dispatch(getMeals({data:"page=1"}));
   }, [dispatch]);
 
   return (
@@ -152,8 +163,8 @@ function MyMenuPage() {
               "can't catch data"
             ) : (
               <>
-                {meals &&
-                  meals.map((item, index) => {
+                {mealsList &&
+                  mealsList.map((item, index) => {
                       return (
                         <Grid key={item._id} item lg={4}>
                           <MyCard meal={item}></MyCard>
@@ -164,7 +175,7 @@ function MyMenuPage() {
             )}
           </Grid>
         )}
-            <Pagination count={10} color="primary" sx={{ mt: 4, mb: 8 }} />
+            <Pagination count={pages} color="primary" sx={{ mt: 4, mb: 8 }} onChange={PageHandle} />
           </Container>
         </Grid>
       </Grid>
