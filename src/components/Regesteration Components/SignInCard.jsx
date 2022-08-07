@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import {
   Container,
   Paper,
@@ -21,6 +21,10 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogin } from "../../features/authenticate/authSlice";
+// import spinner from "../layout/spinner";
+
 
 function SignInCard() {
   const [values, setValues] = useState({ showPassword: false });
@@ -30,6 +34,57 @@ function SignInCard() {
       showPassword: !values.showPassword,
     });
   };
+
+  const [email, setEmail] = useState('')
+  const [password, setPass] = useState('')
+
+  const onChangeEmail = (e) => {
+    setEmail(e.target.value)
+    // console.log(email);
+  }
+  const onChangePass = (e) => {
+    setPass(e.target.value)
+    // console.log(pass);
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    const userData = {
+      email,
+      password,
+    }
+    // console.log(userData);
+    dispatch(userLogin(userData))
+  }
+
+
+  // const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const { isFetching, error } = useSelector(
+    (state) => state.auth
+  )
+
+  useEffect(() => {
+    if (error) {
+      // console.log("error 71");
+    }
+
+    if (!isFetching) {
+      //     // navigate('/')
+
+      // console.log("fetch 77");
+    }
+
+  }, [isFetching, error])
+
+
+
+  // if (isFetching) {
+  //   return <spinner />
+  // }
+
   return (
     <div>
       {" "}
@@ -112,12 +167,14 @@ function SignInCard() {
                 </Button>
               </Box>
 
-              <Container sx={{ my: 3 }} component="form">
+              <Container sx={{ my: 3 }} component="form" onSubmit={onSubmit}>
                 <FormControl sx={{ mt: 2 }} fullWidth>
                   <InputLabel htmlFor="Email-Field">Email</InputLabel>
                   <OutlinedInput
                     id="Email-Field"
                     label="Email"
+                    value={email}
+                    onChange={onChangeEmail}
                     startAdornment={
                       <InputAdornment position="start">
                         <PersonIcon></PersonIcon>
@@ -130,8 +187,9 @@ function SignInCard() {
                   <InputLabel htmlFor="Password-Field">Password</InputLabel>
                   <OutlinedInput
                     id="Password-Field"
+                    onChange={onChangePass}
                     type={values.showPassword ? "text" : "password"}
-                    value={values.password}
+                    value={password}
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
@@ -166,6 +224,7 @@ function SignInCard() {
                     sign in
                   </Button>
                 </FormControl>
+                {error && <h2>Please try again .... </h2>}
               </Container>
               <Grid
                 container

@@ -10,6 +10,9 @@ import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
+import { logout } from "../../features/authenticate/authSlice";
+import { useDispatch } from "react-redux";
+
 export default function MyAccount() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -19,6 +22,12 @@ export default function MyAccount() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const dispatch = useDispatch()
+  function userLogout() {
+    dispatch(logout())
+    // console.log("User Logout")
+  }
   return (
     <React.Fragment>
       <Box
@@ -82,7 +91,7 @@ export default function MyAccount() {
           <Avatar /> Profile
         </MenuItem>
         <Divider />
-        <MenuItem>
+        <MenuItem onClick={userLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

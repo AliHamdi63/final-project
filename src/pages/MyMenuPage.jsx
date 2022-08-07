@@ -21,25 +21,25 @@ import { getMeals } from "../features/meal/mealSlice";
 import { click } from "@testing-library/user-event/dist/click";
 
 function MyMenuPage() {
-  
+
   let {
     meals,
     mealsIsLoading,
     getMealsError,
   } = useSelector((state) => state.meal);
   const mealsList = meals.meals;
-  const {pages} = meals;
+  const { pages } = meals;
 
 
-  const PageHandle = async (event, value)=>{
+  const PageHandle = async (event, value) => {
 
-    dispatch(getMeals({data: `page=${value}`}));
+    dispatch(getMeals({ data: `page=${value}` }));
 
   };
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getMeals({data:"page=1"}));
+    dispatch(getMeals({ data: "page=1" }));
   }, [dispatch]);
 
   return (
@@ -188,22 +188,6 @@ function MyMenuPage() {
             {mealsIsLoading ? (
               "Loading ..."
             ) : (
-// <<<<<<< HEAD
-//               <>
-//                 {mealsList &&
-//                   mealsList.map((item, index) => {
-//                       return (
-//                         <Grid key={item._id} item lg={4}>
-//                           <MyCard meal={item}></MyCard>
-//                         </Grid>
-//                       );
-//                   })}
-//               </>
-//             )}
-//           </Grid>
-//         )}
-            
-// =======
               <Grid
                 container
                 spacing={2}
@@ -234,10 +218,9 @@ function MyMenuPage() {
               justifyContent="center"
             >
               <Grid item xs={3}>
-              <Pagination count={pages} color="primary" sx={{ mt: 4, mb: 8 }} onChange={PageHandle} />
+                <Pagination count={pages} color="primary" sx={{ mt: 4, mb: 8 }} onChange={PageHandle} />
               </Grid>
             </Grid>
-{/* >>>>>>> main */}
           </Container>
         </Grid>
       </Grid>

@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import {
   Container,
   Paper,
@@ -12,7 +12,7 @@ import {
   InputAdornment,
   IconButton,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import cookImage from "../../assets/svgs/Recipe book-bro.svg";
 
@@ -22,6 +22,13 @@ import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 
+
+import { userRegister } from '../../features/authenticate/authSlice'
+import { useDispatch, useSelector } from "react-redux";
+// import spinner from "../layout/spinner";
+
+
+
 function RegisterCard() {
   const [values, setValues] = useState({ showPassword: false });
   const handleClickShowPassword = () => {
@@ -30,6 +37,74 @@ function RegisterCard() {
       showPassword: !values.showPassword,
     });
   };
+
+
+  const [firstName, setFName] = useState('')
+  const [lastName, setLName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPass] = useState('')
+
+  const onChangeFName = (e) => {
+    setFName(e.target.value)
+    // console.log(email);
+  }
+  const onChangeLName = (e) => {
+    setLName(e.target.value)
+    // console.log(pass);
+  }
+  const onChangeEmail = (e) => {
+    setEmail(e.target.value)
+    // console.log(email);
+  }
+  const onChangePass = (e) => {
+    setPass(e.target.value)
+    // console.log(pass);
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    const userData = {
+      firstName,
+      lastName,
+      email,
+      password,
+    }
+    // console.log(userData);
+    dispatch(userRegister(userData))
+  }
+
+
+  // const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const { isFetching, error } = useSelector(
+    (state) => state.auth
+  )
+
+  useEffect(() => {
+    if (error) {
+      console.log("error 87");
+    }
+
+    if (!isFetching) {
+      //     // navigate('/')
+
+      console.log("fetch 93");
+    }
+
+  }, [isFetching, error])
+
+
+
+  // if (isFetching) {
+  //   return <spinner />
+  // }
+
+
+
+
+
   return (
     <div>
       {" "}
@@ -102,7 +177,7 @@ function RegisterCard() {
                 }}
               ></Box>
 
-              <Container sx={{ my: 3 }} component="form">
+              <Container sx={{ my: 3 }} component="form" onSubmit={onSubmit}>
                 <Grid
                   Container
                   display={"flex"}
@@ -118,6 +193,8 @@ function RegisterCard() {
                       <OutlinedInput
                         id="FirstName-Field"
                         label="First Name"
+                        value={firstName}
+                        onChange={onChangeFName}
                         startAdornment={
                           <InputAdornment position="start">
                             <PersonIcon></PersonIcon>
@@ -134,6 +211,8 @@ function RegisterCard() {
                       <OutlinedInput
                         id="LastName-Field"
                         label="Last Name"
+                        value={lastName}
+                        onChange={onChangeLName}
                         startAdornment={
                           <InputAdornment position="start">
                             <PersonIcon></PersonIcon>
@@ -149,6 +228,8 @@ function RegisterCard() {
                   <OutlinedInput
                     id="Email-Field"
                     label="Email"
+                    value={email}
+                    onChange={onChangeEmail}
                     startAdornment={
                       <InputAdornment position="start">
                         <PersonIcon></PersonIcon>
@@ -162,7 +243,8 @@ function RegisterCard() {
                   <OutlinedInput
                     id="Password-Field"
                     type={values.showPassword ? "text" : "password"}
-                    value={values.password}
+                    value={password}
+                    onChange={onChangePass}
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
