@@ -82,7 +82,7 @@ function MyMenuPage() {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                <Typography fontWeight={"bold"}>Categories</Typography>
+                <Typography fontWeight={"bold"}>Cuisine</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <FormControl>
@@ -98,14 +98,34 @@ function MyMenuPage() {
                       label="All"
                     />
                     <FormControlLabel
-                      value="lamb"
+                      value="african"
                       control={<Radio />}
-                      label="Lamb"
+                      label="African"
                     />
                     <FormControlLabel
-                      value="fish"
+                      value="moroccan"
                       control={<Radio />}
-                      label="Fish"
+                      label="Moroccan"
+                    />
+                    <FormControlLabel
+                      value="japanese"
+                      control={<Radio />}
+                      label="Japanese"
+                    />
+                    <FormControlLabel
+                      value="asian"
+                      control={<Radio />}
+                      label="Asian"
+                    />
+                    <FormControlLabel
+                      value="italian"
+                      control={<Radio />}
+                      label="Italian"
+                    />
+                    <FormControlLabel
+                      value="american"
+                      control={<Radio />}
+                      label="American"
                     />
                   </RadioGroup>
                 </FormControl>
@@ -141,6 +161,21 @@ function MyMenuPage() {
                       value="fish"
                       control={<Radio />}
                       label="Fish"
+                    />
+                    <FormControlLabel
+                      value="poultry"
+                      control={<Radio />}
+                      label="Poultry"
+                    />
+                    <FormControlLabel
+                      value="beef"
+                      control={<Radio />}
+                      label="Beef"
+                    />
+                    <FormControlLabel
+                      value="vegetarian"
+                      control={<Radio />}
+                      label="Vegetarian"
                     />
                   </RadioGroup>
                 </FormControl>
