@@ -22,7 +22,7 @@ import { added, removed } from "../../features/cart/cartSlice";
 
 
 
-function MealHeadderComponent({meal}) {
+function MealHeadderComponent({ meal }) {
   // console.log(meal)
 
   const numOfItems = useSelector((state) => state.cart.numOfItems)
@@ -128,14 +128,14 @@ function MealHeadderComponent({meal}) {
                     </Typography>
                   </Box>
                   <Box>
-                    <Button variant="contained" size="large" onClick={() => dispatch(added("Initial Value"))}>
+                    <Button variant="contained" size="large" onClick={() => dispatch(added(meal))}>
                       Add to cooking Cart
                     </Button>
+                    {/* <br />
                     <br />
-                    <br />
-                    <Button variant="contained" sx={{ backgroundColor: 'red' }} size="large" onClick={() => dispatch(removed("Initial Value"))}>
+                    <Button variant="contained" sx={{ backgroundColor: 'red' }} size="large" onClick={() => dispatch(removed(meal._id))}>
                       Remove from cooking Cart
-                    </Button>
+                    </Button> */}
                   </Box>
                   <Container
                     sx={{

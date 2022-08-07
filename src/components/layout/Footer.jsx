@@ -19,7 +19,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import MapLocation from "../shared/MapLocation";
 function Footer(props) {
   const position = [30.550964701276385, 31.009036511610887];
-  console.log(props.isDarkTheme);
+  // console.log(props.isDarkTheme);
   let isDarkMode = props.isDarkTheme;
   const [isDark, setIsDark] = useState(props.isDarkTheme);
   // setIsDark((prevState) => !prevState);
