@@ -78,16 +78,10 @@ export default function MyAccount() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem component={Link} to={`/Profile`}>
+        <MenuItem component={Link} to={`/Profile/Dashboard`}>
           <Avatar /> Profile
         </MenuItem>
         <Divider />
-        <MenuItem>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
         <MenuItem>
           <ListItemIcon>
             <Logout fontSize="small" />

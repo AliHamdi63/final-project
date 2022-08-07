@@ -94,7 +94,10 @@ function InstructionsComponent({ meal }) {
                         </Box>{" "}
                       </Typography>
                       <Divider></Divider>
-                      <Typography>{item.description}</Typography>
+                      {/* <Typography>{item.description}</Typography> */}
+                      <p
+                        dangerouslySetInnerHTML={{ __html: item.description }}
+                      ></p>
                     </Box>
                   </Grid>
                 );

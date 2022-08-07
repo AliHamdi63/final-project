@@ -17,7 +17,16 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import { InputAdornment } from "@mui/material";
 function ProfileDetails() {
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [file, setFile] = useState(null);
+  function imageUploader(imageFile, data) {
+    let picName = (Date.now() + imageFile.name).toString();
+    console.log(picName);
+    let formData = new FormData();
+    formData.append("name", picName);
+    formData.append("file", imageFile);
+    data.image = picName;
+    // uploadImage(formData);
+  }
 
   return (
     <Container sx={{ my: 10 }}>
@@ -59,34 +68,57 @@ function ProfileDetails() {
               mt: 4,
             }}
           >
-            <Grid container spacing={2}>
+            <Grid
+              container
+              spacing={2}
+              component="form"
+              display={"flex"}
+              flexDirection="row"
+              justifyContent={"center"}
+              alignItems="center"
+            >
               {" "}
               <Grid item xs={12} md={6} justify="center">
-                <Box>
-                  {selectedImage && (
-                    <div>
-                      <img
-                        alt="not fount"
-                        width={"250px"}
-                        src={URL.createObjectURL(selectedImage)}
-                      />
-                      <br />
-                      <button onClick={() => setSelectedImage(null)}>
-                        Remove
-                      </button>
-                    </div>
-                  )}
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Box mt={2}>
+                    <img
+                      src={
+                        file
+                          ? typeof file === "string"
+                            ? file
+                            : URL.createObjectURL(file)
+                          : imgHolder
+                      }
+                      width="400px"
+                      alt=""
+                    />
+                  </Box>
+
                   <br />
 
                   <br />
-                  <input
-                    type="file"
-                    name="myImage"
-                    onChange={(event) => {
-                      console.log(event.target.files[0]);
-                      setSelectedImage(event.target.files[0]);
-                    }}
-                  />
+
+                  <FormControl sx={{ mb: 10 }}>
+                    <Button variant="contained" component="label">
+                      Upload
+                      <input
+                        hidden
+                        type="file"
+                        name="myImage"
+                        onChange={(event) => {
+                          console.log(event.target.files[0]);
+                          setFile(event.target.files[0]);
+                        }}
+                      />{" "}
+                    </Button>
+                  </FormControl>
                 </Box>
               </Grid>
               <Grid item xs={12} md={6}>
@@ -101,9 +133,9 @@ function ProfileDetails() {
                   {" "}
                   Account Details
                 </Typography>
-                <Container sx={{ my: 2 }} component="form">
+                <Container sx={{ my: 2 }}>
                   <Grid
-                    Container
+                    container
                     display={"flex"}
                     flexWrap={"wrap"}
                     justifyContent={"space-between"}
@@ -118,9 +150,7 @@ function ProfileDetails() {
                           id="FirstName-Field"
                           label="First Name"
                           startAdornment={
-                            <InputAdornment position="start">
-                              {/* <PersonIcon></PersonIcon> */}
-                            </InputAdornment>
+                            <InputAdornment position="start"></InputAdornment>
                           }
                         />
                       </FormControl>
@@ -134,9 +164,7 @@ function ProfileDetails() {
                           id="LastName-Field"
                           label="Last Name"
                           startAdornment={
-                            <InputAdornment position="start">
-                              {/* <PersonIcon></PersonIcon> */}
-                            </InputAdornment>
+                            <InputAdornment position="start"></InputAdornment>
                           }
                         />
                       </FormControl>
