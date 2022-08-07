@@ -1,9 +1,4 @@
-import {
-  Box,
-  Grid,
-  Typography,
-  Divider,
-} from "@mui/material";
+import { Box, Grid, Typography, Divider } from "@mui/material";
 import { Container } from "@mui/system";
 import React, { useEffect } from "react";
 import MyCard from "./MyCard";

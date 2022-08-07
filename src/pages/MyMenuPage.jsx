@@ -21,25 +21,19 @@ import { getMeals } from "../features/meal/mealSlice";
 import { click } from "@testing-library/user-event/dist/click";
 
 function MyMenuPage() {
-  
-  let {
-    meals,
-    mealsIsLoading,
-    getMealsError,
-  } = useSelector((state) => state.meal);
+  let { meals, mealsIsLoading, getMealsError } = useSelector(
+    (state) => state.meal
+  );
   const mealsList = meals.meals;
-  const {pages} = meals;
+  const { pages } = meals;
 
-
-  const PageHandle = async (event, value)=>{
-
-    dispatch(getMeals({data: `page=${value}`}));
-
+  const PageHandle = async (event, value) => {
+    dispatch(getMeals({ data: `page=${value}` }));
   };
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getMeals({data:"page=1"}));
+    dispatch(getMeals({ data: "page=1" }));
   }, [dispatch]);
 
   return (
@@ -73,174 +67,171 @@ function MyMenuPage() {
           </Button>
         </Container>
       </Paper>
-      <Grid>
-        <Grid item sx={{ my: 2 }} width={{ lg: "20%" }}>
-          <Container>
-            <Accordion square>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Typography fontWeight={"bold"}>Cuisine</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <FormControl>
-                  <FormLabel id="demo-radio-buttons-group-label"></FormLabel>
-                  <RadioGroup
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="all"
-                    name="radio-buttons-group"
-                  >
-                    <FormControlLabel
-                      value="all"
-                      control={<Radio />}
-                      label="All"
-                    />
-                    <FormControlLabel
-                      value="african"
-                      control={<Radio />}
-                      label="African"
-                    />
-                    <FormControlLabel
-                      value="moroccan"
-                      control={<Radio />}
-                      label="Moroccan"
-                    />
-                    <FormControlLabel
-                      value="japanese"
-                      control={<Radio />}
-                      label="Japanese"
-                    />
-                    <FormControlLabel
-                      value="asian"
-                      control={<Radio />}
-                      label="Asian"
-                    />
-                    <FormControlLabel
-                      value="italian"
-                      control={<Radio />}
-                      label="Italian"
-                    />
-                    <FormControlLabel
-                      value="american"
-                      control={<Radio />}
-                      label="American"
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion square>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Typography fontWeight={"bold"}>Categories</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <FormControl>
-                  <FormLabel id="demo-radio-buttons-group-label"></FormLabel>
-                  <RadioGroup
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="all"
-                    name="radio-buttons-group"
-                  >
-                    <FormControlLabel
-                      value="all"
-                      control={<Radio />}
-                      label="All"
-                    />
-                    <FormControlLabel
-                      value="lamb"
-                      control={<Radio />}
-                      label="Lamb"
-                    />
-                    <FormControlLabel
-                      value="fish"
-                      control={<Radio />}
-                      label="Fish"
-                    />
-                    <FormControlLabel
-                      value="poultry"
-                      control={<Radio />}
-                      label="Poultry"
-                    />
-                    <FormControlLabel
-                      value="beef"
-                      control={<Radio />}
-                      label="Beef"
-                    />
-                    <FormControlLabel
-                      value="vegetarian"
-                      control={<Radio />}
-                      label="Vegetarian"
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </AccordionDetails>
-            </Accordion>
-          </Container>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "start",
+          flexWrap: "wrap",
+        }}
+      >
+        <Grid container sx={{ ml: 2, mt: 7 }} width={{ lg: "10%" }}>
+          <Accordion square sx={{ width: "100%" }}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography fontWeight={"bold"}>Cuisine</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label"></FormLabel>
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  defaultValue="all"
+                  name="radio-buttons-group"
+                >
+                  <FormControlLabel
+                    value="all"
+                    control={<Radio />}
+                    label="All"
+                  />
+                  <FormControlLabel
+                    value="african"
+                    control={<Radio />}
+                    label="African"
+                  />
+                  <FormControlLabel
+                    value="moroccan"
+                    control={<Radio />}
+                    label="Moroccan"
+                  />
+                  <FormControlLabel
+                    value="japanese"
+                    control={<Radio />}
+                    label="Japanese"
+                  />
+                  <FormControlLabel
+                    value="asian"
+                    control={<Radio />}
+                    label="Asian"
+                  />
+                  <FormControlLabel
+                    value="italian"
+                    control={<Radio />}
+                    label="Italian"
+                  />
+                  <FormControlLabel
+                    value="american"
+                    control={<Radio />}
+                    label="American"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion square sx={{ width: "100%" }}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography fontWeight={"bold"}>Categories</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label"></FormLabel>
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  defaultValue="all"
+                  name="radio-buttons-group"
+                >
+                  <FormControlLabel
+                    value="all"
+                    control={<Radio />}
+                    label="All"
+                  />
+                  <FormControlLabel
+                    value="lamb"
+                    control={<Radio />}
+                    label="Lamb"
+                  />
+                  <FormControlLabel
+                    value="fish"
+                    control={<Radio />}
+                    label="Fish"
+                  />
+                  <FormControlLabel
+                    value="poultry"
+                    control={<Radio />}
+                    label="Poultry"
+                  />
+                  <FormControlLabel
+                    value="beef"
+                    control={<Radio />}
+                    label="Beef"
+                  />
+                  <FormControlLabel
+                    value="vegetarian"
+                    control={<Radio />}
+                    label="Vegetarian"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </AccordionDetails>
+          </Accordion>
         </Grid>
-        <Grid item>
-          <Container>
-            {mealsIsLoading ? (
-              "Loading ..."
-            ) : (
-// <<<<<<< HEAD
-//               <>
-//                 {mealsList &&
-//                   mealsList.map((item, index) => {
-//                       return (
-//                         <Grid key={item._id} item lg={4}>
-//                           <MyCard meal={item}></MyCard>
-//                         </Grid>
-//                       );
-//                   })}
-//               </>
-//             )}
-//           </Grid>
-//         )}
-            
-// =======
+        <Grid>
+          <Grid item sx={{ my: 2 }} width={{ lg: "20%" }}></Grid>
+          <Grid item>
+            <Container>
+              {mealsIsLoading ? (
+                "Loading ..."
+              ) : (
+                <Grid
+                  container
+                  spacing={2}
+                  justifyContent="center"
+                  sx={{ flexGrow: 1, mt: "40px" }}
+                >
+                  {getMealsError ? (
+                    "can't catch data"
+                  ) : (
+                    <>
+                      {mealsList &&
+                        mealsList.map((item, index) => {
+                          return (
+                            <Grid key={item._id} item lg={4}>
+                              <MyCard meal={item}></MyCard>
+                            </Grid>
+                          );
+                        })}
+                    </>
+                  )}
+                </Grid>
+              )}
               <Grid
                 container
-                spacing={2}
+                spacing={0}
+                direction="column"
+                alignItems="center"
                 justifyContent="center"
-                sx={{ flexGrow: 1, mt: "40px" }}
               >
-                {getMealsError ? (
-                  "can't catch data"
-                ) : (
-                  <>
-                    {mealsList &&
-                      mealsList.map((item, index) => {
-                        return (
-                          <Grid key={item._id} item lg={4}>
-                            <MyCard meal={item}></MyCard>
-                          </Grid>
-                        );
-                      })}
-                  </>
-                )}
+                <Grid item xs={3}>
+                  <Pagination
+                    count={pages}
+                    color="primary"
+                    sx={{ mt: 4, mb: 8 }}
+                    onChange={PageHandle}
+                  />
+                </Grid>
               </Grid>
-            )}
-            <Grid
-              container
-              spacing={0}
-              direction="column"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Grid item xs={3}>
-              <Pagination count={pages} color="primary" sx={{ mt: 4, mb: 8 }} onChange={PageHandle} />
-              </Grid>
-            </Grid>
-{/* >>>>>>> main */}
-          </Container>
+              {/* >>>>>>> main */}
+            </Container>
+          </Grid>
         </Grid>
-      </Grid>
+      </Box>
     </Box>
   );
 }
