@@ -26,7 +26,7 @@ import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
-const navItems = ["Home", "Menu", "About", "Contact", "Market"];
+const navItems = ["Home", "Menu", "About", "Contact"];
 function MyAppBar(props) {
   let numOfItems = useSelector((state) => state.cart.numOfItems);
   // console.log(numOfItems.length);
