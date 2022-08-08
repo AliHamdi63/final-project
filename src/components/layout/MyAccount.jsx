@@ -9,9 +9,10 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../features/authenticate/authSlice";
 import { useDispatch } from "react-redux";
+
 
 export default function MyAccount() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -23,9 +24,12 @@ export default function MyAccount() {
     setAnchorEl(null);
   };
 
+  const navigate = useNavigate();
   const dispatch = useDispatch()
   function userLogout() {
     dispatch(logout())
+    navigate('/Home')
+
     // console.log("User Logout")
   }
   return (

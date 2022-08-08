@@ -1,7 +1,16 @@
 import React from "react";
 import { Container, Divider, Paper, Typography } from "@mui/material";
 import { Grid, Box } from "@mui/material";
+
+import { useSelector } from "react-redux";
+
+
+
+
 function ProfileDashboard() {
+
+  const user = useSelector((state) => state.auth.user)
+  // console.log(user?.address?.city);
   return (
     <Container sx={{ my: 10 }}>
       <Paper>
@@ -30,12 +39,11 @@ function ProfileDashboard() {
             Hello,
             {
               <Typography component={"span"} fontWeight="bold">
-                Abdelrahman
+                {user.firstName} {user.lastName} {' '}
               </Typography>
             }
             From your Account Dashboard you have the ability to view a snapshot
             of your recent account activity and update your account information.
-            Select a link below to view or edit information.
           </Typography>
           <Grid container spacing={4} mt={1}>
             <Grid item xs={12} md={6}>
@@ -45,8 +53,8 @@ function ProfileDashboard() {
                     Account Information
                   </Typography>
                   <Divider></Divider>
-                  <Typography>Abdelrahman Ibrahim</Typography>{" "}
-                  <Typography>Abdelrahman_Elemary99@outlook.com</Typography>{" "}
+                  <Typography>{user.firstName} {user.lastName}</Typography>{" "}
+                  <Typography>{user.email} </Typography>{" "}
                 </Container>
               </Paper>
             </Grid>
@@ -57,7 +65,15 @@ function ProfileDashboard() {
                     Address
                   </Typography>
                   <Divider></Divider>
-                  <Typography>ITI Menofia Branch Shbien Al Kom</Typography>{" "}
+                  <Typography>
+                    {
+                      user?.address?.city == undefined && user?.address?.area == undefined
+                        ?
+                        "None"
+                        :
+                        (user?.address?.city + " " + user?.address?.area)
+                    }
+                  </Typography>{" "}
                 </Container>
               </Paper>
             </Grid>
