@@ -258,6 +258,7 @@ function MyMenuPage() {
                     spacing={2}
                     justifyContent="center"
                     sx={{ flexGrow: 1, mt: "40px" }}
+                    minWidth={{ lg: 1200 }}
                   >
                     {getMealsError ? (
                       "can't catch data"
