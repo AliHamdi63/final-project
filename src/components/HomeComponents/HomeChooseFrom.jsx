@@ -3,6 +3,7 @@ import {
   Grid,
   Typography,
   Divider,
+  CircularProgress,
 } from "@mui/material";
 import { Container } from "@mui/system";
 import React, { useEffect } from "react";
@@ -19,7 +20,13 @@ export default function HomeChooseFrom() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getMeals());
+    dispatch(getMeals({
+      data: {
+        cuisine: `cuisine=`,
+        category: `category=`,
+      },
+      type: "filter",
+    }));
   }, [dispatch]);
 
   return (
@@ -49,7 +56,9 @@ export default function HomeChooseFrom() {
           </Box>
         </Container>
         {mealsIsLoading ? (
-          "Loading ..."
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: '200px', height: '100vh'}}>
+          <CircularProgress size={80} />
+        </Box>
         ) : (
           <Grid
             container

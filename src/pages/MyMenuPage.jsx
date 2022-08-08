@@ -1,4 +1,4 @@
-import { Box, Container, Paper, Typography } from "@mui/material";
+import { Box, CircularProgress, Container, Paper, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
@@ -18,28 +18,70 @@ import FormLabel from "@mui/material/FormLabel";
 import Pagination from "@mui/material/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { getMeals } from "../features/meal/mealSlice";
-import { click } from "@testing-library/user-event/dist/click";
+import {
+  getFilterCuisine,
+  getFilterCategory,
+} from "../features/meal/mealSlice";
+import { getMealsNames } from "../features/meal/mealSlice";
 
 function MyMenuPage() {
-  
-  let {
-    meals,
-    mealsIsLoading,
-    getMealsError,
-  } = useSelector((state) => state.meal);
+  const dispatch = useDispatch();
+
+  let { meals, mealsIsLoading, getMealsError } = useSelector(
+    (state) => state.meal
+  );
   const mealsList = meals.meals;
-  const {pages} = meals;
+  const { pages } = meals;
 
-
-  const PageHandle = async (event, value)=>{
-
-    dispatch(getMeals({data: `page=${value}`}));
-
+  const PageHandle = async (event, value) => {
+    dispatch(getMeals({ data: `page=${value}`, type: "paggination" }));
   };
 
-  const dispatch = useDispatch();
+  let currentCuisine = useSelector((state) => state.meal.filterCuisine);
+  let currentCategory = useSelector((state) => state.meal.filterCategory);
+
+  const cuisineHandle = async (event, value) => {
+    dispatch(getFilterCuisine(value));
+  };
+  const categoryHandle = async (event, value) => {
+    dispatch(getFilterCategory(value));
+  };
+
+  const searchHandle = async (event, value) => {
+    if (value) {
+      value = value.charAt(0).toUpperCase() + value.slice(1);
+      dispatch(getMeals({ data: value, type: "search" }));
+    }
+  };
+
+  let mealsNames = useSelector((state) => state.meal.mealsNames);
+
   useEffect(() => {
-    dispatch(getMeals({data:"page=1"}));
+    dispatch(getMealsNames());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(
+      getMeals({
+        data: {
+          cuisine: `cuisine=${currentCuisine}`,
+          category: `category=${currentCategory}`,
+        },
+        type: "filter",
+      })
+    );
+  }, [currentCuisine, currentCategory]);
+
+  useEffect(() => {
+    dispatch(
+      getMeals({
+        data: {
+          cuisine: `cuisine=${currentCuisine}`,
+          category: `category=${currentCategory}`,
+        },
+        type: "filter",
+      })
+    );
   }, [dispatch]);
 
   return (
@@ -63,10 +105,12 @@ function MyMenuPage() {
           <Autocomplete
             id="free-solo-demo"
             freeSolo
-            options={top100Films.map((option) => option.title)}
+            options={mealsNames.map((option) => option)}
             renderInput={(params) => <TextField {...params} label="search" />}
             sx={{ py: 2 }}
             fullWidth
+            onChange={searchHandle}
+            onFocus={() => console.log("focus")}
           />
           <Button variant="contained" size="large" sx={{ ml: 2 }}>
             Go
@@ -89,41 +133,42 @@ function MyMenuPage() {
                   <FormLabel id="demo-radio-buttons-group-label"></FormLabel>
                   <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="all"
+                    defaultValue=" "
                     name="radio-buttons-group"
+                    onChange={cuisineHandle}
                   >
                     <FormControlLabel
-                      value="all"
+                      value=""
                       control={<Radio />}
                       label="All"
                     />
                     <FormControlLabel
-                      value="african"
+                      value="African"
                       control={<Radio />}
                       label="African"
                     />
                     <FormControlLabel
-                      value="moroccan"
+                      value="Moroccan"
                       control={<Radio />}
                       label="Moroccan"
                     />
                     <FormControlLabel
-                      value="japanese"
+                      value="Japanese"
                       control={<Radio />}
                       label="Japanese"
                     />
                     <FormControlLabel
-                      value="asian"
+                      value="Asian"
                       control={<Radio />}
                       label="Asian"
                     />
                     <FormControlLabel
-                      value="italian"
+                      value="Italian"
                       control={<Radio />}
                       label="Italian"
                     />
                     <FormControlLabel
-                      value="american"
+                      value="American"
                       control={<Radio />}
                       label="American"
                     />
@@ -146,34 +191,35 @@ function MyMenuPage() {
                     aria-labelledby="demo-radio-buttons-group-label"
                     defaultValue="all"
                     name="radio-buttons-group"
+                    onChange={categoryHandle}
                   >
                     <FormControlLabel
-                      value="all"
+                      value=""
                       control={<Radio />}
                       label="All"
                     />
                     <FormControlLabel
-                      value="lamb"
+                      value="Lamb"
                       control={<Radio />}
                       label="Lamb"
                     />
                     <FormControlLabel
-                      value="fish"
+                      value="Fish"
                       control={<Radio />}
                       label="Fish"
                     />
                     <FormControlLabel
-                      value="poultry"
+                      value="Poultry"
                       control={<Radio />}
                       label="Poultry"
                     />
                     <FormControlLabel
-                      value="beef"
+                      value="Beef"
                       control={<Radio />}
                       label="Beef"
                     />
                     <FormControlLabel
-                      value="vegetarian"
+                      value="Vegetarian"
                       control={<Radio />}
                       label="Vegetarian"
                     />
@@ -186,45 +232,38 @@ function MyMenuPage() {
         <Grid item>
           <Container>
             {mealsIsLoading ? (
-              "Loading ..."
+                <Box sx={{ display: 'flex', justifyContent: 'center', mt: '200px', height: '100vh'}}>
+                <CircularProgress size={80} />
+              </Box>
             ) : (
-// <<<<<<< HEAD
-//               <>
-//                 {mealsList &&
-//                   mealsList.map((item, index) => {
-//                       return (
-//                         <Grid key={item._id} item lg={4}>
-//                           <MyCard meal={item}></MyCard>
-//                         </Grid>
-//                       );
-//                   })}
-//               </>
-//             )}
-//           </Grid>
-//         )}
-            
-// =======
-              <Grid
-                container
-                spacing={2}
-                justifyContent="center"
-                sx={{ flexGrow: 1, mt: "40px" }}
-              >
-                {getMealsError ? (
-                  "can't catch data"
-                ) : (
-                  <>
-                    {mealsList &&
-                      mealsList.map((item, index) => {
-                        return (
-                          <Grid key={item._id} item lg={4}>
-                            <MyCard meal={item}></MyCard>
-                          </Grid>
-                        );
-                      })}
-                  </>
+              <>
+                {currentCuisine && (
+                  <h3>
+                    {currentCuisine} -- {currentCategory}
+                  </h3>
                 )}
-              </Grid>
+                <Grid
+                  container
+                  spacing={2}
+                  justifyContent="center"
+                  sx={{ flexGrow: 1, mt: "40px" }}
+                >
+                  {getMealsError ? (
+                    "can't catch data"
+                  ) : (
+                    <>
+                      {mealsList &&
+                        mealsList.map((item, index) => {
+                          return (
+                            <Grid key={item._id} item lg={4}>
+                              <MyCard meal={item}></MyCard>
+                            </Grid>
+                          );
+                        })}
+                    </>
+                  )}
+                </Grid>
+              </>
             )}
             <Grid
               container
@@ -234,10 +273,14 @@ function MyMenuPage() {
               justifyContent="center"
             >
               <Grid item xs={3}>
-              <Pagination count={pages} color="primary" sx={{ mt: 4, mb: 8 }} onChange={PageHandle} />
+                <Pagination
+                  count={pages}
+                  color="primary"
+                  sx={{ mt: 4, mb: 8 }}
+                  onChange={PageHandle}
+                />
               </Grid>
             </Grid>
-{/* >>>>>>> main */}
           </Container>
         </Grid>
       </Grid>
@@ -246,30 +289,3 @@ function MyMenuPage() {
 }
 
 export default MyMenuPage;
-
-const top100Films = [
-  { title: "The Shawshank Redemption", year: 1994 },
-  { title: "The Godfather", year: 1972 },
-  { title: "The Dark Knight", year: 2008 },
-  { title: "12 Angry Men", year: 1957 },
-  { title: "Schindler's List", year: 1993 },
-  { title: "The Dark Knight", year: 2008 },
-  { title: "12 Angry Men", year: 1957 },
-  { title: "Schindler's List", year: 1993 },
-  { title: "The Shawshank Redemption", year: 1994 },
-  { title: "The Godfather", year: 1972 },
-  { title: "The Dark Knight", year: 2008 },
-  { title: "12 Angry Men", year: 1957 },
-  { title: "Schindler's List", year: 1993 },
-  { title: "The Dark Knight", year: 2008 },
-  { title: "12 Angry Men", year: 1957 },
-  { title: "Schindler's List", year: 1993 },
-  { title: "The Shawshank Redemption", year: 1994 },
-  { title: "The Godfather", year: 1972 },
-  { title: "The Dark Knight", year: 2008 },
-  { title: "12 Angry Men", year: 1957 },
-  { title: "Schindler's List", year: 1993 },
-  { title: "The Dark Knight", year: 2008 },
-  { title: "12 Angry Men", year: 1957 },
-  { title: "Schindler's List", year: 1993 },
-];
