@@ -16,20 +16,15 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import AvTimerIcon from "@mui/icons-material/AvTimer";
 
-
 import { useSelector, useDispatch } from "react-redux";
 import { added, removed } from "../../features/cart/cartSlice";
-
-
 
 function MealHeadderComponent({ meal }) {
   // console.log(meal)
 
-  const numOfItems = useSelector((state) => state.cart.numOfItems)
+  const numOfItems = useSelector((state) => state.cart.numOfItems);
   const dispatch = useDispatch();
   // console.log(numOfItems);
-
-
 
   return (
     <div>
@@ -49,14 +44,7 @@ function MealHeadderComponent({ meal }) {
         >
           <Grid container spacing={2}>
             <Grid item xs={12} md={6} justify="center">
-              <img
-                src={
-                  meal.image
-                }
-                alt=""
-                width={"100%"}
-                height={"100%"}
-              />
+              <img src={meal.image} alt="" width={"100%"} height={"100%"} />
             </Grid>
             <Grid item xs={12} md={6}>
               <Container
@@ -71,8 +59,7 @@ function MealHeadderComponent({ meal }) {
                     color="primary.dark"
                   >
                     {" "}
-                    {meal.name}
-                    {" "}
+                    {meal.name}{" "}
                   </Typography>
                   <Typography
                     variant="body2"
@@ -128,7 +115,11 @@ function MealHeadderComponent({ meal }) {
                     </Typography>
                   </Box>
                   <Box>
-                    <Button variant="contained" size="large" onClick={() => dispatch(added(meal))}>
+                    <Button
+                      variant="contained"
+                      size="large"
+                      onClick={() => dispatch(added(meal))}
+                    >
                       Add to cooking Cart
                     </Button>
                     {/* <br />
@@ -177,7 +168,9 @@ function MealHeadderComponent({ meal }) {
                         Calories
                       </Typography>
 
-                      <Typography variant="body1">{meal.calories} Cals</Typography>
+                      <Typography variant="body1">
+                        {meal.calories} Cals
+                      </Typography>
                     </Box>
                     <Divider></Divider>
                   </Container>
