@@ -12,7 +12,7 @@ import {
   InputAdornment,
   IconButton,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import cookImage from "../../assets/svgs/Recipe book-bro.svg";
 
@@ -34,6 +34,10 @@ function SignInCard() {
       showPassword: !values.showPassword,
     });
   };
+
+  const user = useSelector((state) => state.auth.user)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const [email, setEmail] = useState('')
   const [password, setPass] = useState('')
@@ -59,8 +63,7 @@ function SignInCard() {
   }
 
 
-  // const navigate = useNavigate()
-  const dispatch = useDispatch()
+
 
   const { isFetching, error } = useSelector(
     (state) => state.auth
@@ -225,6 +228,7 @@ function SignInCard() {
                   </Button>
                 </FormControl>
                 {error && <h2>Please try again .... </h2>}
+                {user == null ? null : navigate('/Home')}
               </Container>
               <Grid
                 container

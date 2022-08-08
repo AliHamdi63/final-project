@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit/dist";
 import axios from 'axios'
 import cookie from "cookiejs";
 
+
 let url = 'https://foody--api.herokuapp.com/';
 
 export const userLogin = createAsyncThunk('auth/login', async (user) => {

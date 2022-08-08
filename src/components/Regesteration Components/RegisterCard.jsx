@@ -74,8 +74,8 @@ function RegisterCard() {
     dispatch(userRegister(userData))
   }
 
-
-  // const navigate = useNavigate()
+  const user = useSelector((state) => state.auth.user)
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const { isFetching, error } = useSelector(
@@ -279,6 +279,8 @@ function RegisterCard() {
                     sign up
                   </Button>
                 </FormControl>
+                {error && <h2>Please try again .... </h2>}
+                {user == null ? null : navigate('/Home')}
               </Container>
               <Grid
                 container
@@ -286,7 +288,9 @@ function RegisterCard() {
                 direction="row"
                 alignItems="center"
                 justifyContent="center"
-              ></Grid>
+              >
+
+              </Grid>
             </Grid>
           </Grid>
         </Paper>
