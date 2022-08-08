@@ -11,6 +11,7 @@ import { Box, Container } from "@mui/system";
 import MyAccount from "./MyAccount";
 import { Button } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
+import { useSelector } from "react-redux";
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -33,6 +34,10 @@ HideOnScroll.propTypes = {
 };
 
 export default function HideAppBar(props) {
+  const user = useSelector((state) => state.auth.user);
+
+  // console.log(user);
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -46,24 +51,41 @@ export default function HideAppBar(props) {
                 alignContent: "center",
               }}
             >
-              <Typography variant="body1" textAlign={"center"}>
-                Welcome, Abderlrahman
-              </Typography>
-
-              <Box>
-                <MyAccount></MyAccount>
-                {/* <Button
-                  color="inherit"
-                  size="small"
-                  component={Link}
-                  to={`/Login`}
+              {user == null ? (
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row-reverse",
+                    width: "100%",
+                  }}
                 >
-                  <Typography variant="body2" textTransform={"capitalize"}>
-                    Sign In
+                  <Button
+                    color="inherit"
+                    size="small"
+                    component={Link}
+                    to={`/Login`}
+                  >
+                    <Typography variant="body2" textTransform={"capitalize"}>
+                      Sign In
+                    </Typography>
+                    <LoginIcon fontSize="small"></LoginIcon>
+                  </Button>
+                </Box>
+              ) : (
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography variant="body1" textAlign={"center"}>
+                    Welcome, {user.firstName} {user.lastName}
                   </Typography>
-                  <LoginIcon fontSize="small"></LoginIcon>
-                </Button> */}
-              </Box>
+                  <MyAccount></MyAccount>
+                </Box>
+              )}
             </Container>
           </Toolbar>
         </AppBar>

@@ -1,4 +1,10 @@
-import { Box, CircularProgress, Container, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  Container,
+  Paper,
+  Typography,
+} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
@@ -110,180 +116,186 @@ function MyMenuPage() {
             sx={{ py: 2 }}
             fullWidth
             onChange={searchHandle}
-            onFocus={() => console.log("focus")}
           />
           <Button variant="contained" size="large" sx={{ ml: 2 }}>
             Go
           </Button>
         </Container>
       </Paper>
-      <Grid>
-        <Grid item sx={{ my: 2 }} width={{ lg: "20%" }}>
-          <Container>
-            <Accordion square>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Typography fontWeight={"bold"}>Cuisine</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <FormControl>
-                  <FormLabel id="demo-radio-buttons-group-label"></FormLabel>
-                  <RadioGroup
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue=" "
-                    name="radio-buttons-group"
-                    onChange={cuisineHandle}
-                  >
-                    <FormControlLabel
-                      value=""
-                      control={<Radio />}
-                      label="All"
-                    />
-                    <FormControlLabel
-                      value="African"
-                      control={<Radio />}
-                      label="African"
-                    />
-                    <FormControlLabel
-                      value="Moroccan"
-                      control={<Radio />}
-                      label="Moroccan"
-                    />
-                    <FormControlLabel
-                      value="Japanese"
-                      control={<Radio />}
-                      label="Japanese"
-                    />
-                    <FormControlLabel
-                      value="Asian"
-                      control={<Radio />}
-                      label="Asian"
-                    />
-                    <FormControlLabel
-                      value="Italian"
-                      control={<Radio />}
-                      label="Italian"
-                    />
-                    <FormControlLabel
-                      value="American"
-                      control={<Radio />}
-                      label="American"
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion square>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Typography fontWeight={"bold"}>Categories</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <FormControl>
-                  <FormLabel id="demo-radio-buttons-group-label"></FormLabel>
-                  <RadioGroup
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="all"
-                    name="radio-buttons-group"
-                    onChange={categoryHandle}
-                  >
-                    <FormControlLabel
-                      value=""
-                      control={<Radio />}
-                      label="All"
-                    />
-                    <FormControlLabel
-                      value="Lamb"
-                      control={<Radio />}
-                      label="Lamb"
-                    />
-                    <FormControlLabel
-                      value="Fish"
-                      control={<Radio />}
-                      label="Fish"
-                    />
-                    <FormControlLabel
-                      value="Poultry"
-                      control={<Radio />}
-                      label="Poultry"
-                    />
-                    <FormControlLabel
-                      value="Beef"
-                      control={<Radio />}
-                      label="Beef"
-                    />
-                    <FormControlLabel
-                      value="Vegetarian"
-                      control={<Radio />}
-                      label="Vegetarian"
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </AccordionDetails>
-            </Accordion>
-          </Container>
-        </Grid>
-        <Grid item>
-          <Container>
-            {mealsIsLoading ? (
-                <Box sx={{ display: 'flex', justifyContent: 'center', mt: '200px', height: '100vh'}}>
-                <CircularProgress size={80} />
-              </Box>
-            ) : (
-              <>
-                {currentCuisine && (
-                  <h3>
-                    {currentCuisine} -- {currentCategory}
-                  </h3>
-                )}
-                <Grid
-                  container
-                  spacing={2}
-                  justifyContent="center"
-                  sx={{ flexGrow: 1, mt: "40px" }}
-                >
-                  {getMealsError ? (
-                    "can't catch data"
-                  ) : (
-                    <>
-                      {mealsList &&
-                        mealsList.map((item, index) => {
-                          return (
-                            <Grid key={item._id} item lg={4}>
-                              <MyCard meal={item}></MyCard>
-                            </Grid>
-                          );
-                        })}
-                    </>
-                  )}
-                </Grid>
-              </>
-            )}
-            <Grid
-              container
-              spacing={0}
-              direction="column"
-              alignItems="center"
-              justifyContent="center"
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "start",
+          flexWrap: "wrap",
+        }}
+      >
+        <Grid container sx={{ ml: 2, mt: 7 }} width={{ lg: "10%" }}>
+          <Accordion square sx={{ width: "100%" }}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
             >
-              <Grid item xs={3}>
-                <Pagination
-                  count={pages}
-                  color="primary"
-                  sx={{ mt: 4, mb: 8 }}
-                  onChange={PageHandle}
-                />
-              </Grid>
-            </Grid>
-          </Container>
+              <Typography fontWeight={"bold"}>Cuisine</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label"></FormLabel>
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  defaultValue=" "
+                  name="radio-buttons-group"
+                  onChange={cuisineHandle}
+                >
+                  <FormControlLabel value="" control={<Radio />} label="All" />
+                  <FormControlLabel
+                    value="African"
+                    control={<Radio />}
+                    label="African"
+                  />
+                  <FormControlLabel
+                    value="Moroccan"
+                    control={<Radio />}
+                    label="Moroccan"
+                  />
+                  <FormControlLabel
+                    value="Japanese"
+                    control={<Radio />}
+                    label="Japanese"
+                  />
+                  <FormControlLabel
+                    value="Asian"
+                    control={<Radio />}
+                    label="Asian"
+                  />
+                  <FormControlLabel
+                    value="Italian"
+                    control={<Radio />}
+                    label="Italian"
+                  />
+                  <FormControlLabel
+                    value="American"
+                    control={<Radio />}
+                    label="American"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion square sx={{ width: "100%" }}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography fontWeight={"bold"}>Categories</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label"></FormLabel>
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  defaultValue="all"
+                  name="radio-buttons-group"
+                  onChange={categoryHandle}
+                >
+                  <FormControlLabel value="" control={<Radio />} label="All" />
+                  <FormControlLabel
+                    value="Lamb"
+                    control={<Radio />}
+                    label="Lamb"
+                  />
+                  <FormControlLabel
+                    value="Fish"
+                    control={<Radio />}
+                    label="Fish"
+                  />
+                  <FormControlLabel
+                    value="Poultry"
+                    control={<Radio />}
+                    label="Poultry"
+                  />
+                  <FormControlLabel
+                    value="Beef"
+                    control={<Radio />}
+                    label="Beef"
+                  />
+                  <FormControlLabel
+                    value="Vegetarian"
+                    control={<Radio />}
+                    label="Vegetarian"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </AccordionDetails>
+          </Accordion>
         </Grid>
-      </Grid>
+        <Grid>
+          <Grid item sx={{ my: 2 }} width={{ lg: "20%" }}></Grid>
+          <Grid item>
+            <Container>
+              {mealsIsLoading ? (
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    mt: "200px",
+                    height: "100vh",
+                  }}
+                >
+                  <CircularProgress size={80} />
+                </Box>
+              ) : (
+                <>
+                  {currentCuisine && (
+                    <h3>
+                      {currentCuisine} -- {currentCategory}
+                    </h3>
+                  )}
+                  <Grid
+                    container
+                    spacing={2}
+                    justifyContent="center"
+                    sx={{ flexGrow: 1, mt: "40px" }}
+                  >
+                    {getMealsError ? (
+                      "can't catch data"
+                    ) : (
+                      <>
+                        {mealsList &&
+                          mealsList.map((item, index) => {
+                            return (
+                              <Grid key={item._id} item lg={4}>
+                                <MyCard meal={item}></MyCard>
+                              </Grid>
+                            );
+                          })}
+                      </>
+                    )}
+                  </Grid>
+                </>
+              )}
+              <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Grid item xs={3}>
+                  <Pagination
+                    count={pages}
+                    color="primary"
+                    sx={{ mt: 4, mb: 8 }}
+                    onChange={PageHandle}
+                  />
+                </Grid>
+              </Grid>
+            </Container>
+          </Grid>
+        </Grid>
+      </Box>
     </Box>
   );
 }
