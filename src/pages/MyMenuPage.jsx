@@ -19,6 +19,7 @@ import Pagination from "@mui/material/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { getMeals } from "../features/meal/mealSlice";
 import { click } from "@testing-library/user-event/dist/click";
+import LoadingSpinner from "../components/Utilities/LoadingSpinner";
 
 function MyMenuPage() {
   let { meals, mealsIsLoading, getMealsError } = useSelector(
@@ -187,7 +188,7 @@ function MyMenuPage() {
           <Grid item>
             <Container>
               {mealsIsLoading ? (
-                "Loading ..."
+                <LoadingSpinner></LoadingSpinner>
               ) : (
                 <Grid
                   container
