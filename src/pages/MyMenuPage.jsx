@@ -35,48 +35,56 @@ function MyMenuPage() {
 
     dispatch(getMeals({ data: `page=${value}` }));
 
-  };
+    const PageHandle = async (event, value) => {
+      dispatch(getMeals({ data: `page=${value}` }));
+    };
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getMeals({ data: "page=1" }));
-  }, [dispatch]);
+    const dispatch = useDispatch();
+    useEffect(() => {
+      dispatch(getMeals({ data: "page=1" }));
+    }, [dispatch]);
 
-  return (
-    <Box sx={{ minHeight: "100vh" }}>
-      <Paper variant={"outlined"} square>
-        <Container
+    return (
+      <Box sx={{ minHeight: "100vh" }}>
+        <Paper variant={"outlined"} square>
+          <Container
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              sx={{ mr: 2 }}
+              color="primary"
+              variant="h5"
+              fontWeight={"bold"}
+            >
+              Meals
+            </Typography>
+            <Autocomplete
+              id="free-solo-demo"
+              freeSolo
+              options={top100Films.map((option) => option.title)}
+              renderInput={(params) => <TextField {...params} label="search" />}
+              sx={{ py: 2 }}
+              fullWidth
+            />
+            <Button variant="contained" size="large" sx={{ ml: 2 }}>
+              Go
+            </Button>
+          </Container>
+        </Paper>
+        <Box
           sx={{
             display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
+            justifyContent: "center",
+            alignItems: "start",
+            flexWrap: "wrap",
           }}
         >
-          <Typography
-            sx={{ mr: 2 }}
-            color="primary"
-            variant="h5"
-            fontWeight={"bold"}
-          >
-            Meals
-          </Typography>
-          <Autocomplete
-            id="free-solo-demo"
-            freeSolo
-            options={top100Films.map((option) => option.title)}
-            renderInput={(params) => <TextField {...params} label="search" />}
-            sx={{ py: 2 }}
-            fullWidth
-          />
-          <Button variant="contained" size="large" sx={{ ml: 2 }}>
-            Go
-          </Button>
-        </Container>
-      </Paper>
-      <Grid>
-        <Grid item sx={{ my: 2 }} width={{ lg: "20%" }}>
-          <Container>
-            <Accordion square>
+          <Grid container sx={{ ml: 2, mt: 7 }} width={{ lg: "10%" }}>
+            <Accordion square sx={{ width: "100%" }}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
@@ -131,7 +139,7 @@ function MyMenuPage() {
                 </FormControl>
               </AccordionDetails>
             </Accordion>
-            <Accordion square>
+            <Accordion square sx={{ width: "100%" }}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
@@ -181,53 +189,47 @@ function MyMenuPage() {
                 </FormControl>
               </AccordionDetails>
             </Accordion>
-          </Container>
-        </Grid>
-        <Grid item>
-          <Container>
-            {mealsIsLoading ? (
-              "Loading ..."
-            ) : (
+          </Grid>
+          <Grid item>
+            <Container>
+              {mealsIsLoading ? (
+                "Loading ..."
+              ) : (
+                <Grid
+                  container
+                  spacing={0}
+                  direction="column"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <Grid item xs={3}>
+                    <Pagination
+                      count={pages}
+                      color="primary"
+                      sx={{ mt: 4, mb: 8 }}
+                      onChange={PageHandle}
+                    />
+                  </Grid>
+                </Grid>
+              )}
               <Grid
                 container
-                spacing={2}
+                spacing={0}
+                direction="column"
+                alignItems="center"
                 justifyContent="center"
-                sx={{ flexGrow: 1, mt: "40px" }}
               >
-                {getMealsError ? (
-                  "can't catch data"
-                ) : (
-                  <>
-                    {mealsList &&
-                      mealsList.map((item, index) => {
-                        return (
-                          <Grid key={item._id} item lg={4}>
-                            <MyCard meal={item}></MyCard>
-                          </Grid>
-                        );
-                      })}
-                  </>
-                )}
+                <Grid item xs={3}>
+                  <Pagination count={pages} color="primary" sx={{ mt: 4, mb: 8 }} onChange={PageHandle} />
+                </Grid>
               </Grid>
-            )}
-            <Grid
-              container
-              spacing={0}
-              direction="column"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Grid item xs={3}>
-                <Pagination count={pages} color="primary" sx={{ mt: 4, mb: 8 }} onChange={PageHandle} />
-              </Grid>
-            </Grid>
-          </Container>
-        </Grid>
-      </Grid>
-    </Box>
-  );
+            </Container>
+          </Grid>
+        </Box>
+      </Box>
+    );
+  }
 }
-
 export default MyMenuPage;
 
 const top100Films = [
