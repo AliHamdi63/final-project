@@ -19,11 +19,11 @@ import { InputAdornment } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from '../../features/authenticate/authSlice'
-import { imageUploader } from '../../features/update/uploadImage'
+import { updateUser } from "../../features/authenticate/authSlice";
+import { imageUploader } from "../../features/update/uploadImage";
 
 function ProfileDetails() {
-  const user = useSelector((state) => state.auth.user)
+  const user = useSelector((state) => state.auth.user);
   // console.log(user);
   const [image, setFile] = useState(user.image);
 
@@ -35,39 +35,38 @@ function ProfileDetails() {
   const [isChanged, setIsChanged] = useState(false);
   const navigate = useNavigate()
 
-  let imgP = process.env.REACT_APP_SERVER_URL + '/images';
+  let imgP = process.env.REACT_APP_SERVER_URL + "/images";
   let [isfetching, setFetching] = useState(false);
 
   const dispatch = useDispatch();
 
   const onChangeFName = (e) => {
-    setFName(e.target.value)
+    setFName(e.target.value);
     // console.log(email);
-  }
+  };
   const onChangeLName = (e) => {
-    setLName(e.target.value)
+    setLName(e.target.value);
     // console.log(pass);
-  }
+  };
   const onChangeEmail = (e) => {
-    setEmail(e.target.value)
+    setEmail(e.target.value);
     // console.log(email);
-  }
+  };
   const onChangePhone = (e) => {
-    setPhone(e.target.value)
+    setPhone(e.target.value);
     // console.log(phone);
-  }
-
+  };
 
   const onSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     let id = user._id;
     const updatedData = {
       firstName,
       lastName,
       email,
       phone,
-      image
-    }
+      image,
+    };
     console.log(updatedData);
     dispatch(updateUser({ user, id, updatedData }))
     console.log('done');
@@ -76,13 +75,13 @@ function ProfileDetails() {
 
 
   useEffect(() => {
-    if (typeof (image) !== 'string' && image !== null) {
+    if (typeof image !== "string" && image !== null) {
       imageUploader(image, setFile, setFetching);
     }
-  }, [image])
+  }, [image]);
 
   useEffect(() => {
-    setFile(user.image)
+    setFile(user.image);
     // setAddress(props?.item?.address);
   }, [])
 
@@ -153,7 +152,18 @@ function ProfileDetails() {
                   >
                     <Box mt={2}>
 
-                      <img src={image ? (typeof (image) === 'string' ? (image.startsWith('http') ? image : imgP + '/' + image) : URL.createObjectURL(image)) : imgHolder} width="400px" />
+                      <img
+                        src={
+                          image ?
+                            (typeof (image) === 'string' ?
+                              (image.startsWith('http') ?
+                                image :
+                                imgP + '/' + image) :
+                              URL.createObjectURL(image)) :
+                            imgHolder
+                        }
+                        width="400px"
+                      />
                     </Box>
 
                     <FormControl sx={{ mb: 12 }}>
@@ -218,7 +228,6 @@ function ProfileDetails() {
                             label="Last Name"
                             onChange={onChangeLName}
                             value={lastName}
-
                             startAdornment={
                               <InputAdornment position="start"></InputAdornment>
                             }
