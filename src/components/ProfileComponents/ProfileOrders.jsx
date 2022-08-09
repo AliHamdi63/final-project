@@ -10,8 +10,6 @@ import { getUserOrders } from '../../features/orders/orderSlice'
 import { useDispatch, useSelector } from "react-redux";
 
 
-
-
 function ProfileOrders() {
 
   const dispatch = useDispatch();
@@ -23,15 +21,12 @@ function ProfileOrders() {
   }, [])
   const orders = useSelector((state) => state.orders.orders)
 
-  console.log(orders);
+  // console.log(orders);
 
   const rows = []
-  // const ids = []
   let i = 0;
   orders.forEach((item) => {
-    // console.log(item.status);
-    // console.log(item.amount);
-    // ids.push(item._id);
+
     i++;
     rows.push({
       id: i,
@@ -71,21 +66,6 @@ function ProfileOrders() {
     //   },
     // },
   ];
-  // const rows = [
-  //   {
-  //     id: 1,
-  //     date:
-  //       new Date().toLocaleDateString("en-us", {
-  //         weekday: "long",
-  //         year: "numeric",
-  //         month: "short",
-  //         day: "numeric",
-  //       }),
-  //     status: "deliverd",
-  //     total: "222 for 3 items",
-  //     age: 35,
-  //   },
-  // ];
 
 
   return (

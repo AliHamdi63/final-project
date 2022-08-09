@@ -53,8 +53,9 @@ function ProfileDashboard() {
                     Account Information
                   </Typography>
                   <Divider></Divider>
-                  <Typography>{user.firstName} {user.lastName}</Typography>{" "}
-                  <Typography>{user.email} </Typography>{" "}
+                  <Typography>Full Name: {user.firstName} {user.lastName}</Typography>{" "}
+                  <Typography>Email: {user.email} </Typography>{" "}
+                  <Typography>Phone Number: {user.phone} </Typography>{" "}
                 </Container>
               </Paper>
             </Grid>
@@ -69,9 +70,9 @@ function ProfileDashboard() {
                     {
                       user?.address?.city == undefined && user?.address?.area == undefined
                         ?
-                        "None"
+                        "Please, enter your address."
                         :
-                        (user?.address?.city + " " + user?.address?.area)
+                        (user?.address?.city + ", " + user?.address?.area)
                     }
                   </Typography>{" "}
                 </Container>
