@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   Container,
   Paper,
@@ -10,13 +10,25 @@ import {
   InputLabel,
   Box,
   OutlinedInput,
+  TextField,
 } from "@mui/material";
 import sideImage from "../../assets/svgs/contact us.svg";
 import BusinessIcon from "@mui/icons-material/Business";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
+import { useForm } from "react-hook-form";
 
 function MyContactCard() {
+  const form = useRef(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const handleForm = (data) => {
+    console.log("");
+    form.current.reset();
+  };
   return (
     <div>
       {" "}
@@ -105,38 +117,88 @@ function MyContactCard() {
                 {" "}
                 Get In Touch
               </Typography>
-              <Container sx={{ my: 2 }} component="form">
-                <FormControl sx={{ mt: 2 }} fullWidth>
-                  <InputLabel htmlFor="Name-Field">Name</InputLabel>
-                  <OutlinedInput id="Name-Field" label="Name" />
-                </FormControl>
-                <FormControl sx={{ mt: 2 }} fullWidth>
-                  <InputLabel htmlFor="Email-Field">Email</InputLabel>
-                  <OutlinedInput id="Email-Field" label="Email" />
-                </FormControl>
-                <FormControl sx={{ mt: 2 }} fullWidth>
-                  <InputLabel htmlFor="Phone-Field">Phone</InputLabel>
-                  <OutlinedInput id="Phone-Field" label="Phone" />
-                </FormControl>
-                <FormControl sx={{ mt: 2 }} fullWidth>
-                  <InputLabel htmlFor="Message-Field">Message</InputLabel>
-                  <OutlinedInput
-                    id="Message-Field"
-                    label="Message"
+              <Container sx={{ my: 2 }}>
+                {/* form section  =============   */}
+                <form
+                  ref={form}
+                  onSubmit={handleSubmit((data) => handleForm(data))}
+                >
+                  {/* Name input field ====  */}
+                  <TextField
+                    sx={{ mb: 2, width: "100%" }}
+                    variant="outlined"
+                    label="name"
+                    autoComplete="name"
+                    {...register("name", {
+                      required: "Required Field",
+                      pattern: {
+                        value: /^[a-zA-Z ]{3,20}$/gm,
+                        // only contain charachters and space, and length from 3 to 20 letters
+                        message: "invalid name (only contain charachters and space, and length from 3 to 20 letters)",
+                      },
+                    })}
+                    error={!!errors?.name}
+                    helperText={errors?.name ? errors.name.message : null}
+                  />
+                  {/* Email input field ====  */}
+                  <TextField
+                    sx={{ mb: 2, width: "100%" }}
+                    variant="outlined"
+                    label="eamil"
+                    autoComplete="email"
+                    {...register("email", {
+                      required: "Required Field",
+                      pattern: {
+                        // email must be in the form like ahmed@gmail.com
+                        value: /\S+@\S+\.\S+/,
+                        message: "invalid email address (must be in the form like ahmed@gmail.com)",
+                      },
+                    })}
+                    error={!!errors?.email}
+                    helperText={errors?.email ? errors.email.message : null}
+                  />
+                  {/* Phone input field ====  */}
+                  <TextField
+                    sx={{ mb: 2, width: "100%" }}
+                    variant="outlined"
+                    label="phone"
+                    autoComplete="phone"
+                    {...register("phone", {
+                      required: "Required Field",
+                      pattern: {
+                        // egyption phone number
+                        value: /^01[0125][0-9]{8}$/gm,
+                        message: "invalid phone number",
+                      },
+                    })}
+                    error={!!errors?.phone}
+                    helperText={errors?.phone ? errors.phone.message : null}
+                  />
+                  {/* Subject input field ====  */}
+                  <TextField
+                    sx={{ mb: 2, width: "100%" }}
+                    id="outlined-multiline-static"
+                    label="Subject"
                     multiline
                     rows={4}
+                    {...register("textArea", {
+                      required: "Required Field",
+                      pattern: {
+                        // subject must have at lest 5 charachter
+                        value: /.{5,}/gm,
+                        message: "invalid Subject ( must have at lest 5 charachter)",
+                      },
+                    })}
+                    error={!!errors?.textArea}
+                    helperText={
+                      errors?.textArea ? errors.textArea.message : null
+                    }
                   />
-                </FormControl>
-                <FormControl sx={{ mt: 2 }} fullWidth>
-                  <InputLabel htmlFor="Phone-Field">Phone</InputLabel>
-                  <OutlinedInput id="Phone-Field" label="Phone" />
-                </FormControl>
-                <FormControl sx={{ mt: 2 }}>
-                  <Button variant="contained" type="sumbit">
+                  <Button variant="contained" type="submit">
                     {" "}
-                    Submit
+                    submit
                   </Button>
-                </FormControl>
+                </form>
               </Container>
             </Grid>
           </Grid>

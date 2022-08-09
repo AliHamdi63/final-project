@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import {
   Container,
   Grid,
@@ -17,12 +17,18 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import MapLocation from "../shared/MapLocation";
+import { useForm } from "react-hook-form";
+
 function Footer(props) {
   const position = [30.550964701276385, 31.009036511610887];
-  // console.log(props.isDarkTheme);
+  const form = useRef(null);
+  const { register, handleSubmit, formState: {errors} } = useForm();
+  const handleForm = (data)=>{
+    console.log('');
+    form.current.reset();
+  }
   let isDarkMode = props.isDarkTheme;
   const [isDark, setIsDark] = useState(props.isDarkTheme);
-  // setIsDark((prevState) => !prevState);
   useEffect(() => {
     if (isDarkMode === true) {
       setIsDark(true);
@@ -168,15 +174,39 @@ function Footer(props) {
             <Typography variant="caption">share your Feedback</Typography>{" "}
             <Box my={2} display={"flex"} flexDirection={"column"} gap={2}>
               {/* form */}
-              <TextField id="outlined-basic" label="Email" variant="outlined" />
+              <form ref={form} onSubmit={handleSubmit((data)=>handleForm(data))}>
               <TextField
+              sx={{mb:2, width:'100%'}}
+              variant="outlined"
+              label="eamil"
+              autoComplete="email"
+              {...register('email', {required: 'Required Field',
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: "invalid email address" 
+              }
+            })}
+              error={!!errors?.email}
+              helperText={errors?.email ? errors.email.message : null}
+          />
+              <TextField
+                sx={{mb:2, width:'100%'}}
                 id="outlined-multiline-static"
                 label="Subject"
                 multiline
                 rows={4}
+                {...register('textArea', {required: 'Required Field',
+              pattern: {
+                value: /.{5,}/gm,
+                message: "invalid Subject" 
+              }
+            })}
+              error={!!errors?.textArea}
+              helperText={errors?.textArea ? errors.textArea.message : null}
               />
+              <Button variant="contained" type='submit'> submit</Button>
+              </form>
               {/* form */}
-              <Button variant="contained"> submit</Button>
             </Box>
           </Grid>
           <Grid item xs={12} md={4}>
