@@ -19,7 +19,7 @@ function ProfileAddresses(props) {
     strings: {
       title: "Show me where I am, yo!",
     },
-    onActivate: () => {}, // callback before engine starts retrieving locations
+    onActivate: () => { }, // callback before engine starts retrieving locations
   };
   const position = [30.550964701276385, 31.009036511610887];
 

@@ -20,7 +20,7 @@ import axios from "axios";
 
 function MyCartItems() {
   let url = process.env.REACT_APP_SERVER_URL;
-  console.log(url);
+  // console.log(url);
 
   async function checkout() {
     const order = {
