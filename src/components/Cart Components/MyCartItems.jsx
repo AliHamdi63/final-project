@@ -16,14 +16,26 @@ import AddIcon from "@mui/icons-material/Add";
 
 import { useSelector, useDispatch } from "react-redux";
 import { added, removed } from "../../features/cart/cartSlice";
-
-
+import axios from "axios";
 
 function MyCartItems() {
+  let url = process.env.REACT_APP_SERVER_URL;
+  console.log(url);
+
+  async function checkout() {
+    const order = {
+      methodOfPayment: "stripe",
+      meals: numOfItems.map((item) => {
+        return { meal: item._id, quantity: item.quantity };
+      }),
+    };
+    const response = await axios.post(`${url}orders/checkout`, order);
+    console.log(response);
+  }
 
   const numOfItems = useSelector((state) => state.cart.numOfItems);
   const dispatch = useDispatch();
-  // console.log(numOfItems);
+  console.log(numOfItems);
 
   return (
     <Container sx={{ minHeight: "100vh", mb: 8 }}>
@@ -81,50 +93,68 @@ function MyCartItems() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {numOfItems && numOfItems.map((row, index) => {
-              function add() {
-                dispatch(added(row.meal));
-                // console.log("object");
-              }
-              function remove() {
-                dispatch(removed(row.meal._id));
-                // console.log("object22");
-              }
-              return (
-                <TableRow
-                  key={index}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    <img src={row.meal.image} alt="" width={"150px"} />
-                  </TableCell>
-                  <TableCell align="left">
-                    <Typography variant="h6">{row.meal.name}</Typography>
-                  </TableCell>
-                  <TableCell align="left">
-                    <Typography variant="h6">{row.meal.price} / {row.meal.servings}</Typography>
-                  </TableCell>
-                  <TableCell sx={{ fontSize: 18 }} align="left">{row.count}</TableCell>
-                  <TableCell sx={{ fontSize: 18 }} align="left">{row.meal.price * row.count}</TableCell>
-                  <TableCell sx={{ fontSize: 18 }} align="left">
-                    {" "}
-                    <Fab color="success" aria-label="add" sx={{ mr: 2 }} size="small" onClick={add}>
-                      <AddIcon></AddIcon>
-                    </Fab>
-                    <Fab color="secondary" aria-label="add" size="small" onClick={remove}>
-                      <RemoveIcon></RemoveIcon>
-                    </Fab>
-                    {/* <br /> */}
-                    {/* <br /> */}
-                  </TableCell>
-                </TableRow>
-
-              )
-            }
-            )}
+            {numOfItems &&
+              numOfItems.map((row, index) => {
+                function add() {
+                  dispatch(added(row.meal));
+                  // console.log("object");
+                }
+                function remove() {
+                  dispatch(removed(row.meal._id));
+                  // console.log("object22");
+                }
+                return (
+                  <TableRow
+                    key={index}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      <img src={row.meal.image} alt="" width={"150px"} />
+                    </TableCell>
+                    <TableCell align="left">
+                      <Typography variant="h6">{row.meal.name}</Typography>
+                    </TableCell>
+                    <TableCell align="left">
+                      <Typography variant="h6">
+                        {row.meal.price} / {row.meal.servings}
+                      </Typography>
+                    </TableCell>
+                    <TableCell sx={{ fontSize: 18 }} align="left">
+                      {row.quantity}
+                    </TableCell>
+                    <TableCell sx={{ fontSize: 18 }} align="left">
+                      {row.meal.price * row.quantity}
+                    </TableCell>
+                    <TableCell sx={{ fontSize: 18 }} align="left">
+                      {" "}
+                      <Fab
+                        color="success"
+                        aria-label="add"
+                        sx={{ mr: 2 }}
+                        size="small"
+                        onClick={add}
+                      >
+                        <AddIcon></AddIcon>
+                      </Fab>
+                      <Fab
+                        color="secondary"
+                        aria-label="add"
+                        size="small"
+                        onClick={remove}
+                      >
+                        <RemoveIcon></RemoveIcon>
+                      </Fab>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>
+      <Button variant="contained" onClick={checkout}>
+        {" "}
+        Checkout
+      </Button>
     </Container>
   );
 }

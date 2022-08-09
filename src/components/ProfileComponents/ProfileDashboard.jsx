@@ -14,9 +14,9 @@ function ProfileDashboard() {
                 fontFamily={"serif"}
                 fontWeight={"bold"}
                 fontStyle={"italic"}
+                mr={5}
               >
-                {" "}
-                User DashBoard{" "}
+                User DashBoard
               </Typography>
 
               <Divider
@@ -35,7 +35,6 @@ function ProfileDashboard() {
             }
             From your Account Dashboard you have the ability to view a snapshot
             of your recent account activity and update your account information.
-            Select a link below to view or edit information.
           </Typography>
           <Grid container spacing={4} mt={1}>
             <Grid item xs={12} md={6}>
