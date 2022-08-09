@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Paper,
@@ -16,17 +16,90 @@ import BusinessIcon from "@mui/icons-material/Business";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import { InputAdornment } from "@mui/material";
+
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser } from '../../features/authenticate/authSlice'
+import { imageUploader } from '../../features/update/uploadImage'
+
 function ProfileDetails() {
-  const [file, setFile] = useState(null);
-  function imageUploader(imageFile, data) {
-    let picName = (Date.now() + imageFile.name).toString();
-    console.log(picName);
-    let formData = new FormData();
-    formData.append("name", picName);
-    formData.append("file", imageFile);
-    data.image = picName;
-    // uploadImage(formData);
+  const user = useSelector((state) => state.auth.user)
+  // console.log(user);
+  const [image, setFile] = useState(user.image);
+
+  // let [address,setAddress] = useState(null);
+  const [firstName, setFName] = useState(user.firstName)
+  const [lastName, setLName] = useState(user.lastName)
+  const [email, setEmail] = useState(user.email)
+  const [phone, setPhone] = useState(user.phone)
+
+  let imgP = process.env.REACT_APP_SERVER_URL + '/images';
+  let [isfetching, setFetching] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const onChangeFName = (e) => {
+    setFName(e.target.value)
+    // console.log(email);
   }
+  const onChangeLName = (e) => {
+    setLName(e.target.value)
+    // console.log(pass);
+  }
+  const onChangeEmail = (e) => {
+    setEmail(e.target.value)
+    // console.log(email);
+  }
+  const onChangePhone = (e) => {
+    setPhone(e.target.value)
+    // console.log(phone);
+  }
+
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    let id = user._id;
+    const updatedData = {
+      firstName,
+      lastName,
+      email,
+      phone,
+      image
+    }
+    console.log(updatedData);
+    dispatch(updateUser({ user, id, updatedData }))
+    console.log('done');
+  }
+
+
+  useEffect(() => {
+    if (typeof (image) !== 'string' && image !== null) {
+      imageUploader(image, setFile, setFetching);
+    }
+  }, [image])
+
+  useEffect(() => {
+    setFile(user.image)
+    // setAddress(props?.item?.address);
+  }, [])
+
+
+
+  // const handleAddressChange = (e) => {
+  //   setAddress({ ...address, [e.target.name]: e.target.value })
+  // }
+
+
+
+  // console.log(file);
+  // function imageUploader(imageFile, data) {
+  //   let picName = (Date.now() + imageFile.name).toString();
+  //   console.log(picName);
+  //   let formData = new FormData();
+  //   formData.append("name", picName);
+  //   formData.append("file", imageFile);
+  //   data.image = picName;
+  //   // uploadImage(formData);
+  // }
 
   return (
     <Container sx={{ my: 10 }}>
@@ -77,6 +150,7 @@ function ProfileDetails() {
                 container
                 spacing={2}
                 component="form"
+                onSubmit={onSubmit}
                 display={"flex"}
                 flexDirection="row"
                 justifyContent={"center"}
@@ -93,17 +167,21 @@ function ProfileDetails() {
                     }}
                   >
                     <Box mt={2}>
-                      <img
+                      {/* <img
                         src={
-                          file
-                            ? typeof file === "string"
-                              ? file
-                              : URL.createObjectURL(file)
+                          image
+                            ? typeof image === "string"
+                              ? image === "person.jpg"
+                                ? imgHolder
+                                : image
+                              : URL.createObjectURL(image)
                             : imgHolder
                         }
+
                         width="400px"
                         alt=""
-                      />
+                      /> */}
+                      <img src={image ? (typeof (image) === 'string' ? (image.startsWith('http') ? image : imgP + '/' + image) : URL.createObjectURL(image)) : imgHolder} width="400px" />
                     </Box>
 
                     <FormControl sx={{ mb: 12 }}>
@@ -150,6 +228,8 @@ function ProfileDetails() {
                           <OutlinedInput
                             id="FirstName-Field"
                             label="First Name"
+                            onChange={onChangeFName}
+                            value={firstName}
                             startAdornment={
                               <InputAdornment position="start"></InputAdornment>
                             }
@@ -164,6 +244,9 @@ function ProfileDetails() {
                           <OutlinedInput
                             id="LastName-Field"
                             label="Last Name"
+                            onChange={onChangeLName}
+                            value={lastName}
+
                             startAdornment={
                               <InputAdornment position="start"></InputAdornment>
                             }
@@ -173,11 +256,21 @@ function ProfileDetails() {
                     </Grid>
                     <FormControl sx={{ mt: 2 }} fullWidth>
                       <InputLabel htmlFor="Email-Field">Email</InputLabel>
-                      <OutlinedInput id="Email-Field" label="Email" />
+                      <OutlinedInput
+                        id="Email-Field"
+                        label="Email"
+                        value={email}
+                        onChange={onChangeEmail}
+                      />
                     </FormControl>
                     <FormControl sx={{ mt: 2 }} fullWidth>
                       <InputLabel htmlFor="Phone-Field">Phone</InputLabel>
-                      <OutlinedInput id="Phone-Field" label="Phone" />
+                      <OutlinedInput
+                        id="Phone-Field"
+                        label="Phone"
+                        value={phone}
+                        onChange={onChangePhone}
+                      />
                     </FormControl>
 
                     <FormControl sx={{ mt: 2 }}>

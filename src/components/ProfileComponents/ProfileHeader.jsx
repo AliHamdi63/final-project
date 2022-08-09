@@ -24,7 +24,12 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Avatar from "@mui/material/Avatar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import { logout } from "../../features/authenticate/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+
 
 const drawerWidth = 220;
 
@@ -85,6 +90,15 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   };
 
+  const navigate = useNavigate()
+  const user = useSelector((state) => state.auth.user)
+  const dispatch = useDispatch()
+  function userLogout() {
+    dispatch(logout())
+    navigate('/Home')
+    // console.log("User Logout")
+  }
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -104,7 +118,7 @@ export default function PersistentDrawerLeft() {
             <MoreVertIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Abdelrahman Profile
+            {user.firstName} {user.lastName} Profile
           </Typography>
         </Toolbar>
       </AppBar>
@@ -180,7 +194,7 @@ export default function PersistentDrawerLeft() {
           <Divider />
 
           <ListItem disablePadding sx={{ mt: 1 }}>
-            <ListItemButton>
+            <ListItemButton onClick={userLogout}>
               <ListItemIcon>
                 <LogoutIcon></LogoutIcon>
               </ListItemIcon>

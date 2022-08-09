@@ -20,6 +20,14 @@ export const logout = createAsyncThunk('auth/logout', async () => {
     return null
 })
 
+export const updateUser = createAsyncThunk('update/users', async ({ user, id, updatedData }) => {
+    let response = await axios.put(`${url}users/${id}`, updatedData, {
+        headers: { token: user.token },
+    })
+
+    console.log(response.data)
+    return response.data;
+})
 
 const authSlice = createSlice({
     name: 'auth',
@@ -67,6 +75,13 @@ const authSlice = createSlice({
         [logout.rejected]: (state) => {
             state.isFetching = false;
             state.error = true;
+        },
+        [updateUser.fulfilled]: (state, action) => {
+
+            state.isFetching = false;
+            state.user = action.payload;
+            cookie('user', JSON.stringify(action.payload), 1);
+
         },
 
     }

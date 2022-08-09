@@ -16,6 +16,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
+
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -25,30 +27,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-function createData(image, name, price, quantity, total) {
-  return { image, name, price, quantity, total };
-}
 
-const rows = [
-  createData(
-    "https://media.blueapron.com/recipes/33498/square_newsletter_images/1657644961-44-0059-8585/0815_2P8_Crispy-Prosciutto-Lettuce-Cups_018_SQ_Web.jpg?quality=80&width=850",
-    "Tomatoes Marinated in Vinegar",
-    200,
-    6,
-    1200
-  ),
-  createData(
-    "https://media.blueapron.com/recipes/33498/square_newsletter_images/1657644961-44-0059-8585/0815_2P8_Crispy-Prosciutto-Lettuce-Cups_018_SQ_Web.jpg?quality=80&width=850",
-    "Tomatoes Marinated in Vinegar",
-    200,
-    6,
-    1200
-  ),
-  // createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  // createData("Eclair", 262, 16.0, 24, 6.0),
-  // createData("Cupcake", 305, 3.7, 67, 4.3),
-  // createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
 
 const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props;
@@ -79,7 +58,7 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function Modal() {
+export default function Modal({ order }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -89,6 +68,10 @@ export default function Modal() {
     setOpen(false);
   };
 
+
+  const orderData = order.row.renderCell;
+  // console.log(orderData);
+  let total = 0;
   return (
     <div>
       <IconButton
@@ -115,7 +98,7 @@ export default function Modal() {
           onClose={handleClose}
         >
           <Typography color={"white"} variant="h4" fontFamily={"serif"}>
-            Order #1981
+            Order
           </Typography>
         </Box>
         <DialogContent dividers>
@@ -141,50 +124,50 @@ export default function Modal() {
                 <Typography color={"gray"} variant="h6">
                   Full Name:
                 </Typography>
-                <Typography>Abdelrahman Ibrahim</Typography>
+                <Typography>{orderData.user.firstName} {orderData.user.lastName}</Typography>
               </Grid>
               <Grid item md={3}>
                 <Typography color={"gray"} variant="h6">
                   Email:
                 </Typography>
-                <Typography>Abdelrahman_Elemay99@outlook.com</Typography>
+                <Typography>{orderData.user.email}</Typography>
               </Grid>
               <Grid item md={3}>
                 <Typography color={"gray"} variant="h6">
                   Phone:
                 </Typography>
-                <Typography>01062935901</Typography>
+                <Typography>{orderData.user.phone}</Typography>
               </Grid>
               <Grid item md={3}>
                 <Typography color={"gray"} variant="h6">
                   City:
                 </Typography>
-                <Typography>Tanta:</Typography>
+                <Typography>{orderData.user.address.city}</Typography>
               </Grid>
               <Grid item md={3}>
                 <Typography color={"gray"} variant="h6">
                   Governant:
                 </Typography>
-                <Typography>Alghrbia</Typography>
+                <Typography>{orderData.user.address.area}</Typography>
               </Grid>
               <Grid item md={3}>
                 {" "}
                 <Typography color={"gray"} variant="h6">
                   Street:
                 </Typography>
-                <Typography>13 kobryfarouq el-glaa st</Typography>
+                <Typography>{orderData.user.address.street}</Typography>
               </Grid>
               <Grid item md={3}>
                 <Typography color={"gray"} variant="h6">
-                  Bulding NO.:
+                  Building NO.:
                 </Typography>
-                <Typography>8</Typography>
+                <Typography>{orderData.user.address.BuildingNumber}</Typography>
               </Grid>
               <Grid item md={3}>
                 <Typography color={"gray"} variant="h6">
-                  floor NO.:
+                  Floor NO.:
                 </Typography>
-                <Typography>10</Typography>
+                <Typography>{orderData.user.address.apartmentNumber}</Typography>
               </Grid>
             </Grid>
           </Box>
@@ -209,79 +192,7 @@ export default function Modal() {
             Shopping Cart
             <Divider sx={{ mx: 2, my: 2 }}></Divider>{" "}
           </Typography>
-          {/* <Box sx={{ overflow: "auto" }}>
-            <Grid
-              container
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              spacing={4}
-            >
-              <Grid item md={3}>
-                <Typography color={"gray"} variant="h6">
-                  Image
-                </Typography>
-              </Grid>
-              <Grid item md={2}>
-                <Typography color={"gray"} variant="h6">
-                  Name:
-                </Typography>
-              </Grid>
-              <Grid item md={2}>
-                <Typography color={"gray"} variant="h6">
-                  Price:
-                </Typography>
-              </Grid>
-              <Grid item md={2}>
-                <Typography color={"gray"} variant="h6">
-                  Quantity:
-                </Typography>
-              </Grid>
-              <Grid item md={2}>
-                <Typography color={"gray"} variant="h6">
-                  Total:
-                </Typography>
-              </Grid>
-            </Grid>
-            <Divider sx={{ mx: 2, my: 2 }}></Divider>{" "}
-            <Grid
-              container
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              spacing={4}
-            >
-              <Grid item md={3}>
-                <img
-                  src="https://media.blueapron.com/recipes/33498/square_newsletter_images/1657644961-44-0059-8585/0815_2P8_Crispy-Prosciutto-Lettuce-Cups_018_SQ_Web.jpg?quality=80&width=850"
-                  alt=""
-                  width={"100px"}
-                />
-              </Grid>
-              <Grid item md={3}>
-                <Typography>Crispy Prosciutto Lettuce Cups</Typography>
-              </Grid>
-              <Grid item md={2}>
-                <Typography color={"primary"} fontWeight="bolder">
-                  {" "}
-                  EGP 300
-                </Typography>
-              </Grid>
-              <Grid item md={2}>
-                <Typography>4</Typography>
-              </Grid>
-              <Grid item md={2}>
-                <Typography color={"primary"} fontWeight="bolder">
-                  EGP 1200
-                </Typography>
-              </Grid>
-            </Grid>
-            <Divider sx={{ mx: 2, my: 2 }}></Divider>{" "}
-          </Box> */}
+
           <Box mx={2}>
             <TableContainer>
               <Table
@@ -324,34 +235,38 @@ export default function Modal() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((row) => (
-                    <TableRow key={row.name}>
-                      <TableCell component="th" scope="row">
-                        <img src={row.image} alt="" width={"100px"} />
-                      </TableCell>
-                      <TableCell align="right">{row.name}</TableCell>
-                      <TableCell align="right">
-                        {" "}
-                        <Typography
-                          variant="h6"
-                          fontWeight={"bolder"}
-                          color="primary"
-                        >
-                          EGP {row.price}
-                        </Typography>
-                      </TableCell>
-                      <TableCell align="right">{row.quantity}</TableCell>
-                      <TableCell align="right">
-                        <Typography
-                          variant="h6"
-                          fontWeight={"bolder"}
-                          color="primary"
-                        >
-                          EGP {row.total}
-                        </Typography>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                  {orderData.meals.map((item, index) => {
+                    total += item.meal.price * item.quantity;
+                    return (
+                      <TableRow key={index}>
+                        <TableCell component="th" scope="row">
+                          <img src={item.meal.image} alt="" width={"100px"} />
+                        </TableCell>
+                        <TableCell align="right">{item.meal.name}</TableCell>
+                        <TableCell align="right">
+                          {" "}
+                          <Typography
+                            variant="h6"
+                            fontWeight={"bolder"}
+                            color="primary"
+                          >
+                            EGP {item.meal.price}
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="right">{item.quantity}</TableCell>
+                        <TableCell align="right">
+                          <Typography
+                            variant="h6"
+                            fontWeight={"bolder"}
+                            color="primary"
+                          >
+                            EGP {item.meal.price * item.quantity}
+                          </Typography>
+                        </TableCell>
+                      </TableRow>
+
+                    )
+                  })}
                 </TableBody>
               </Table>
               <Grid
@@ -361,10 +276,10 @@ export default function Modal() {
                 alignItems="flex-end"
               >
                 <Grid item xs={12}>
-                  <Typography variant="h6">SubTotal: EGP 2200</Typography>
+                  <Typography variant="h6">SubTotal: EGP {total}</Typography>
                 </Grid>
                 <Grid item xs={12}>
-                  <Typography variant="h6">Discount: 15 %</Typography>
+                  <Typography variant="h6">Discount: 0 %</Typography>
                 </Grid>
                 <Grid item xs={12}>
                   <Typography variant="h5" fs>
@@ -376,7 +291,7 @@ export default function Modal() {
                       fontSize={"larger"}
                     >
                       {" "}
-                      EGP 1900
+                      EGP {total}
                     </Typography>
                   </Typography>
                 </Grid>
