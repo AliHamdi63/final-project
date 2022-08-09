@@ -23,9 +23,9 @@ function ProfileDashboard() {
                 fontFamily={"serif"}
                 fontWeight={"bold"}
                 fontStyle={"italic"}
+                mr={5}
               >
-                {" "}
-                User DashBoard{" "}
+                User DashBoard
               </Typography>
 
               <Divider

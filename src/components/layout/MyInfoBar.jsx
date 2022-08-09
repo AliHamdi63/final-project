@@ -13,9 +13,6 @@ import { Button } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import { useSelector } from "react-redux";
 
-
-
-
 function HideOnScroll(props) {
   const { children, window } = props;
 
@@ -37,12 +34,9 @@ HideOnScroll.propTypes = {
 };
 
 export default function HideAppBar(props) {
-
-
-  const user = useSelector((state) => state.auth.user)
+  const user = useSelector((state) => state.auth.user);
 
   // console.log(user);
-
 
   return (
     <React.Fragment>
@@ -57,8 +51,14 @@ export default function HideAppBar(props) {
                 alignContent: "center",
               }}
             >
-              {user == null ?
-                <Box>
+              {user == null ? (
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row-reverse",
+                    width: "100%",
+                  }}
+                >
                   <Button
                     color="inherit"
                     size="small"
@@ -71,18 +71,21 @@ export default function HideAppBar(props) {
                     <LoginIcon fontSize="small"></LoginIcon>
                   </Button>
                 </Box>
-                :
-                <Box >
+              ) : (
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
                   <Typography variant="body1" textAlign={"center"}>
                     Welcome, {user.firstName} {user.lastName}
                   </Typography>
                   <MyAccount></MyAccount>
-
                 </Box>
-              }
-
-
-
+              )}
             </Container>
           </Toolbar>
         </AppBar>

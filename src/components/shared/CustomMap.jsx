@@ -8,7 +8,10 @@ import { Icon } from "leaflet";
 import { Box, Typography } from "@mui/material";
 
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
+
 import "leaflet/dist/leaflet.css";
+import "leaflet-easybutton/src/easy-button.js";
+import "leaflet-easybutton/src/easy-button.css";
 
 function ChangeView({ center, zoom }) {
   const map = useMap();
@@ -29,7 +32,7 @@ function TileLayer({ darkMode }) {
   return null;
 }
 
-export default function TrackerMap({
+export default function CustomMap({
   darkMode,
   countries,
   casesType,
@@ -56,10 +59,7 @@ export default function TrackerMap({
           }
         >
           <Popup>
-            <Typography textAlign={"center"}>
-              {" "}
-              ITI <br /> Menofia Branch.
-            </Typography>
+            <Typography textAlign={"center"}> Your location</Typography>
           </Popup>
         </Marker>
       </MapContainer>
