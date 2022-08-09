@@ -23,15 +23,15 @@ function ProfileOrders() {
   }, [])
   const orders = useSelector((state) => state.orders.orders)
 
-  // console.log(orders);
+  console.log(orders);
 
   const rows = []
-  const ids = []
+  // const ids = []
   let i = 0;
   orders.forEach((item) => {
     // console.log(item.status);
     // console.log(item.amount);
-    ids.push(item._id);
+    // ids.push(item._id);
     i++;
     rows.push({
       id: i,
@@ -40,8 +40,8 @@ function ProfileOrders() {
       total: item.amount,
       renderCell: (item)
     })
+    // console.log(rows);
   })
-  // console.log(ids);
   const columns = [
     { field: "id", headerName: "ID", width: 170 },
     { field: "date", headerName: "Date", width: 170 },
@@ -58,17 +58,18 @@ function ProfileOrders() {
       renderCell: (val) => {
         return <Modal order={val} />;
       },
-    },
-    {
-      field: "delete",
-      renderCell: (cellValues) => {
-        return (
-          <IconButton aria-label="delete" size="mediem">
-            <DeleteIcon fontSize="inherit" />
-          </IconButton>
-        );
-      },
-    },
+    }
+    // ,
+    // {
+    //   field: "delete",
+    //   renderCell: (cellValues) => {
+    //     return (
+    //       <IconButton aria-label="delete" size="mediem">
+    //         <DeleteIcon fontSize="inherit" />
+    //       </IconButton>
+    //     );
+    //   },
+    // },
   ];
   // const rows = [
   //   {
