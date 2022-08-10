@@ -32,6 +32,8 @@ import ProfilePssword from "./components/ProfileComponents/ProfilePssword";
 import ScrollToTop from "./components/Utilities/ScrollToTop";
 import PageError from "./pages/PageError";
 import PurchaseSuccess from "./pages/PurchaseSuccess";
+import PaymentchoisePage from "./pages/PaymentchoisePage";
+import CashOnDeliveryPayment from "./pages/CashOnDeliveryPayment";
 
 // Define theme settings
 
@@ -118,7 +120,12 @@ const App = () => {
             <Route path="ProfileOrders" element={<ProfileOrders />} />
             <Route path="ProfilePassword" element={<ProfilePssword />} />
           </Route>
+          {/* payment */}
+
+          <Route path="PaymentChoise" element={<PaymentchoisePage />} />
           <Route path="PurchaseSuccess" element={<PurchaseSuccess />} />
+          <Route path="CashOnDelivery" element={<CashOnDeliveryPayment />} />
+
           <Route path="*" element={<PageError />} />
         </Routes>
         <Footer

@@ -91,7 +91,7 @@ function MealHeadderComponent({ meal }) {
                         alignItems: "center",
                       }}
                     >
-                      ${meal.price}/serving
+                      EGP {meal.price}/serving
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                       {meal.servings} Servings
