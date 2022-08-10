@@ -39,7 +39,7 @@ function MyCartItems() {
   // console.log(numOfItems);
 
   return (
-    <Container sx={{ minHeight: "100vh", mb: 8 }}>
+    <Container sx={{ minHeight: "100vh", mb: 8, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: 'center' }}>
       <Container maxWidth="md" sx={{ mb: 4 }}>
         <Box sx={{ display: "flex", flexDirection: "column", my: "10px" }}>
           <Typography
@@ -68,7 +68,7 @@ function MyCartItems() {
           ></Divider>
         </Box>
       </Container>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{ pb: 1, mb: 3 }}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -152,11 +152,11 @@ function MyCartItems() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Button variant="contained" onClick={checkout}>
+      <Button variant="contained" onClick={checkout} sx={{ py: 2, px: 4, fontSize: 20, mt: 2, mb: 2 }}>
         {" "}
         Checkout
       </Button>
-    </Container>
+    </Container >
   );
 }
 

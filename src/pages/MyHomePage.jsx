@@ -9,7 +9,7 @@ function MyHomePage() {
     <div>
       <MyImageSlider></MyImageSlider>
       <MyBrief></MyBrief>
-      <HomeFeatureSection></HomeFeatureSection>
+      {/* <HomeFeatureSection></HomeFeatureSection> */}
       <HomeChooseFrom></HomeChooseFrom>
     </div>
   );

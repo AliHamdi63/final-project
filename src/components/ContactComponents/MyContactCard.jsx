@@ -100,7 +100,9 @@ function MyContactCard() {
               <Typography variant="h5" color={"primary.light"}>
                 E-mail:
               </Typography>
-              <Typography variant="h6">foody_delicous@kit.com </Typography>
+              <Typography variant="h6">
+                <a href="mailto:foody_delicous@kit.com" style={{ textDecoration: "none", color: "inherit" }}>foody_delicous@kit.com</a>
+              </Typography>
             </Grid>
             <Grid item xs={12} md={6} justify="center">
               <img src={sideImage} alt="" width={"100%"} height={"100%"} />

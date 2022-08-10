@@ -1,34 +1,24 @@
 import React from "react";
-
-import { Container, Divider, Paper, Typography } from "@mui/material";
+import errorPage from '../assets/svgs/Error 404.svg'
+import { Button, Container, Divider, Paper, Typography } from "@mui/material";
 import { Grid, Box } from "@mui/material";
+import { Link } from "react-router-dom";
+
 export default function PageError() {
   return (
     <div>
       {" "}
-      <Container sx={{ my: 10 }}>
-        <Paper>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-
-                backgroundColor: "secondary.dark",
-              }}
-            >
-              <Typography
-                variant="h3"
-                textAlign="center"
-                fontWeight={"bold"}
-                color="white"
-              >
-                {" "}
-                404
-              </Typography>
-            </Box>
-          </Box>
-        </Paper>
+      <Container sx={{ pb: 5, mb: 5, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: 'center' }} >
+        <img src={errorPage} width='600px' />
+        <Button
+          variant="contained"
+          component={Link}
+          to={`/Home`}
+          sx={{ mt: 0 }}
+          size='large'
+        >
+          Go Home
+        </Button>
       </Container>
     </div>
   );
