@@ -3,8 +3,51 @@ import CreditCardIcon from "@mui/icons-material/CreditCard";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import React from "react";
 import { Box } from "@mui/system";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 function PaymentchoisePage() {
+  let url = process.env.REACT_APP_SERVER_URL;
+  const numOfItems = useSelector((state) => state.cart.numOfItems);
+  const navigate = useNavigate();
+  // console.log(numOfItems);
+  // let onlineURL = ''
+  async function onlinePayment() {
+    const order = {
+      methodOfPayment: "stripe",
+      meals: numOfItems.map((item) => {
+        // console.log(item.meal._id);
+        return { meal: item.meal._id, quantity: item.quantity };
+      }),
+    };
+    // console.log(order);
+
+    const response = await axios.post(`${url}orders/checkout`, order);
+    // console.log(response);
+    // onlineURL = response.data.url;
+    localStorage.setItem('isTrue', "t")
+    window.location.replace(response.data.url);
+    // navigate(`/${response.data.url}`)
+
+  }
+  async function deliveryPayment() {
+    const order = {
+      methodOfPayment: "cashOnDelivery",
+      meals: numOfItems.map((item) => {
+        return { meal: item.meal._id, quantity: item.quantity };
+      }),
+    };
+    // console.log(order);
+    const response = await axios.post(`${url}orders/checkout`, order);
+    localStorage.setItem('isTrue', "t")
+
+    // console.log(response);
+    navigate('/CashOnDelivery')
+
+  }
+
+
   return (
     <div>
       <Container sx={{ my: 25 }}>
@@ -17,7 +60,13 @@ function PaymentchoisePage() {
             gap: 2,
           }}
         >
-          <Button variant="outlined" sx={{ width: "80%", mt: 2, p: 5 }}>
+          <Button
+            variant="outlined"
+            sx={{ width: "80%", mt: 2, p: 5 }}
+            onClick={onlinePayment}
+          // component={Link}
+          // to={`/${onlineURL}`}
+          >
             <Box
               sx={{
                 display: "flex",
@@ -37,6 +86,7 @@ function PaymentchoisePage() {
           <Button
             variant="outlined"
             color="secondary"
+            onClick={deliveryPayment}
             sx={{ width: "80%", mb: 2, p: 5 }}
           >
             <Box

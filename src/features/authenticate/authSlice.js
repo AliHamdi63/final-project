@@ -79,8 +79,6 @@ const authSlice = createSlice({
         [updateUser.fulfilled]: (state, action) => {
 
             state.isFetching = false;
-            state.user = action.payload;
-            cookie('user', JSON.stringify(action.payload), 1);
 
         },
 

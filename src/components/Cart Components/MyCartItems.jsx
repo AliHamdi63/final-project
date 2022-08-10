@@ -2,7 +2,7 @@ import React from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Box, Button, Container, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Divider } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -19,26 +19,27 @@ import { added, removed } from "../../features/cart/cartSlice";
 import axios from "axios";
 
 function MyCartItems() {
-  let url = process.env.REACT_APP_SERVER_URL;
-  console.log(url);
+  // let url = process.env.REACT_APP_SERVER_URL;
+  // console.log(url);
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
+  function checkout() {
+    if (user == null) {
+      alert("Please, Register/Login first before proceeding the process.")
+      navigate('/Login')
+    }
+    else {
+      navigate('/PaymentChoise')
 
-  async function checkout() {
-    const order = {
-      methodOfPayment: "stripe",
-      meals: numOfItems.map((item) => {
-        return { meal: item._id, quantity: item.quantity };
-      }),
-    };
-    const response = await axios.post(`${url}orders/checkout`, order);
-    console.log(response);
+    }
   }
 
   const numOfItems = useSelector((state) => state.cart.numOfItems);
   const dispatch = useDispatch();
-  console.log(numOfItems);
+  // console.log(numOfItems);
 
   return (
-    <Container sx={{ minHeight: "100vh", mb: 8 }}>
+    <Container sx={{ minHeight: "100vh", mb: 8, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: 'center' }}>
       <Container maxWidth="md" sx={{ mb: 4 }}>
         <Box sx={{ display: "flex", flexDirection: "column", my: "10px" }}>
           <Typography
@@ -67,7 +68,7 @@ function MyCartItems() {
           ></Divider>
         </Box>
       </Container>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{ pb: 1, mb: 3 }}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -151,11 +152,11 @@ function MyCartItems() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Button variant="contained" onClick={checkout}>
+      <Button variant="contained" onClick={checkout} sx={{ py: 2, px: 4, fontSize: 20, mt: 2, mb: 2 }}>
         {" "}
         Checkout
       </Button>
-    </Container>
+    </Container >
   );
 }
 

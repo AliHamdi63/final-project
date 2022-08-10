@@ -33,7 +33,7 @@ export default function MyBrief() {
           </Typography>
 
           <Typography variant="h6" textAlign="center" alignSelf={"center"}>
-            Our ,Slogoan is Cook It By YourSelf !!
+            Our ,Slogan is to Cook it by Yourself !!
           </Typography>
           <Divider
             color={"primary"}

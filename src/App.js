@@ -18,7 +18,6 @@ import Footer from "./components/layout/Footer";
 import MyAboutPage from "./pages/MyAboutPage";
 import MyContactPage from "./pages/MyContactPage";
 import MyMenuPage from "./pages/MyMenuPage";
-import MyMarketPage from "./pages/MyMarketPage";
 import MyLogInPage from "./pages/MyLogInPage";
 import MyRegisterPage from "./pages/MyRegisterPage";
 import MealPurchasePage from "./pages/MealPurchasePage";
@@ -100,7 +99,6 @@ const App = () => {
           />
           <Route path="Menu" element={<MyMenuPage />} />
           <Route path="/" element={<Navigate to={"/Home"} />} />
-          <Route path="Market" element={<MyMarketPage />} />
           <Route path="LogIn" element={<MyLogInPage />} />
           <Route path="Register" element={<MyRegisterPage />} />
           <Route path="Meal/:id" element={<MealPurchasePage />} />

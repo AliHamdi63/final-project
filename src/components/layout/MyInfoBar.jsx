@@ -49,6 +49,7 @@ export default function HideAppBar(props) {
                 display: "flex",
                 justifyContent: "space-between",
                 alignContent: "center",
+                pb: 2
               }}
             >
               {user == null ? (
@@ -81,9 +82,9 @@ export default function HideAppBar(props) {
                   }}
                 >
                   <Typography variant="body1" textAlign={"center"}>
-                    Welcome, {user.firstName} {user.lastName}
+                    Welcome! {user.firstName} {user.lastName}
                   </Typography>
-                  <MyAccount></MyAccount>
+                  <MyAccount userName={user}></MyAccount>
                 </Box>
               )}
             </Container>

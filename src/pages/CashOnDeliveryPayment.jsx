@@ -8,15 +8,48 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { Box, Container, Divider, Grid } from "@mui/material";
+import { Box, Button, Container, Divider, Grid } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function CashOnDeliveryPayment() {
+  let url = process.env.REACT_APP_SERVER_URL;
+  const numOfItems = useSelector((state) => state.cart.numOfItems);
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
+
+
+  let total = 0;
+  function cash() {
+    async function onlinePayment() {
+      const order = {
+        methodOfPayment: "cashOnDelivery",
+        meals: numOfItems.map((item) => {
+          // console.log(item.meal._id);
+          return { meal: item.meal._id, quantity: item.quantity };
+        }),
+      };
+      // console.log(order);
+
+      const response = await axios.post(`${url}orders`, order, { headers: { token: user.token } });
+      // console.log(response);
+      // onlineURL = response.data.url;
+
+    }
+    if (localStorage.getItem('isTrue')) {
+      onlinePayment();
+      localStorage.removeItem("isTrue")
+      alert('Order Applied')
+      navigate("/Home")
+    }
+  }
   return (
     <Box>
       {" "}
@@ -51,50 +84,50 @@ function CashOnDeliveryPayment() {
               <Typography color={"gray"} variant="h6">
                 Full Name:
               </Typography>
-              <Typography>Abdelrahman Ibrahim</Typography>
+              <Typography>{user.firstName} {user.lastName}</Typography>
             </Grid>
             <Grid item md={3}>
               <Typography color={"gray"} variant="h6">
                 Email:
               </Typography>
-              <Typography> satoociva86@gmaill.com</Typography>
+              <Typography>{user.email}</Typography>
             </Grid>
             <Grid item md={3}>
               <Typography color={"gray"} variant="h6">
                 Phone:
               </Typography>
-              <Typography>01062935901</Typography>
+              <Typography>{user.phone}</Typography>
             </Grid>
             <Grid item md={3}>
               <Typography color={"gray"} variant="h6">
                 City:
               </Typography>
-              <Typography> طنطا</Typography>
+              <Typography>{user.address.city}</Typography>
             </Grid>
             <Grid item md={3}>
               <Typography color={"gray"} variant="h6">
                 Governant:
               </Typography>
-              <Typography> الغربية</Typography>
+              <Typography> {user.address.area}</Typography>
             </Grid>
             <Grid item md={3}>
               {" "}
               <Typography color={"gray"} variant="h6">
                 Street:
               </Typography>
-              <Typography>شارع الجلاء</Typography>
+              <Typography>{user.address.street} </Typography>
             </Grid>
             <Grid item md={3}>
               <Typography color={"gray"} variant="h6">
                 Building NO.:
               </Typography>
-              <Typography>3</Typography>
+              <Typography>{user.address.BuildingNumber}</Typography>
             </Grid>
             <Grid item md={3}>
               <Typography color={"gray"} variant="h6">
                 Floor NO.:
               </Typography>
-              <Typography>6 </Typography>
+              <Typography>{user.address.floorNumber}</Typography>
             </Grid>
           </Grid>
         </Box>
@@ -108,7 +141,7 @@ function CashOnDeliveryPayment() {
           Payment Method
         </Typography>
         <Divider sx={{ mx: 2, my: 2 }}></Divider>
-        <Typography gutterBottom>Card number:XXX-XXX-XXX-7224</Typography>
+        <Typography gutterBottom>Cash On Delivery</Typography>
         <Typography
           gutterBottom
           fontFamily={"serif"}
@@ -162,38 +195,38 @@ function CashOnDeliveryPayment() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                <TableRow>
-                  <TableCell component="th" scope="row">
-                    <img
-                      src={
-                        "https://firebasestorage.googleapis.com/v0/b/foodybackendserver.appspot.com/o/1659727985809306-2PP-Moroccan-Chicken-24269_WEB_SQ.webp?alt=media&token=01816470-6380-4114-b9ef-d9eab18779f7"
-                      }
-                      alt=""
-                      width={"100px"}
-                    />
-                  </TableCell>
-                  <TableCell align="right">Moroccan Chicken</TableCell>
-                  <TableCell align="right">
-                    {" "}
-                    <Typography
-                      variant="h6"
-                      fontWeight={"bolder"}
-                      color="primary"
-                    >
-                      EGP 900
-                    </Typography>
-                  </TableCell>
-                  <TableCell align="right">{2}</TableCell>
-                  <TableCell align="right">
-                    <Typography
-                      variant="h6"
-                      fontWeight={"bolder"}
-                      color="primary"
-                    >
-                      EGP 1200
-                    </Typography>
-                  </TableCell>
-                </TableRow>
+                {numOfItems.map((item, index) => {
+                  total += item.meal.price * item.quantity;
+                  return (
+                    <TableRow key={index}>
+                      <TableCell component="th" scope="row">
+                        <img src={item.meal.image} alt="" width={"100px"} />
+                      </TableCell>
+                      <TableCell align="right">{item.meal.name}</TableCell>
+                      <TableCell align="right">
+                        {" "}
+                        <Typography
+                          variant="h6"
+                          fontWeight={"bolder"}
+                          color="primary"
+                        >
+                          EGP {item.meal.price}
+                        </Typography>
+                      </TableCell>
+                      <TableCell align="right">{item.quantity}</TableCell>
+                      <TableCell align="right">
+                        <Typography
+                          variant="h6"
+                          fontWeight={"bolder"}
+                          color="primary"
+                        >
+                          EGP {item.meal.price * item.quantity}
+                        </Typography>
+                      </TableCell>
+                    </TableRow>
+
+                  )
+                })}
               </TableBody>
             </Table>
             <Grid
@@ -203,7 +236,7 @@ function CashOnDeliveryPayment() {
               alignItems="flex-end"
             >
               <Grid item xs={12}>
-                <Typography variant="h6">SubTotal: EGP 300</Typography>
+                <Typography variant="h6">SubTotal: EGP {total}</Typography>
               </Grid>
               <Grid item xs={12}>
                 <Typography variant="h6">Discount: 0 %</Typography>
@@ -218,12 +251,22 @@ function CashOnDeliveryPayment() {
                     fontSize={"larger"}
                   >
                     {" "}
-                    EGP 300
+                    EGP {total}
                   </Typography>
                 </Typography>
               </Grid>
             </Grid>
           </TableContainer>
+          <Box
+            sx={{ mb: 10, textAlign: "center" }} >
+            <Button
+              variant="contained"
+              onClick={cash}
+            >
+              {" "}
+              Apply
+            </Button>
+          </Box>
         </Box>
       </DialogContent>
     </Box>
