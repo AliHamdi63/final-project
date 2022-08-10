@@ -14,7 +14,7 @@ import { logout } from "../../features/authenticate/authSlice";
 import { useDispatch } from "react-redux";
 
 
-export default function MyAccount() {
+export default function MyAccount({ userName }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -52,7 +52,7 @@ export default function MyAccount() {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 28, height: 28 }}>A</Avatar>
+            <Avatar sx={{ width: 28, height: 28 }} src={userName.image}>{userName?.firstName?.slice(0, 1)}</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -92,7 +92,7 @@ export default function MyAccount() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem component={Link} to={`/Profile/Dashboard`}>
-          <Avatar /> Profile
+          <Avatar src={userName.image} /> Profile
         </MenuItem>
         <Divider />
         <MenuItem onClick={userLogout}>

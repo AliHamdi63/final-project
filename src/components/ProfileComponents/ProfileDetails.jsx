@@ -16,6 +16,7 @@ import BusinessIcon from "@mui/icons-material/Business";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import { InputAdornment } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../features/authenticate/authSlice";
@@ -27,10 +28,12 @@ function ProfileDetails() {
   const [image, setFile] = useState(user.image);
 
   // let [address,setAddress] = useState(null);
-  const [firstName, setFName] = useState(user.firstName);
-  const [lastName, setLName] = useState(user.lastName);
-  const [email, setEmail] = useState(user.email);
-  const [phone, setPhone] = useState(user.phone);
+  const [firstName, setFName] = useState(user.firstName)
+  const [lastName, setLName] = useState(user.lastName)
+  const [email, setEmail] = useState(user.email)
+  const [phone, setPhone] = useState(user.phone)
+  const [isChanged, setIsChanged] = useState(false);
+  const navigate = useNavigate()
 
   let imgP = process.env.REACT_APP_SERVER_URL + "/images";
   let [isfetching, setFetching] = useState(false);
@@ -65,9 +68,11 @@ function ProfileDetails() {
       image,
     };
     console.log(updatedData);
-    dispatch(updateUser({ user, id, updatedData }));
-    console.log("done");
-  };
+    dispatch(updateUser({ user, id, updatedData }))
+    console.log('done');
+    setIsChanged(true)
+  }
+
 
   useEffect(() => {
     if (typeof image !== "string" && image !== null) {
@@ -78,22 +83,7 @@ function ProfileDetails() {
   useEffect(() => {
     setFile(user.image);
     // setAddress(props?.item?.address);
-  }, []);
-
-  // const handleAddressChange = (e) => {
-  //   setAddress({ ...address, [e.target.name]: e.target.value })
-  // }
-
-  // console.log(file);
-  // function imageUploader(imageFile, data) {
-  //   let picName = (Date.now() + imageFile.name).toString();
-  //   console.log(picName);
-  //   let formData = new FormData();
-  //   formData.append("name", picName);
-  //   formData.append("file", imageFile);
-  //   data.image = picName;
-  //   // uploadImage(formData);
-  // }
+  }, [])
 
   return (
     <Container sx={{ my: 10 }}>
@@ -161,29 +151,16 @@ function ProfileDetails() {
                     }}
                   >
                     <Box mt={2}>
-                      {/* <img
-                        src={
-                          image
-                            ? typeof image === "string"
-                              ? image === "person.jpg"
-                                ? imgHolder
-                                : image
-                              : URL.createObjectURL(image)
-                            : imgHolder
-                        }
 
-                        width="400px"
-                        alt=""
-                      /> */}
                       <img
                         src={
-                          image
-                            ? typeof image === "string"
-                              ? image.startsWith("http")
-                                ? image
-                                : imgP + "/" + image
-                              : URL.createObjectURL(image)
-                            : imgHolder
+                          image ?
+                            (typeof (image) === 'string' ?
+                              (image.startsWith('http') ?
+                                image :
+                                imgP + '/' + image) :
+                              URL.createObjectURL(image)) :
+                            imgHolder
                         }
                         width="400px"
                       />
@@ -287,6 +264,7 @@ function ProfileDetails() {
                 </Grid>
               </Grid>
             </Box>
+            {isChanged ? navigate('/Profile/Dashboard') : null}
           </Paper>
         </Container>
       </div>

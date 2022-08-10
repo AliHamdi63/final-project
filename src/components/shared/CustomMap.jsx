@@ -94,7 +94,7 @@ export default function CustomMap({ darkMode }) {
         </Marker> */}
         <Test location={loc} search={search} />
         {loc?.lat},{loc?.lng}
-        {console.log(loc?.lat)}
+        {/* {console.log(loc?.lat)} */}
       </MapContainer>
       <input
         placeholder="№,street,zip,city,country"
