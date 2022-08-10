@@ -10,6 +10,7 @@ import {
   InputLabel,
   Box,
   OutlinedInput,
+  Alert,
 } from "@mui/material";
 import imgHolder from "../../assets/images/noimage.png";
 import BusinessIcon from "@mui/icons-material/Business";
@@ -37,21 +38,65 @@ function ProfileDetails() {
 
   const dispatch = useDispatch();
 
+  let firstNameValidationError = "invalid name !!";
+  const [firstNameValideState, setFirstNameValideState] = useState(true);
+  const validateFirstName = (e) => {
+    const regex = /([a-zA-Z]{3,})/;
+    if (regex.test(e.target.value)) {
+      setFirstNameValideState(true);
+    } else {
+      setFirstNameValideState(false);
+    }
+  };
+
+  let lastNameValidationError = "invalid name !!";
+  const [lastNameValideState, setLastNameValideState] = useState(true);
+  const validateLastName = (e) => {
+    const regex = /([a-zA-Z]{3,})/;
+    if (regex.test(e.target.value)) {
+      setLastNameValideState(true);
+    } else {
+      setLastNameValideState(false);
+    }
+  };
+
+  let emailValidationError = 'invalid email !!';
+  const [emailValideState, setEmailValideState] = useState(true);
+  const validateEmail = (e) => {
+    const regex = /\S+@\S+\.\S+/;
+    if (regex.test(e.target.value)) {
+      setEmailValideState(true);
+    } else {
+      setEmailValideState(false);
+    }
+  };
+
+  let phoneNumberValidationError = 'invalid phone number !!';
+  const [phoneNumberValideState, setPhoneNumberValideState] = useState(true);
+  const validatePhoneNumber = (e) => {
+    const regex = /^01[0125][0-9]{8}$/gm;
+    if (regex.test(e.target.value)) {
+      setPhoneNumberValideState(true);
+    } else {
+      setPhoneNumberValideState(false);
+    }
+  };
+
   const onChangeFName = (e) => {
     setFName(e.target.value);
-    // console.log(email);
+    validateFirstName(e);
   };
   const onChangeLName = (e) => {
     setLName(e.target.value);
-    // console.log(pass);
+    validateLastName(e);
   };
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
-    // console.log(email);
+    validateEmail(e);
   };
   const onChangePhone = (e) => {
     setPhone(e.target.value);
-    // console.log(phone);
+    validatePhoneNumber(e);
   };
 
   const onSubmit = (e) => {
@@ -239,6 +284,11 @@ function ProfileDetails() {
                               <InputAdornment position="start"></InputAdornment>
                             }
                           />
+                          {!firstNameValideState && (
+                            <Alert severity="error" sx={{ mt: 1 }}>
+                              {firstNameValidationError}
+                            </Alert>
+                          )}
                         </FormControl>
                       </Grid>
                       <Grid item xs={12} md={5.5}>
@@ -255,6 +305,11 @@ function ProfileDetails() {
                               <InputAdornment position="start"></InputAdornment>
                             }
                           />
+                          {!lastNameValideState && (
+                            <Alert severity="error" sx={{ mt: 1 }}>
+                              {lastNameValidationError}
+                            </Alert>
+                          )}
                         </FormControl>
                       </Grid>
                     </Grid>
@@ -266,6 +321,11 @@ function ProfileDetails() {
                         value={email}
                         onChange={onChangeEmail}
                       />
+                      {!emailValideState && (
+                            <Alert severity="error" sx={{ mt: 1 }}>
+                              {emailValidationError}
+                            </Alert>
+                          )}
                     </FormControl>
                     <FormControl sx={{ mt: 2 }} fullWidth>
                       <InputLabel htmlFor="Phone-Field">Phone</InputLabel>
@@ -275,6 +335,11 @@ function ProfileDetails() {
                         value={phone}
                         onChange={onChangePhone}
                       />
+                      {!phoneNumberValideState && (
+                            <Alert severity="error" sx={{ mt: 1 }}>
+                              {phoneNumberValidationError}
+                            </Alert>
+                          )}
                     </FormControl>
 
                     <FormControl sx={{ mt: 2 }}>
