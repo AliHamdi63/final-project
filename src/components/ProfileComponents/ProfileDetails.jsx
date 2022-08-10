@@ -310,10 +310,10 @@ function ProfileDetails() {
                         onChange={onChangeEmail}
                       />
                       {!emailValideState && (
-                            <Alert severity="error" sx={{ mt: 1 }}>
-                              {emailValidationError}
-                            </Alert>
-                          )}
+                        <Alert severity="error" sx={{ mt: 1 }}>
+                          {emailValidationError}
+                        </Alert>
+                      )}
                     </FormControl>
                     <FormControl sx={{ mt: 2 }} fullWidth>
                       <InputLabel htmlFor="Phone-Field">Phone</InputLabel>
@@ -324,10 +324,10 @@ function ProfileDetails() {
                         onChange={onChangePhone}
                       />
                       {!phoneNumberValideState && (
-                            <Alert severity="error" sx={{ mt: 1 }}>
-                              {phoneNumberValidationError}
-                            </Alert>
-                          )}
+                        <Alert severity="error" sx={{ mt: 1 }}>
+                          {phoneNumberValidationError}
+                        </Alert>
+                      )}
                     </FormControl>
 
                     <FormControl sx={{ mt: 2 }}>
