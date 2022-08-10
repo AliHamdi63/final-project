@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  numOfItems: [],
+  numOfItems: JSON.parse(localStorage.getItem('meals')) || [],
 };
 
 const cartSlice = createSlice({
@@ -18,6 +18,7 @@ const cartSlice = createSlice({
         // console.log(...state.numOfItems)
         // state.numOfItems.push(action.payload)
         state.numOfItems.push({ quantity: countNum, meal: action.payload });
+        localStorage.setItem('meals', JSON.stringify(state.numOfItems));
         // console.log(state.numOfItems)
       } else {
         // console.log(state.numOfItems, "ELssseee")
@@ -33,6 +34,8 @@ const cartSlice = createSlice({
         if (duplicatedItems.length == 0) {
           // state.numOfItems.push(action.payload)
           state.numOfItems.push({ quantity: countNum, meal: action.payload });
+          localStorage.setItem('meals', JSON.stringify(state.numOfItems))
+
         } else {
           // console.log(duplicatedItems)
           state.numOfItems.map((item) => {
@@ -42,6 +45,8 @@ const cartSlice = createSlice({
               return item;
             }
           });
+          localStorage.setItem('meals', JSON.stringify(state.numOfItems))
+
         }
       }
     },
@@ -54,6 +59,8 @@ const cartSlice = createSlice({
           return item.meal._id !== action.payload;
         }
       });
+      localStorage.setItem('meals', JSON.stringify(state.numOfItems))
+
       // console.log(state.numOfItems)
     },
   },

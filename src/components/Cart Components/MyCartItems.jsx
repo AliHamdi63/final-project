@@ -2,7 +2,7 @@ import React from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Box, Button, Container, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Divider } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -19,23 +19,24 @@ import { added, removed } from "../../features/cart/cartSlice";
 import axios from "axios";
 
 function MyCartItems() {
-  let url = process.env.REACT_APP_SERVER_URL;
+  // let url = process.env.REACT_APP_SERVER_URL;
   // console.log(url);
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
+  function checkout() {
+    if (user == null) {
+      alert("Please, Register/Login first before proceeding the process.")
+      navigate('/Login')
+    }
+    else {
+      navigate('/PaymentChoise')
 
-  async function checkout() {
-    const order = {
-      methodOfPayment: "stripe",
-      meals: numOfItems.map((item) => {
-        return { meal: item._id, quantity: item.quantity };
-      }),
-    };
-    const response = await axios.post(`${url}orders/checkout`, order);
-    console.log(response);
+    }
   }
 
   const numOfItems = useSelector((state) => state.cart.numOfItems);
   const dispatch = useDispatch();
-  console.log(numOfItems);
+  // console.log(numOfItems);
 
   return (
     <Container sx={{ minHeight: "100vh", mb: 8 }}>
