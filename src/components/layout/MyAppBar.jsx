@@ -141,7 +141,7 @@ function MyAppBar(props) {
             justifyContent: { sm: "space-around", xs: "space-between" },
             alignItems: "center",
 
-            marginTop: 2.2,
+            marginTop: 3
           }}
         >
           <IconButton
