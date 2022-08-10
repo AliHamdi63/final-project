@@ -49,6 +49,7 @@ export default function HideAppBar(props) {
                 display: "flex",
                 justifyContent: "space-between",
                 alignContent: "center",
+                pb: 2
               }}
             >
               {user == null ? (

@@ -47,7 +47,10 @@ function MyContactPage(props) {
           ></Divider>
         </Box>
       </Container>
-      <MapLocation center={position} zoom={12} darkMode={isDark} />
+      <Box sx={{ ml: 10, mr: 10, mb: 8 }}>
+        <MapLocation center={position} zoom={12} darkMode={isDark} />
+
+      </Box>
     </Box>
   );
 }

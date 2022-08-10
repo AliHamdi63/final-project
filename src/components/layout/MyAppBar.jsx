@@ -56,6 +56,11 @@ function MyAppBar(props) {
       return value = 0;
 
     }
+    else if (location.pathname === "/") {
+
+      return value = 0;
+
+    }
     else if (location.pathname === "/Menu") {
 
       return value = 1;
@@ -136,7 +141,7 @@ function MyAppBar(props) {
             justifyContent: { sm: "space-around", xs: "space-between" },
             alignItems: "center",
 
-            marginTop: 2.2,
+            marginTop: 3
           }}
         >
           <IconButton
