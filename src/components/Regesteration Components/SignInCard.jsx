@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useRef, useState } from "react";
 import {
   Container,
   Paper,
@@ -11,6 +11,7 @@ import {
   OutlinedInput,
   InputAdornment,
   IconButton,
+  Alert,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -25,7 +26,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../features/authenticate/authSlice";
 // import spinner from "../layout/spinner";
 
-
 function SignInCard() {
   const [values, setValues] = useState({ showPassword: false });
   const handleClickShowPassword = () => {
@@ -35,39 +35,81 @@ function SignInCard() {
     });
   };
 
-  const user = useSelector((state) => state.auth.user)
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const user = useSelector((state) => state.auth.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [email, setEmail] = useState('')
-  const [password, setPass] = useState('')
+  const [email, setEmail] = useState("");
+  const [password, setPass] = useState("");
 
   const onChangeEmail = (e) => {
-    setEmail(e.target.value)
-    // console.log(email);
-  }
+    setEmail(e.target.value);
+    validateEmail(e);
+  };
   const onChangePass = (e) => {
-    setPass(e.target.value)
-    // console.log(pass);
-  }
+    setPass(e.target.value);
+    validatePass(e);
+  };
+
+  let emailValidationError = 'invalid email !!';
+  const [emailValideState, setEmailValideState] = useState(true);
+  let passValidationError = 'invalid password !!';
+  const [passValideState, setPassValideState] = useState(true);
+  // const btnRef = useRef();
+  // const [btnDisabled, setBtnDisabled] = useState(true);
+
+  // useEffect(()=>{
+  //   console.log(btnRef.current.disabled);
+  //   btnRef.current.disabled = btnDisabled;
+  // }, [btnRef])
+
+  const validateEmail = (e) => {
+    const regex = /\S+@\S+\.\S+/;
+    if (regex.test(e.target.value)) {
+      setEmailValideState(true);
+      // if(passValideState){
+      //   setBtnDisabled(true);
+      //   handleClick(btnDisabled)
+      // }
+    } else {
+      setEmailValideState(false);
+    }
+  };
+
+  const validatePass = (e) => {
+    const regex = /(?=.{5,})/;
+    if (regex.test(e.target.value)) {
+      setPassValideState(true);
+      // if(emailValideState){
+      //   setBtnDisabled(true);
+      //   handleClick(btnDisabled);
+      // }
+    } else {
+      setPassValideState(false);
+    }
+  };
+
+  // const handleClick = (state) => {
+  //   if(state){
+  //     console.log(btnRef.current.disabled)
+  //     btnRef.current.disabled = !btnDisabled;
+  //     console.log(btnRef.current.disabled)
+
+  //   }
+  // };
 
   const onSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const userData = {
       email,
       password,
-    }
+    };
     // console.log(userData);
-    dispatch(userLogin(userData))
-  }
+    dispatch(userLogin(userData));
+  };
 
-
-
-
-  const { isFetching, error } = useSelector(
-    (state) => state.auth
-  )
+  const { isFetching, error } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (error) {
@@ -76,13 +118,9 @@ function SignInCard() {
 
     if (!isFetching) {
       //     // navigate('/')
-
       // console.log("fetch 77");
     }
-
-  }, [isFetching, error])
-
-
+  }, [isFetching, error]);
 
   // if (isFetching) {
   //   return <spinner />
@@ -184,6 +222,9 @@ function SignInCard() {
                       </InputAdornment>
                     }
                   />
+                  {!emailValideState && <Alert severity="error" sx={{mt:1}}>
+                    {emailValidationError}
+                  </Alert>}
                 </FormControl>
 
                 <FormControl sx={{ mt: 8 }} fullWidth>
@@ -215,6 +256,9 @@ function SignInCard() {
                     }
                     label="Password"
                   />
+                  {!passValideState && <Alert severity="error" sx={{mt:1}}>
+                    {passValidationError}
+                  </Alert>}
                 </FormControl>
                 <FormControl
                   sx={{
@@ -228,7 +272,7 @@ function SignInCard() {
                   </Button>
                 </FormControl>
                 {error && <h2>Please try again .... </h2>}
-                {user == null ? null : navigate('/Home')}
+                {user == null ? null : navigate("/Home")}
               </Container>
               <Grid
                 container

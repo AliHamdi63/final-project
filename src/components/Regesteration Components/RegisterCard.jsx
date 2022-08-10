@@ -11,6 +11,7 @@ import {
   OutlinedInput,
   InputAdornment,
   IconButton,
+  Alert,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -38,6 +39,49 @@ function RegisterCard() {
     });
   };
 
+  let firstNameValidationError = "invalid name !!";
+  const [firstNameValideState, setFirstNameValideState] = useState(true);
+  const validateFirstName = (e) => {
+    const regex = /([a-zA-Z]{3,})/;
+    if (regex.test(e.target.value)) {
+      setFirstNameValideState(true);
+    } else {
+      setFirstNameValideState(false);
+    }
+  };
+
+  let lastNameValidationError = "invalid name !!";
+  const [lastNameValideState, setLastNameValideState] = useState(true);
+  const validateLastName = (e) => {
+    const regex = /([a-zA-Z]{3,})/;
+    if (regex.test(e.target.value)) {
+      setLastNameValideState(true);
+    } else {
+      setLastNameValideState(false);
+    }
+  };
+
+  let emailValidationError = 'invalid email !!';
+  const [emailValideState, setEmailValideState] = useState(true);
+  const validateEmail = (e) => {
+    const regex = /\S+@\S+\.\S+/;
+    if (regex.test(e.target.value)) {
+      setEmailValideState(true);
+    } else {
+      setEmailValideState(false);
+    }
+  };
+
+  let passValidationError = 'invalid password !!';
+  const [passValideState, setPassValideState] = useState(true);
+  const validatePass = (e) => {
+    const regex = /(?=.{5,})/;
+    if (regex.test(e.target.value)) {
+      setPassValideState(true);
+    } else {
+      setPassValideState(false);
+    }
+  };
 
   const [firstName, setFName] = useState('')
   const [lastName, setLName] = useState('')
@@ -46,19 +90,19 @@ function RegisterCard() {
 
   const onChangeFName = (e) => {
     setFName(e.target.value)
-    // console.log(email);
+    validateFirstName(e);
   }
   const onChangeLName = (e) => {
     setLName(e.target.value)
-    // console.log(pass);
+    validateLastName(e);
   }
   const onChangeEmail = (e) => {
     setEmail(e.target.value)
-    // console.log(email);
+    validateEmail(e);
   }
   const onChangePass = (e) => {
     setPass(e.target.value)
-    // console.log(pass);
+    validatePass(e);
   }
 
   const onSubmit = (e) => {
@@ -201,6 +245,11 @@ function RegisterCard() {
                           </InputAdornment>
                         }
                       />
+                      {!firstNameValideState && (
+                            <Alert severity="error" sx={{ mt: 1 }}>
+                              {firstNameValidationError}
+                            </Alert>
+                          )}
                     </FormControl>
                   </Grid>
                   <Grid item xs={12} md={5.5}>
@@ -219,6 +268,11 @@ function RegisterCard() {
                           </InputAdornment>
                         }
                       />
+                      {!lastNameValideState && (
+                            <Alert severity="error" sx={{ mt: 1 }}>
+                              {lastNameValidationError}
+                            </Alert>
+                          )}
                     </FormControl>
                   </Grid>
                 </Grid>
@@ -236,6 +290,11 @@ function RegisterCard() {
                       </InputAdornment>
                     }
                   />
+                  {!emailValideState && (
+                            <Alert severity="error" sx={{ mt: 1 }}>
+                              {emailValidationError}
+                            </Alert>
+                          )}
                 </FormControl>
 
                 <FormControl sx={{ mt: 2 }} fullWidth>
@@ -267,6 +326,9 @@ function RegisterCard() {
                     }
                     label="Password"
                   />
+                  {!passValideState && <Alert severity="error" sx={{mt:1}}>
+                    {passValidationError}
+                  </Alert>}
                 </FormControl>
                 <FormControl
                   sx={{
