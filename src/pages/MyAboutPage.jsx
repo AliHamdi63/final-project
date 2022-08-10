@@ -27,22 +27,25 @@ export default function MyAboutPage() {
               fontFamily={"serif"}
               fontWeight={"bold"}
               fontStyle={"italic"}
-              sx={{mb: '20px'}}
+              sx={{ mb: "20px" }}
             >
               {" "}
               What Is Foody
             </Typography>
           </Divider>
           <Typography
-              variant="body"
-              textAlign="center"
-              fontFamily={"serif"}
-              fontWeight={"bold"}
-              fontStyle={"italic"}
-            >
-              {" "}
-              Restourant are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
-            </Typography>
+            variant="body"
+            textAlign="center"
+            fontFamily={"serif"}
+            fontWeight={"bold"}
+            fontStyle={"italic"}
+          >
+            {" "}
+            Restourant are many variations of passages of Lorem Ipsum available,
+            but the majority have suffered alteration in some form, by injected
+            humour, or randomised words which don't look even slightly
+            believable.
+          </Typography>
         </Box>
       </Container>
       <Paper
