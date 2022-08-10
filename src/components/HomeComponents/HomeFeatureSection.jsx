@@ -48,7 +48,7 @@ export default function HomeFeatureSection() {
         >
           <Box width={"100%"} sx={{ pb: 5, mb: 5, display: "flex", flexDirection: "row", gap: 10, flexWrap: "wrap", justifyContent: "center", alignItems: 'center' }}>
             <Box width={'280px'}>
-              <img src={img1} minWidth='200px' maxWidth='400px' height="300px" />
+              <img src={img1} style={{ minWidth: '200px', maxWidth: '400px' }} height="300px" />
               <Typography variant="h5" fontWeight={'bold'} >
                 Cook, create, enjoy
               </Typography>
@@ -57,7 +57,7 @@ export default function HomeFeatureSection() {
               </Typography>
             </Box>
             <Box width={'280px'}>
-              <img src={img2} minWidth='200px' maxWidth='400px' height="300px" />
+              <img src={img2} style={{ minWidth: '200px', maxWidth: '400px' }} height="300px" />
               <Typography variant="h5" fontWeight={'bold'} >
                 Unpack your box
               </Typography>
@@ -66,7 +66,7 @@ export default function HomeFeatureSection() {
               </Typography>
             </Box>
             <Box width={'280px'}>
-              <img src={img3} minWidth='200px' maxWidth='400px' height="315px" />
+              <img src={img3} style={{ minWidth: '200px', maxWidth: '400px' }} height="315px" />
               <Typography variant="h5" fontWeight={'bold'} >
                 Choose your meals
               </Typography>

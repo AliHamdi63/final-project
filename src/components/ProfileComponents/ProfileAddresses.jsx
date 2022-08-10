@@ -99,7 +99,7 @@ function ProfileAddresses(props) {
   }
   function userLogout() {
     dispatch(logout())
-    navigate('/Home')
+    navigate('/Login')
     // console.log("User Logout")
   }
   // let datainfo = {
