@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 function ProfileDashboard() {
 
-  const user = useSelector((state) => state.auth.user)
+  const user = useSelector((state) => state.auth.user);
   // console.log(user?.address?.city);
   return (
     <Container sx={{ my: 10 }}>

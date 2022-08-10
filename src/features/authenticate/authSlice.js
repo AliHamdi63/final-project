@@ -25,7 +25,7 @@ export const updateUser = createAsyncThunk('update/users', async ({ user, id, up
         headers: { token: user.token },
     })
 
-    // console.log(response.data)
+    console.log(response.data)
     return response.data;
 })
 
