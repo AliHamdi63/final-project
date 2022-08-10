@@ -111,7 +111,7 @@ function ProfileAddresses(props) {
   // console.log(datainfo);
   return (
     <Container sx={{ my: 10 }}>
-      <Paper sx={{ p: 2 }}>
+      <Paper sx={{ p: 2, pb: 8 }}>
         <Box sx={{ display: "flex", flexDirection: "column", p: 2 }}>
           <Typography
             variant="h3"
@@ -165,7 +165,7 @@ function ProfileAddresses(props) {
               />
             </FormControl>
             <FormControl fullWidth>
-              <InputLabel htmlFor="area-Field">Country</InputLabel>
+              <InputLabel htmlFor="area-Field">Area</InputLabel>
               <OutlinedInput
                 id="area-Field"
                 label="area"

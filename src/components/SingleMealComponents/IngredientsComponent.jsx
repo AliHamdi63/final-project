@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Grid, Typography, Box } from "@mui/material";
 
-function IngredientsComponent({meal}) {
+function IngredientsComponent({ meal }) {
   return (
     <Container maxWidth={"xl"}>
       {" "}
@@ -26,15 +26,15 @@ function IngredientsComponent({meal}) {
               }}
             >
               {meal && meal._ingredients.map((item, index) => {
-                return(
+                return (
                   <Typography
-                  key={index}
-                  variant="body2"
-                  color="text.secondary"
-                  fontSize={"large"}
-                >
-                  {item.quantity} {item.name}{" "}
-                </Typography>
+                    key={index}
+                    variant="body2"
+                    color="text.secondary"
+                    fontSize={"large"}
+                  >
+                    {item.quantity} {item.name}{" "}
+                  </Typography>
                 )
               })}
             </Box>

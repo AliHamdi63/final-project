@@ -11,6 +11,7 @@ import { Box } from "@mui/material";
 import "../../styles/slider.css";
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function MyImageSlider() {
   return (
@@ -77,7 +78,7 @@ function MyImageSlider() {
           >
             The meal kit that puts quality first{" "}
           </Typography>
-          <Button variant={"contained"} size="large">
+          <Button variant={"contained"} size="large" component={Link} to={'/Menu'}>
             {" "}
             <Typography variant="h6">Start Now</Typography>
           </Button>

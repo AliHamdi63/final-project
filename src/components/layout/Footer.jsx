@@ -16,8 +16,10 @@ import EmailIcon from "@mui/icons-material/Email";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import TwitterIcon from "@mui/icons-material/Twitter";
 import MapLocation from "../shared/MapLocation";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 function Footer(props) {
   const position = [30.550964701276385, 31.009036511610887];
@@ -94,7 +96,7 @@ function Footer(props) {
               </Typography>{" "}
             </Grid>
             <Grid item xs={12}>
-              <Button variant="contained"> Get Cooking</Button>
+              <Button variant="contained" component={Link} to={'/Menu'}> Get Cooking</Button>
             </Grid>
           </Grid>
           <Grid item xs={12}></Grid>
@@ -113,7 +115,7 @@ function Footer(props) {
               <RestaurantMenuIcon fontSize={"222px"}></RestaurantMenuIcon>
             </Typography>
             <Typography variant="body2">
-            Choose from an ever-changing mix of meat, fish, Beyond Meat™, WW™ Recommended, Diabetes Friendly recipes and health-conscious offerings.
+              Choose from an ever-changing mix of meat, fish, Beyond Meat™, WW™ Recommended, Diabetes Friendly recipes and health-conscious offerings.
             </Typography>
             <Box my={2} display={"flex"} flexDirection={"column"} gap={2}>
               <Box
@@ -125,7 +127,7 @@ function Footer(props) {
               >
                 <LocationOnIcon color="primary"></LocationOnIcon>
                 <Typography variant="body2">
-                  ITI Menofia Branch Shbien Al Kom
+                  ITI Menofia Branch Shbeen El Koom
                 </Typography>
               </Box>
               <Box
@@ -149,13 +151,13 @@ function Footer(props) {
               >
                 <EmailIcon color="primary"></EmailIcon>
                 <Typography variant="body2" textAlign={"center"}>
-                  foody_delicous@kit.com
+                  <a href="mailto:foody_delicous@kit.com" style={{ textDecoration: "none", color: "inherit" }}>foody_delicous@kit.com</a>
                 </Typography>
               </Box>
               <Box display={"flex"} gap={1}>
-                <FacebookIcon></FacebookIcon>
-                <InstagramIcon></InstagramIcon>
-                <LinkedInIcon></LinkedInIcon>
+                <a href="https://www.facebook.com/" style={{ textDecoration: "none", color: "inherit" }} target="_blank"><FacebookIcon /></a>
+                <a href="https://www.instagram.com/" style={{ textDecoration: "none", color: "inherit" }} target="_blank"><InstagramIcon /></a>
+                <a href="https://twitter.com/" style={{ textDecoration: "none", color: "inherit" }} target="_blank"><TwitterIcon /></a>
               </Box>
             </Box>
           </Grid>

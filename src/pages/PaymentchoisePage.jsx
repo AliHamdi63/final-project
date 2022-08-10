@@ -11,7 +11,7 @@ function PaymentchoisePage() {
   let url = process.env.REACT_APP_SERVER_URL;
   const numOfItems = useSelector((state) => state.cart.numOfItems);
   const navigate = useNavigate();
-  console.log(numOfItems);
+  // console.log(numOfItems);
   // let onlineURL = ''
   async function onlinePayment() {
     const order = {
@@ -21,10 +21,10 @@ function PaymentchoisePage() {
         return { meal: item.meal._id, quantity: item.quantity };
       }),
     };
-    console.log(order);
+    // console.log(order);
 
     const response = await axios.post(`${url}orders/checkout`, order);
-    console.log(response);
+    // console.log(response);
     // onlineURL = response.data.url;
     localStorage.setItem('isTrue', "t")
     window.location.replace(response.data.url);
@@ -38,7 +38,7 @@ function PaymentchoisePage() {
         return { meal: item.meal._id, quantity: item.quantity };
       }),
     };
-    console.log(order);
+    // console.log(order);
     const response = await axios.post(`${url}orders/checkout`, order);
     localStorage.setItem('isTrue', "t")
 
