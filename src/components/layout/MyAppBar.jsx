@@ -37,13 +37,41 @@ function MyAppBar(props) {
       location.pathname === "/Register" ||
       location.pathname === "/LogIn" ||
       location.pathname === "/Profile" ||
+      location.pathname === "/Profile/ProfileDetails" ||
+      location.pathname === "/Profile/ProfileOrders" ||
+      location.pathname === "/Profile/ProfilePassword" ||
+      location.pathname === "/Profile/Dashboard" ||
+      location.pathname === "/Profile/Address" ||
+      location.pathname === "/PurchaseSuccess" ||
+      location.pathname === "/CashOnDelivery" ||
+      location.pathname === "/PaymentChoise" ||
       location.pathname === "/Cart"
+
     ) {
       value = -1;
       // console.log(value);
-    } else {
-      return value;
     }
+    else if (location.pathname === "/Home") {
+
+      return value = 0;
+
+    }
+    else if (location.pathname === "/Menu") {
+
+      return value = 1;
+
+    }
+    else if (location.pathname === "/About") {
+
+      return value = 2;
+
+    }
+    else if (location.pathname === "/Contact") {
+
+      return value = 3;
+
+    }
+
   }
 
   let [value, setValue] = React.useState(0);

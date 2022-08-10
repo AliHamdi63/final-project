@@ -9,7 +9,7 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { Icon } from "leaflet";
 
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Container, OutlinedInput, Typography } from "@mui/material";
 
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
 
@@ -70,7 +70,7 @@ export default function CustomMap({ darkMode }) {
       });
   }, [search]);
   return (
-    <Box sx={{ height: "250px", width: "100%" }}>
+    <Box sx={{ height: "250px", width: "100%", mb: 10 }}>
       <MapContainer
         center={loc || { lat: 30.550964701276385, lng: 31.009036511610887 }}
         zoom={loc ? 20 : 10}
@@ -96,10 +96,19 @@ export default function CustomMap({ darkMode }) {
         {loc?.lat},{loc?.lng}
         {/* {console.log(loc?.lat)} */}
       </MapContainer>
-      <input
+      {/* <input
         placeholder="№,street,zip,city,country"
         onChange={(e) => updSearch(e.target.value)}
-      />{" "}
+
+      />{" "} */}
+      <Container >
+        <OutlinedInput
+          placeholder="street city area"
+          onChange={(e) => updSearch(e.target.value)}
+          sx={{ mt: 5 }}
+          fullWidth
+        />{" "}
+      </Container>
     </Box>
   );
 }
