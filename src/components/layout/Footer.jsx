@@ -113,9 +113,7 @@ function Footer(props) {
               <RestaurantMenuIcon fontSize={"222px"}></RestaurantMenuIcon>
             </Typography>
             <Typography variant="body2">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum
-              perspiciatis cupiditate numquam odio explicabo accusantium
-              deserunt incidunt.
+            Choose from an ever-changing mix of meat, fish, Beyond Meat™, WW™ Recommended, Diabetes Friendly recipes and health-conscious offerings.
             </Typography>
             <Box my={2} display={"flex"} flexDirection={"column"} gap={2}>
               <Box
