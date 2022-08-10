@@ -8,7 +8,9 @@ import {
   Divider,
   Box,
 } from "@mui/material";
-// import sideImage from '../assets/images/about-us-1'
+import sideImage1 from '../assets/images/about-us-1.webp'
+import sideImage2 from '../assets/images/about-us-2.webp'
+import sideImage3 from '../assets/images/about-us-3.webp'
 
 export default function MyAboutPage() {
   return (
@@ -60,9 +62,7 @@ export default function MyAboutPage() {
         <Grid container spacing={2}>
           <Grid item xs={12} md={7}>
             <img
-              src={
-                "https://media.blueapron.com/assets/registration/homepage/fresh-ingredients.webp?&height=374&quality=90"
-              }
+              src={sideImage1}
               alt=""
               width={"100%"}
               height={"100%"}
@@ -155,9 +155,7 @@ export default function MyAboutPage() {
           </Grid>
           <Grid item xs={12} md={7}>
             <img
-              src={
-                "https://media.blueapron.com/assets/registration/homepage/chef-experience.webp?height=374&quality=90"
-              }
+              src={sideImage2}
               alt=""
               width={"100%"}
               height={"100%"}
@@ -178,9 +176,7 @@ export default function MyAboutPage() {
         <Grid container spacing={2}>
           <Grid item xs={12} md={7}>
             <img
-              src={
-                "https://media.blueapron.com/assets/registration/homepage/flexible-mobile.webp?height=374&quality=90"
-              }
+              src={sideImage3}
               alt=""
               width={"100%"}
               height={"100%"}
