@@ -52,7 +52,7 @@ function ProfilePssword() {
   const user = useSelector((state) => state.auth.user)
   function userLogout() {
     dispatch(logout())
-    navigate('/Home')
+    navigate('/Login')
     // console.log("User Logout")
   }
   const onSubmit = (e) => {

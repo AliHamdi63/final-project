@@ -19,7 +19,7 @@ import { InputAdornment } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from "../../features/authenticate/authSlice";
+import { updateUser, logout } from "../../features/authenticate/authSlice";
 import { imageUploader } from "../../features/update/uploadImage";
 
 function ProfileDetails() {
@@ -32,7 +32,7 @@ function ProfileDetails() {
   const [lastName, setLName] = useState(user.lastName)
   const [email, setEmail] = useState(user.email)
   const [phone, setPhone] = useState(user.phone)
-  const [isChanged, setIsChanged] = useState(false);
+  // const [isChanged, setIsChanged] = useState(false);
   const navigate = useNavigate()
 
   let imgP = process.env.REACT_APP_SERVER_URL + "/images";
@@ -67,10 +67,14 @@ function ProfileDetails() {
       phone,
       image,
     };
-    console.log(updatedData);
+    // console.log(updatedData);
     dispatch(updateUser({ user, id, updatedData }))
-    console.log('done');
-    setIsChanged(true)
+    // console.log('done');
+    // setIsChanged(true)
+    // if (isChanged) {
+    userLogout()
+    // }
+
   }
 
 
@@ -84,6 +88,13 @@ function ProfileDetails() {
     setFile(user.image);
     // setAddress(props?.item?.address);
   }, [])
+
+  function userLogout() {
+    alert("Data Updated, Please Sign In again.")
+    dispatch(logout())
+    navigate('/Login')
+    // console.log("User Logout")
+  }
 
   return (
     <Container sx={{ my: 10 }}>
@@ -264,7 +275,15 @@ function ProfileDetails() {
                 </Grid>
               </Grid>
             </Box>
-            {isChanged ? navigate('/Profile/Dashboard') : null}
+            {/* {isChanged ?
+              <Box sx={{ ml: 5, textAlign: "center" }}>
+                <h3>Data Changed, Please Logout and Sign In</h3>
+                <Button variant="outlined" sx={{ my: 5, mt: 0 }} onClick={userLogout}>
+                  LogOut
+                </Button>
+              </Box>
+              :
+              null} */}
           </Paper>
         </Container>
       </div>
