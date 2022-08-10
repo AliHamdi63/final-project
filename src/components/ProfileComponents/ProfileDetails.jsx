@@ -112,7 +112,9 @@ function ProfileDetails() {
       phone,
       image,
     };
-    // console.log(updatedData);
+    console.log(updatedData);
+    console.log(user);
+    console.log(user._id);
     dispatch(updateUser({ user, id, updatedData }))
     // console.log('done');
     // setIsChanged(true)

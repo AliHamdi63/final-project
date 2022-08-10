@@ -55,7 +55,7 @@ function ProfileDashboard() {
                   <Divider></Divider>
                   <Typography>Full Name: {user.firstName} {user.lastName}</Typography>{" "}
                   <Typography>Email: {user.email} </Typography>{" "}
-                  <Typography>Phone Number: {user.phone} </Typography>{" "}
+                  <Typography>Phone Number: {user?.phone == undefined ? "Please, enter your phone number." : user.phone} </Typography>{" "}
                 </Container>
               </Paper>
             </Grid>
