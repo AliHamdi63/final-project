@@ -24,7 +24,7 @@ function MyCartItems() {
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
   function checkout() {
-    if (user == null || user.adderss.city == undefined) {
+    if (user == null) {
       alert("Please, Register/Login first before proceeding the process.")
       navigate('/Login')
     }
@@ -32,7 +32,7 @@ function MyCartItems() {
       navigate('/PaymentChoise')
 
     }
-    if (user.adderss == undefined) {
+    if (user?.adderss == undefined) {
       alert("Please, add your address first before proceeding the process.")
       navigate('/Profile/Address')
     }
