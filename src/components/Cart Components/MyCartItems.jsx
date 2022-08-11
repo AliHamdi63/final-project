@@ -32,7 +32,7 @@ function MyCartItems() {
       navigate('/PaymentChoise')
 
     }
-    if (user.adderss.city == undefined) {
+    if (user.adderss == undefined) {
       alert("Please, add your address first before proceeding the process.")
       navigate('/Profile/Address')
     }
