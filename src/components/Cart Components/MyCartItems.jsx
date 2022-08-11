@@ -29,6 +29,7 @@ function MyCartItems() {
       navigate('/Login')
     }
     else {
+      console.log(user?.adderss?.city);
       if (user?.adderss?.city == undefined) {
         alert("Please, add your address first before proceeding the process.")
         navigate('/Profile/Address')
