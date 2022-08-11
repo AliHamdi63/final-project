@@ -29,15 +29,15 @@ function MyCartItems() {
       navigate('/Login')
     }
     else {
-      navigate('/PaymentChoise')
+      if (user?.adderss?.city == undefined) {
+        alert("Please, add your address first before proceeding the process.")
+        navigate('/Profile/Address')
+      }
+      else {
+        navigate('/PaymentChoise')
 
-    }
-    if (user?.adderss?.city == undefined) {
-      alert("Please, add your address first before proceeding the process.")
-      navigate('/Profile/Address')
-    }
-    else {
-      navigate('/PaymentChoise')
+      }
+      // navigate('/PaymentChoise')
 
     }
   }
