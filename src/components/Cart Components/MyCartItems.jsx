@@ -29,8 +29,7 @@ function MyCartItems() {
       navigate('/Login')
     }
     else {
-      console.log(user?.adderss?.city);
-      if (user?.adderss?.city == undefined) {
+      if (typeof user?.address?.city == typeof undefined || user?.address?.city == undefined) {
         alert("Please, add your address first before proceeding the process.")
         navigate('/Profile/Address')
       }
@@ -38,7 +37,6 @@ function MyCartItems() {
         navigate('/PaymentChoise')
 
       }
-      // navigate('/PaymentChoise')
 
     }
   }
