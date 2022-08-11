@@ -29,7 +29,14 @@ function MyCartItems() {
       navigate('/Login')
     }
     else {
-      navigate('/PaymentChoise')
+      if (typeof user?.address?.city == typeof undefined || user?.address?.city == undefined) {
+        alert("Please, add your address first before proceeding the process.")
+        navigate('/Profile/Address')
+      }
+      else {
+        navigate('/PaymentChoise')
+
+      }
 
     }
   }
