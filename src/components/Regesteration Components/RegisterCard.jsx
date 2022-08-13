@@ -24,7 +24,7 @@ import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 
 
-import { userRegister } from '../../features/authenticate/authSlice'
+import { userRegister, logout } from '../../features/authenticate/authSlice'
 import { useDispatch, useSelector } from "react-redux";
 // import spinner from "../layout/spinner";
 
@@ -116,6 +116,11 @@ function RegisterCard() {
     }
     // console.log(userData);
     dispatch(userRegister(userData))
+
+    setTimeout(() => {
+      dispatch(logout());
+      navigate('/Login')
+    }, 1000);
   }
 
   const user = useSelector((state) => state.auth.user)
@@ -128,13 +133,13 @@ function RegisterCard() {
 
   useEffect(() => {
     if (error) {
-      console.log("error 87");
+      // console.log("error 87");
     }
 
     if (!isFetching) {
       //     // navigate('/')
 
-      console.log("fetch 93");
+      // console.log("fetch 93");
     }
 
   }, [isFetching, error])
@@ -246,10 +251,10 @@ function RegisterCard() {
                         }
                       />
                       {!firstNameValideState && (
-                            <Alert severity="error" sx={{ mt: 1 }}>
-                              {firstNameValidationError}
-                            </Alert>
-                          )}
+                        <Alert severity="error" sx={{ mt: 1 }}>
+                          {firstNameValidationError}
+                        </Alert>
+                      )}
                     </FormControl>
                   </Grid>
                   <Grid item xs={12} md={5.5}>
@@ -269,10 +274,10 @@ function RegisterCard() {
                         }
                       />
                       {!lastNameValideState && (
-                            <Alert severity="error" sx={{ mt: 1 }}>
-                              {lastNameValidationError}
-                            </Alert>
-                          )}
+                        <Alert severity="error" sx={{ mt: 1 }}>
+                          {lastNameValidationError}
+                        </Alert>
+                      )}
                     </FormControl>
                   </Grid>
                 </Grid>
@@ -291,10 +296,10 @@ function RegisterCard() {
                     }
                   />
                   {!emailValideState && (
-                            <Alert severity="error" sx={{ mt: 1 }}>
-                              {emailValidationError}
-                            </Alert>
-                          )}
+                    <Alert severity="error" sx={{ mt: 1 }}>
+                      {emailValidationError}
+                    </Alert>
+                  )}
                 </FormControl>
 
                 <FormControl sx={{ mt: 2 }} fullWidth>
@@ -326,7 +331,7 @@ function RegisterCard() {
                     }
                     label="Password"
                   />
-                  {!passValideState && <Alert severity="error" sx={{mt:1}}>
+                  {!passValideState && <Alert severity="error" sx={{ mt: 1 }}>
                     {passValidationError}
                   </Alert>}
                 </FormControl>
@@ -344,7 +349,7 @@ function RegisterCard() {
                 {error && <h2>Please try again .... </h2>}
                 {user == null ? null : navigate('/Home')}
               </Container>
-              <Grid
+              {/* <Grid
                 container
                 p={2}
                 direction="row"
@@ -352,7 +357,7 @@ function RegisterCard() {
                 justifyContent="center"
               >
 
-              </Grid>
+              </Grid> */}
             </Grid>
           </Grid>
         </Paper>
