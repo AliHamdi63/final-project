@@ -24,6 +24,8 @@ import { updateUser, logout } from "../../features/authenticate/authSlice";
 import { imageUploader } from "../../features/update/uploadImage";
 
 function ProfileDetails() {
+  document.title = "Profile Details";
+
   const user = useSelector((state) => state.auth.user);
   // console.log(user);
   const [image, setFile] = useState(user.image);

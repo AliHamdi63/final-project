@@ -4,6 +4,8 @@ import MyEmptyCart from "../components/Cart Components/MyEmptyCart";
 import { useSelector } from "react-redux";
 
 function ShoppingCartPage() {
+  document.title = "Cart";
+
   let numOfItems = useSelector((state) => state.cart.numOfItems);
 
   return (

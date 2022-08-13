@@ -22,6 +22,8 @@ import { updateUser, logout } from '../../features/authenticate/authSlice'
 
 
 function ProfilePssword() {
+  document.title = "Change Password";
+
   const [values, setValues] = useState({ showPassword: false });
   const [password, setPass] = useState("");
   const [password2, setPass2] = useState("");

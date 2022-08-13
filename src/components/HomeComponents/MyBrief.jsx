@@ -9,6 +9,7 @@ import {
   Box,
 } from "@mui/material";
 import sideImage from "../../assets/images/brief.jpg";
+import { Link } from "react-router-dom";
 
 export default function MyBrief() {
   return (
@@ -97,7 +98,7 @@ export default function MyBrief() {
                 </Typography>
               </Grid>
               <Grid item xs={12} sm={6} justify="center" align="center">
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" component={Link} to={'/Menu'}>
                   show more
                 </Button>
               </Grid>

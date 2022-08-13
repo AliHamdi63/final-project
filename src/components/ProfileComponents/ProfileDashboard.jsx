@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 
 function ProfileDashboard() {
+  document.title = "Profile Dashboard";
 
   const user = useSelector((state) => state.auth.user);
   // console.log(user?.address?.city);

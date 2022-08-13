@@ -4,6 +4,8 @@ import MyContactCard from "../components/ContactComponents/MyContactCard";
 import MapLocation from "../components/shared/MapLocation";
 
 function MyContactPage(props) {
+  document.title = "Contact Us"
+
   const position = [30.550964701276385, 31.009036511610887];
   // console.log(props.isDarkTheme);
   let isDarkMode = props.isDarkTheme;

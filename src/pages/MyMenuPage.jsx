@@ -31,6 +31,8 @@ import {
 import { getMealsNames } from "../features/meal/mealSlice";
 
 function MyMenuPage() {
+  document.title = "Menu"
+
   const dispatch = useDispatch();
 
   let { meals, mealsIsLoading, getMealsError } = useSelector(

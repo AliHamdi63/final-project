@@ -5,6 +5,8 @@ import HomeFeatureSection from "../components/HomeComponents/HomeFeatureSection"
 import HomeChooseFrom from "../components/HomeComponents/HomeChooseFrom";
 
 function MyHomePage() {
+  document.title = "Foody-Home"
+
   return (
     <div>
       <MyImageSlider></MyImageSlider>

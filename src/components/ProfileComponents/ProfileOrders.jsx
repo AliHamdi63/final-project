@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 function ProfileOrders() {
+  document.title = "Orders";
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user)

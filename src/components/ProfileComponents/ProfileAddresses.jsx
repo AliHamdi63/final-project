@@ -18,6 +18,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUser, logout } from "../../features/authenticate/authSlice";
 
 function ProfileAddresses(props) {
+  document.title = "Profile Address";
+
   // console.log(props.isDarkTheme);
   const locateOptions = {
     position: "topright",

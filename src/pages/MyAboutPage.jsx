@@ -13,6 +13,8 @@ import sideImage2 from '../assets/images/about-us-2.webp'
 import sideImage3 from '../assets/images/about-us-3.webp'
 
 export default function MyAboutPage() {
+  document.title = "About Us"
+
   return (
     <Container
       sx={{
