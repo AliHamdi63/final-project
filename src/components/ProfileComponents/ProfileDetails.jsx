@@ -17,17 +17,27 @@ import BusinessIcon from "@mui/icons-material/Business";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import { InputAdornment } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser, logout } from "../../features/authenticate/authSlice";
 import { imageUploader } from "../../features/update/uploadImage";
+import { getUser } from '../../features/authenticate/singleCall'
+
 
 function ProfileDetails() {
   document.title = "Profile Details";
+  const [user, setUser] = useState(useSelector((state) => state.auth.user));
+  // let [item, setItem] = useState(null);
+  // let id = user._id;
+  // let [isupdate, setIsupdate] = useState(false);
+  // useEffect(() => {
+  //   getUser(user, id, setItem);
+  //   // console.log(item);
+  //   console.log(user);
 
-  const user = useSelector((state) => state.auth.user);
-  // console.log(user);
+  // })
+
   const [image, setFile] = useState(user.image);
 
   // let [address,setAddress] = useState(null);
@@ -35,7 +45,7 @@ function ProfileDetails() {
   const [lastName, setLName] = useState(user.lastName)
   const [email, setEmail] = useState(user.email)
   const [phone, setPhone] = useState(user.phone)
-  // const [isChanged, setIsChanged] = useState(false);
+  const [isChanged, setIsChanged] = useState(false);
   const navigate = useNavigate()
 
   let imgP = process.env.REACT_APP_SERVER_URL + "/images";
@@ -104,7 +114,12 @@ function ProfileDetails() {
     validatePhoneNumber(e);
   };
 
+
+
+
   const onSubmit = (e) => {
+    setIsChanged(true);
+    console.log(isChanged);
     e.preventDefault();
     let id = user._id;
     const updatedData = {
@@ -114,18 +129,10 @@ function ProfileDetails() {
       phone,
       image,
     };
-    // console.log(updatedData);
-    // console.log(user);
-    // console.log(user._id);
-    dispatch(updateUser({ user, id, updatedData }))
-    // console.log('done');
-    // setIsChanged(true)
-    // if (isChanged) {
-    userLogout()
-    // }
 
+    dispatch(updateUser({ user, id, updatedData: updatedData }))
+    console.log(user);
   }
-
 
   useEffect(() => {
     if (typeof image !== "string" && image !== null) {
@@ -139,9 +146,11 @@ function ProfileDetails() {
   }, [])
 
   function userLogout() {
-    alert("Data Updated, Please Sign In again.")
     dispatch(logout())
     navigate('/Login')
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
     // console.log("User Logout")
   }
 
@@ -344,7 +353,7 @@ function ProfileDetails() {
                 </Grid>
               </Grid>
             </Box>
-            {/* {isChanged ?
+            {isChanged ?
               <Box sx={{ ml: 5, textAlign: "center" }}>
                 <h3>Data Changed, Please Logout and Sign In</h3>
                 <Button variant="outlined" sx={{ my: 5, mt: 0 }} onClick={userLogout}>
@@ -352,7 +361,7 @@ function ProfileDetails() {
                 </Button>
               </Box>
               :
-              null} */}
+              null}
           </Paper>
         </Container>
       </div>

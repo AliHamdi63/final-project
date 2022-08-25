@@ -29,6 +29,8 @@ export const updateUser = createAsyncThunk('update/users', async ({ user, id, up
     return response.data;
 })
 
+
+
 const authSlice = createSlice({
     name: 'auth',
     initialState: { user: JSON.parse(cookie.get('user')) || null, isFetching: false, error: false },

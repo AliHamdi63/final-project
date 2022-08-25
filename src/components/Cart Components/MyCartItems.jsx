@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Box, Button, Container, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
@@ -23,28 +23,34 @@ function MyCartItems() {
   // console.log(url);
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
+  let [isLogin, setIsLogin] = useState(true)
+  let [isAddressed, setIsAddressed] = useState(true)
   function checkout() {
     if (user == null) {
-      alert("Please, Register/Login first before proceeding the process.")
-      navigate('/Login')
+      setIsLogin(false)
+      setIsAddressed(false)
     }
     else {
       if (typeof user?.address?.city == typeof undefined || user?.address?.city == undefined) {
-        alert("Please, add your address first before proceeding the process.")
-        navigate('/Profile/Address')
+        setIsAddressed(false)
       }
       else {
+        // setIsLogin(true)
+        setIsAddressed(true)
         navigate('/PaymentChoise')
-
       }
-
     }
   }
 
   const numOfItems = useSelector((state) => state.cart.numOfItems);
   const dispatch = useDispatch();
   // console.log(numOfItems);
-
+  function goToLogin() {
+    navigate("/Login")
+  }
+  function goToProAddre() {
+    navigate("/Profile/Address")
+  }
   return (
     <Container sx={{ minHeight: "100vh", mb: 8, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: 'center' }}>
       <Container maxWidth="md" sx={{ mb: 4 }}>
@@ -163,6 +169,22 @@ function MyCartItems() {
         {" "}
         Checkout
       </Button>
+      {isLogin ?
+        (isAddressed ?
+          null :
+          <Box sx={{ ml: 5, textAlign: "center" }}>
+            <h3>Please, add your address first before proceeding the process.</h3>
+            <Button variant="outlined" sx={{ my: 5, mt: 0 }} onClick={goToProAddre}>
+              Go to Profile
+            </Button>
+          </Box>) :
+        <Box sx={{ ml: 5, textAlign: "center" }}>
+          <h3>Please, Register/Login first before proceeding the process.</h3>
+          <Button variant="outlined" sx={{ my: 5, mt: 0 }} onClick={goToLogin}>
+            Login
+          </Button>
+        </Box>
+      }
     </Container >
   );
 }
