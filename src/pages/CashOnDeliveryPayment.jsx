@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
@@ -24,6 +24,7 @@ function CashOnDeliveryPayment() {
   const numOfItems = useSelector((state) => state.cart.numOfItems);
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
+  const [isApplied, setIsApplied] = useState(false);
 
 
   let total = 0;
@@ -46,9 +47,14 @@ function CashOnDeliveryPayment() {
     if (localStorage.getItem('isTrue')) {
       onlinePayment();
       localStorage.removeItem("isTrue")
-      alert('Order Applied')
-      navigate("/Home")
+      // alert('Order Applied')
+      setIsApplied(true);
+      // navigate("/Home")
     }
+  }
+
+  function showOrders() {
+    navigate("/Profile/ProfileOrders")
   }
   return (
     <Box>
@@ -266,6 +272,15 @@ function CashOnDeliveryPayment() {
               {" "}
               Apply
             </Button>
+            {isApplied ?
+              <Box sx={{ ml: 0, textAlign: "center" }}>
+                <h3>Order Applied</h3>
+                <Button variant="outlined" sx={{ my: 5, mt: 0 }} onClick={showOrders}>
+                  Show Orders
+                </Button>
+              </Box>
+              :
+              null}
           </Box>
         </Box>
       </DialogContent>
