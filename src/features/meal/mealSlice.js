@@ -18,11 +18,11 @@ export const getMeals = createAsyncThunk(
     try {
       let url = "";
       if (query.type === "paggination") {
-        url = `https://foody--api.herokuapp.com/meals?${query.data}`;
+        url = `foody-server-roan.vercel.app/meals?${query.data}`;
       } else if (query.type === "filter") {
-        url = `https://foody--api.herokuapp.com/meals?${query.data.cuisine}&${query.data.category}`;
+        url = `foody-server-roan.vercel.app/meals?${query.data.cuisine}&${query.data.category}`;
       } else if (query.type === "search") {
-        url = `https://foody--api.herokuapp.com/meals/search/${query.data}`;
+        url = `foody-server-roan.vercel.app/meals/search/${query.data}`;
 
         const res = await fetch(url);
         const data = await res.json();
@@ -41,7 +41,7 @@ export const getOneMeal = createAsyncThunk(
   "meal/getOneMeal",
   async (id, { rejectWithValue }) => {
     try {
-      const res = await fetch(`https://foody--api.herokuapp.com/meals/${id}`);
+      const res = await fetch(`foody-server-roan.vercel.app/meals/${id}`);
       const data = await res.json();
       return data;
     } catch (error) {
@@ -55,7 +55,7 @@ export const getMealsNames = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await fetch(
-        "https://foody--api.herokuapp.com/meals/find/name"
+        "foody-server-roan.vercel.app/meals/find/name"
       );
       const data = await res.json();
       return data;
