@@ -18,11 +18,11 @@ export const getMeals = createAsyncThunk(
     try {
       let url = "";
       if (query.type === "paggination") {
-        url = `foody-server-roan.vercel.app/meals?${query.data}`;
+        url = `https://foody-server-roan.vercel.app/meals?${query.data}`;
       } else if (query.type === "filter") {
-        url = `foody-server-roan.vercel.app/meals?${query.data.cuisine}&${query.data.category}`;
+        url = `https://foody-server-roan.vercel.app/meals?${query.data.cuisine}&${query.data.category}`;
       } else if (query.type === "search") {
-        url = `foody-server-roan.vercel.app/meals/search/${query.data}`;
+        url = `https://foody-server-roan.vercel.app/meals/search/${query.data}`;
 
         const res = await fetch(url);
         const data = await res.json();
@@ -41,7 +41,7 @@ export const getOneMeal = createAsyncThunk(
   "meal/getOneMeal",
   async (id, { rejectWithValue }) => {
     try {
-      const res = await fetch(`foody-server-roan.vercel.app/meals/${id}`);
+      const res = await fetch(`https://foody-server-roan.vercel.app/meals/${id}`);
       const data = await res.json();
       return data;
     } catch (error) {
@@ -55,7 +55,7 @@ export const getMealsNames = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await fetch(
-        "foody-server-roan.vercel.app/meals/find/name"
+        "https://foody-server-roan.vercel.app/meals/find/name"
       );
       const data = await res.json();
       return data;
